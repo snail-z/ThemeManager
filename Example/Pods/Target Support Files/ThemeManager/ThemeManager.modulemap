@@ -1,0 +1,6 @@
+framework module ThemeManager {
+  umbrella header "ThemeManager-umbrella.h"
+
+  export *
+  module * { export * }
+}
