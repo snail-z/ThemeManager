@@ -208,8 +208,7 @@
             if (!color) zhThemeDebugLog(@"Not hexadecimal color code. %@", value);
             return color;
         }
-        NSString *msg = [zhThemeFiles.defaultManager valueForKey:@"colorFile"];
-        zhThemeDebugLog(@"Not found key (%@) in color profile: %@", self.pkey, msg);
+        zhThemeDebugLog(@"Not found key (%@) in color profile: %@", self.pkey, [zhThemeFiles.defaultManager valueForKey:@"colorFile"]);
     }
     return nil;
 }
@@ -234,8 +233,7 @@
             if (self.isImgRenderingMode < 0) return image;
             return [image imageWithRenderingMode:self.isImgRenderingMode];
         }
-        NSString *msg = [zhThemeFiles.defaultManager valueForKey:@"imageFile"];
-        zhThemeDebugLog(@"Not found key (%@) in image profile: %@", self.pkey, msg);
+        zhThemeDebugLog(@"Not found key (%@) in image profile: %@", self.pkey, [zhThemeFiles.defaultManager valueForKey:@"imageFile"]);
     }
     return nil;
 }

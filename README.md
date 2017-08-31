@@ -1,7 +1,7 @@
   <img src="http://oqebi7u13.bkt.clouddn.com/ThemeManager.png" alt="ThemeManager" title="ThemeManager">
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/ThemeManager)
-[![Version](https://img.shields.io/badge/pod-v0.1.0-brightgreen.svg)](http://cocoapods.org/pods/ThemeManager)
+[![Version](https://img.shields.io/badge/pod-v0.1.1-brightgreen.svg)](http://cocoapods.org/pods/ThemeManager)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/ThemeManager)
 [![Platform](https://img.shields.io/badge/platform-%20iOS7.0+%20-lightgrey.svg)](http://cocoapods.org/pods/ThemeManager)
 
@@ -29,7 +29,7 @@ use_frameworks!
 
 target 'You Project' do
     
-	pod "ThemeManager", '~> 0.1.0'
+	pod "ThemeManager", '~> 0.1.1'
     
 end
 ```
@@ -67,3 +67,5 @@ snail-z, haozhang0770@163.com
 ## License
 
 ThemeManager is available under the MIT license. See the LICENSE file for more info.
+
+
