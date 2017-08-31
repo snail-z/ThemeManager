@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ThemeManager_Example' do
+  pod 'ThemeManager', :path => '../'
+
+  target 'ThemeManager_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
