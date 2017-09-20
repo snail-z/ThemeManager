@@ -11,24 +11,22 @@
 #import "zhThemePicker.h"
 
 @interface NSObject (zhTheme)
-// theme listener
-NSMutableDictionary<NSString *,id> * addListener(NSObject *object, const void *key, SEL aSelector);
-// get picker
-id getThemePicker(NSObject *object, const void *key);
-// for picker. with properties
-void setThemePicker(zhThemePicker *picker, NSObject *object, NSString *propertyName);
-// for CA picker. properties
-void setThemeCGPicker(zhThemePicker *picker, NSObject *object, NSString *propertyName);
-// for picker. with aSelector and state
-void makeThemeStatePicker(zhThemePicker *picker, NSObject *object, SEL aSelector, NSInteger state);
-// for enum type.
-void makeThemeEnumDictionary(NSObject *object, SEL aSelector, NSDictionary<NSString *,NSNumber *> *dict);
+
+// get picker. properties
+id zh_getThemePicker(id instance, const void *key);
+// for picker. properties
+void zh_setThemePicker(zhThemePicker *picker, id instance, NSString *propertyName);
+// for enumerations type.
+void zh_makeThemeEnumerations(id instance, SEL aSelector, NSDictionary<NSString *,NSNumber *> *dict);
 // for textAttributes.
-void makeThemeAttributes(NSObject *object, SEL aSelector, NSDictionary<NSString *,id> *dict);
+void zh_makeThemeTextAttributes(id instance, SEL aSelector, NSDictionary<NSString *,id> *attrs);
 // for textAttributes. with state
-void makeThemeStateAttributes(NSObject *object, SEL aSelector, NSDictionary<NSString *,id> *dict, NSInteger state);
-// for picker. with custom selector1
-void deployThemePicker1(NSObject *object, SEL aSelector, zhThemePicker *picker);
-// for picker. with custom selector2
-void deployThemePicker2(NSObject *object, SEL aSelector, zhThemePicker *picker1, zhThemePicker *picker2);
+void zh_makeThemeStateTextAttributes(id instance, SEL aSelector, NSDictionary<NSString *,id> *attrs, NSInteger state);
+// for picker. with state
+void zh_makeThemeStatePicker(id instance, SEL aSelector, zhThemePicker *picker, NSInteger state);
+// for a picker
+void zh_makeThemePicker1(id instance, SEL aSelector, zhThemePicker *picker);
+// for two picker.
+void zh_makeThemePicker2(NSObject *object, SEL aSelector, zhThemePicker *picker1, zhThemePicker *picker2);
+
 @end

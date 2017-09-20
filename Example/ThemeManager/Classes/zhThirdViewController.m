@@ -61,7 +61,7 @@
         progressView.backgroundColor = [UIColor colorWithHexString:hexString];
         progressView.layer.cornerRadius = 10;
         progressView.layer.masksToBounds = YES;
-        NSString *title = [NSString stringWithFormat:@"style%lu", idx + 1];
+        NSString *title = [NSString stringWithFormat:@"style%lu", (long)(idx + 1)];
         progressView.textLabel.text = title;
         progressView.textLabel.font = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:47];
         progressView.tag = idx;
@@ -94,7 +94,7 @@
     } else {
         [_timer invalidate];
         _timer = nil;
-        progressView.textLabel.text = [NSString stringWithFormat:@"style%lu", idx + 1];
+        progressView.textLabel.text = [NSString stringWithFormat:@"style%d", idx + 1];
         [ThemeManager updateThemeStyle:themeStyles[idx]];
     }
 }

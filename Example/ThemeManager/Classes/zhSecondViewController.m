@@ -7,6 +7,7 @@
 //
 
 #import "zhSecondViewController.h"
+#import "zhSwitchButton.h"
 
 @interface zhSecondViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -42,7 +43,7 @@
     [button zh_setImagePicker:ThemePickerWithKey(@"image05") forState:UIControlStateNormal];
     [button addTarget:self action:@selector(switchThemeClicked:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
+
     [self commonInitialization];
 }
 
@@ -53,6 +54,7 @@
     _tableView.delaysContentTouches = NO;
     _tableView.rowHeight = 140;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
     _tableView.zh_backgroundColorPicker = ThemePickerWithKey(@"color01");
     [self.view addSubview:_tableView];
 }

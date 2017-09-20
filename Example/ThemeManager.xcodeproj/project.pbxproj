@@ -73,6 +73,7 @@
 		F2500C321F57EC64002FF5CB /* zhTheme_Color.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2500C301F57EC64002FF5CB /* zhTheme_Color.plist */; };
 		F2500C331F57EC64002FF5CB /* zhTheme_Image.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2500C311F57EC64002FF5CB /* zhTheme_Image.plist */; };
 		F2500C361F57EC73002FF5CB /* MyThemeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F2500C351F57EC73002FF5CB /* MyThemeConfig.m */; };
+		F2BD440F1F6EB2B4005AED6E /* zhSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD440E1F6EB2B4005AED6E /* zhSwitchButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +179,8 @@
 		F2500C311F57EC64002FF5CB /* zhTheme_Image.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zhTheme_Image.plist; sourceTree = "<group>"; };
 		F2500C341F57EC73002FF5CB /* MyThemeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyThemeConfig.h; sourceTree = "<group>"; };
 		F2500C351F57EC73002FF5CB /* MyThemeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyThemeConfig.m; sourceTree = "<group>"; };
+		F2BD440D1F6EB2B4005AED6E /* zhSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhSwitchButton.h; sourceTree = "<group>"; };
+		F2BD440E1F6EB2B4005AED6E /* zhSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhSwitchButton.m; sourceTree = "<group>"; };
 		FC0182FC93C96567267FDA70 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -382,6 +385,8 @@
 			children = (
 				F2500BEB1F57DFB2002FF5CB /* zhProgressView.h */,
 				F2500BEC1F57DFB2002FF5CB /* zhProgressView.m */,
+				F2BD440D1F6EB2B4005AED6E /* zhSwitchButton.h */,
+				F2BD440E1F6EB2B4005AED6E /* zhSwitchButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -691,6 +696,7 @@
 			files = (
 				F2500BF71F57E0AA002FF5CB /* zhSecondViewController.m in Sources */,
 				F24376121F57F5B7000852C7 /* zhNextViewController.m in Sources */,
+				F2BD440F1F6EB2B4005AED6E /* zhSwitchButton.m in Sources */,
 				F2500C361F57EC73002FF5CB /* MyThemeConfig.m in Sources */,
 				6003F59E195388D20070C39A /* zhAppDelegate.m in Sources */,
 				F2500BF91F57E0AA002FF5CB /* zhThirdViewController.m in Sources */,
@@ -848,9 +854,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ThemeManager/ThemeManager-Prefix.pch";
 				INFOPLIST_FILE = "ThemeManager/ThemeManager-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -864,9 +872,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ThemeManager/ThemeManager-Prefix.pch";
 				INFOPLIST_FILE = "ThemeManager/ThemeManager-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

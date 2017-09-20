@@ -37,11 +37,11 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-    NSDictionary *fontAttrs = @{ThemeDay : [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25],
-                                ThemeNight : [UIFont fontWithName:@"Baskerville-BoldItalic" size:25],
-                                Theme1 : [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25],
-                                Theme2 : [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25],
-                                Theme3 : [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25]};
+    NSDictionary *fontAttrs = @{ThemeDay : [UIFont fontWithName:@"Baskerville-BoldItalic" size:25],
+                                ThemeNight : [UIFont fontWithName:@"ArialHebrew-Bold" size:22],
+                                Theme1 : [UIFont fontWithName:@"ArialHebrew-Bold" size:22],
+                                Theme2 : [UIFont fontWithName:@"ArialHebrew-Bold" size:20],
+                                Theme3 : [UIFont fontWithName:@"ArialHebrew-Bold" size:17]};
     textAttrs[NSFontAttributeName] = ThemePickerWithDict(fontAttrs);
     [self.navigationController.navigationBar zh_setTitleTextAttributes:textAttrs];
     

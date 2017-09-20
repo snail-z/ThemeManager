@@ -11,9 +11,8 @@
 #endif
 
 #import "zhTheme.h"
-#import "QuartzCore+zhTheme.h"
+#import "Components+zhTheme.h"
 #import "Supplementary+zhTheme.h"
-#import "UIKit+zhTheme.h"
 #import "NSObject+zhTheme.h"
 #import "zhThemeFiles.h"
 #import "zhThemeManager.h"

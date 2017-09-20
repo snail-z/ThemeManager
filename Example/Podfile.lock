@@ -1,10 +1,10 @@
 PODS:
-  - ThemeManager (0.1.0):
-    - ThemeManager/Components (= 0.1.0)
-    - ThemeManager/Core (= 0.1.0)
-  - ThemeManager/Components (0.1.0):
+  - ThemeManager (0.1.1):
+    - ThemeManager/Components (= 0.1.1)
+    - ThemeManager/Core (= 0.1.1)
+  - ThemeManager/Components (0.1.1):
     - ThemeManager/Core
-  - ThemeManager/Core (0.1.0)
+  - ThemeManager/Core (0.1.1)
 
 DEPENDENCIES:
   - ThemeManager (from `../`)
@@ -14,7 +14,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ThemeManager: 6e8961223897a883715a5dcca13958c3a47823f5
+  ThemeManager: 23a6a90babdb7054a7cef6dbdb6e9f84680ffe85
 
 PODFILE CHECKSUM: a2c8979e6ed3004ca21b636683a8b635f60907a9
 

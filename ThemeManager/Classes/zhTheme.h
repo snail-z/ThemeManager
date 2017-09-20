@@ -12,9 +12,7 @@
 #import "zhThemeManager.h"
 #import "zhThemePicker.h"
 #import "NSObject+zhTheme.h"
-
-#import "UIKit+zhTheme.h"
-#import "QuartzCore+zhTheme.h"
+#import "Components+zhTheme.h"
 #import "Supplementary+zhTheme.h"
 
 #define pickerify_property(class, property) _theme_property_cla_ify(class, property)
@@ -28,10 +26,10 @@ CLASSNAME (zhTheme_ ## PROPERTY ## _Picker) \
 @implementation \
 CLASSNAME (zhTheme_ ## PROPERTY ## _Picker) \
 - (zhThemePicker *)zh_ ## PROPERTY ## Picker { \
-    return getThemePicker(self, @selector(zh_ ## PROPERTY ## Picker)); \
+    return zh_getThemePicker(self, @selector(zh_ ## PROPERTY ## Picker)); \
 } \
 - (void)setZh_ ## PROPERTY ## Picker:(zhThemePicker *)zh_ ## PROPERTY ## Picker { \
-    setThemePicker(zh_ ## PROPERTY ## Picker, self, (@#PROPERTY)); \
+    zh_setThemePicker(zh_ ## PROPERTY ## Picker, self, (@#PROPERTY)); \
 } \
 @end
 #define _theme_method_cla_ify1(CLASSNAME, NAME1) interface \
@@ -42,7 +40,7 @@ CLASSNAME (zhTheme## NAME1 ## _Picker) \
 CLASSNAME (zhTheme## NAME1 ## _Picker) \
 - (void)zh_ ## NAME1 ## Picker:(nonnull zhThemePicker *)picker { \
     NSString *selName = [NSString stringWithFormat:@"%@:", (@#NAME1)]; \
-    deployThemePicker1(self, NSSelectorFromString(selName), picker);\
+    zh_makeThemePicker1(self, NSSelectorFromString(selName), picker);\
 }\
 @end
 #define _theme_method_cla_ify2(CLASSNAME, NAME1, NAME2) interface \
@@ -53,7 +51,7 @@ CLASSNAME (zhTheme_ ## NAME1 ## _ ## NAME2 ## _Picker) \
 CLASSNAME (zhTheme_ ## NAME1 ## _ ## NAME2 ## _Picker) \
 - (void)zh_ ## NAME1 ## Picker:(zhThemePicker *)picker1 _ ## NAME2 ## Picker:(zhThemePicker *)picker2 { \
     NSString *selName = [NSString stringWithFormat:@"%@:%@:", (@#NAME1), (@#NAME2)]; \
-    deployThemePicker2(self, NSSelectorFromString(selName), picker1, picker2);\
+    zh_makeThemePicker2(self, NSSelectorFromString(selName), picker1, picker2);\
 }\
 @end
 

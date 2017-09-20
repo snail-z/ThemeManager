@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/////////////////////////////// UIKit+zhTheme ///////////////////////////////
+
 @interface UIView (zhTheme)
 
 @property (nonatomic, strong) zhThemePicker *zh_backgroundColorPicker;
@@ -34,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)zh_setTitleColorPicker:(zhThemePicker *)picker forState:(UIControlState)state;
 - (void)zh_setImagePicker:(zhThemePicker *)picker forState:(UIControlState)state;
 - (void)zh_setBackgroundImagePicker:(zhThemePicker *)picker forState:(UIControlState)state;
+
+//@property (nonatomic, strong) zhThemePicker *yt_themePicker;
 
 @end
 
@@ -154,6 +158,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// app info.plist - when `View controller-based status bar appearance` item set to N0 is valid.
 - (void)zh_setStatusBarStyle:(nullable NSDictionary<NSString *, NSNumber *> *)dict;
+
+@end
+
+/////////////////////////////// QuartzCore+zhTheme ///////////////////////////////
+
+@interface CALayer (zhTheme)
+
+@property (nonatomic, strong) zhThemePicker *zh_backgroundColorPicker;
+@property (nonatomic, strong) zhThemePicker *zh_borderColorPicker;
+@property (nonatomic, strong) zhThemePicker *zh_shadowColorPicker;
+@property (nonatomic, strong) zhThemePicker *zh_borderWidthPicker;
+
+@end
+
+@interface CAShapeLayer (zhTheme)
+
+@property (nonatomic, strong) zhThemePicker *zh_fillColorPicker;
+@property (nonatomic, strong) zhThemePicker *zh_strokeColorPicker;
 
 @end
 

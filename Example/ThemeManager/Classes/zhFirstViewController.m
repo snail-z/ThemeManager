@@ -53,6 +53,7 @@
     _tableView.delaysContentTouches = NO;
     _tableView.rowHeight = 140;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     _tableView.zh_backgroundColorPicker = ThemePickerWithKey(@"color01");
     self.view = _tableView;
 }

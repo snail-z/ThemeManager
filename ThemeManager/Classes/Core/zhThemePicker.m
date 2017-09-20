@@ -139,7 +139,6 @@
 @property (nonatomic, strong, readonly) NSDictionary<NSString *, id> *pDict;
 @property (nonatomic, assign, readonly) BOOL isAnimated;
 @property (nonatomic, assign, readonly) UIImageRenderingMode isImgRenderingMode;
-
 @end
 
 @implementation zhThemePicker

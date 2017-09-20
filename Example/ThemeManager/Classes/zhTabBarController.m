@@ -52,7 +52,7 @@
         textAttrs[NSForegroundColorAttributeName] = ThemePickerWithKey(@"color02");
         textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:12];
         [item zh_setTitleTextPickerAttributes:textAttrs forState:UIControlStateNormal];
-    
+
         self.tabBar.zh_overlayColorPicker = ThemePickerWithKey(@"color05");
         self.tabBar.translucent = NO;
         [self addChildViewController:nav];

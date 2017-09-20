@@ -12,18 +12,15 @@
 
 @interface UINavigationBar ()
 
-@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, id> *zh_overPickers;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, id> *zh_themeCustomObjects;
 
 @end
 
 @implementation UINavigationBar (zhThemeOverlay)
 
-- (NSMutableDictionary<NSString *,id> *)zh_overPickers {
-    return addListener(self, _cmd, @selector(zhThemeUpdateOverlayViewColor));
-}
-
-- (void)zhThemeUpdateOverlayViewColor {
-    [self.zh_overPickers enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, zhThemePicker *  _Nonnull picker, BOOL * _Nonnull stop) {
+// overwrite `zh_themeUpdateForCustomObjects`
+- (void)zh_themeUpdateForCustomObjects {
+    [self.zh_themeCustomObjects enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, zhThemePicker *  _Nonnull picker, BOOL * _Nonnull stop) {
         if ([[picker valueForKey:@"isAnimated"] boolValue]) {
             [UIView animateWithDuration:ThemeManager.changeThemeColorAnimationDuration animations:^{
                 [self zh_setOverlayViewBackgroundColor:picker.themeColor];
@@ -61,13 +58,13 @@
         [self setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
         [self.zh_overlayView removeFromSuperview];
         objc_setAssociatedObject(self, @selector(zh_overlayView), nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        [self.zh_overPickers removeObjectForKey:NSStringFromSelector(@selector(zh_setOverlayViewBackgroundColor:))];
+        [self.zh_themeCustomObjects removeObjectForKey:NSStringFromSelector(@selector(zh_setOverlayViewBackgroundColor:))];
         return;
     }
     [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     objc_setAssociatedObject(self, @selector(zh_overlayColorPicker), zh_overlayColorPicker, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self zh_setOverlayViewBackgroundColor:zh_overlayColorPicker.themeColor];
-    [self.zh_overPickers setObject:zh_overlayColorPicker forKey:NSStringFromSelector(@selector(zh_setOverlayViewBackgroundColor:))];
+    [self.zh_themeCustomObjects setObject:zh_overlayColorPicker forKey:NSStringFromSelector(@selector(zh_setOverlayViewBackgroundColor:))];
 }
 
 @end
@@ -87,11 +84,11 @@
 }
 
 - (zhThemePicker *)zh_overlayColorPicker {
-    return getThemePicker(self, _cmd);
+    return zh_getThemePicker(self, _cmd);
 }
 
 - (void)setZh_overlayColorPicker:(zhThemePicker *)zh_overlayColorPicker {
-    setThemePicker(zh_overlayColorPicker, self, @"zh_overlayView.backgroundColor");
+    zh_setThemePicker(zh_overlayColorPicker, self, @"zh_overlayView.backgroundColor");
 }
 
 @end
