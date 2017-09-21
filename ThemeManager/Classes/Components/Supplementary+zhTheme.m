@@ -35,7 +35,8 @@
     UIView *overlayView = objc_getAssociatedObject(self, _cmd);
     if (!overlayView) {
         overlayView = [[UIView alloc] init];
-        overlayView.frame = CGRectMake(0, -20, UIScreen.mainScreen.bounds.size.width, 20);
+        CGFloat height = [NSStringFromCGSize([UIScreen mainScreen].bounds.size) isEqualToString:@"{375, 812}"] ? 44 : 20;
+        overlayView.frame = CGRectMake(0, -height, UIScreen.mainScreen.bounds.size.width, height);
         overlayView.userInteractionEnabled = NO;
         overlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self addSubview:overlayView];
