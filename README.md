@@ -74,7 +74,8 @@ See demo. please wait...
 - (void)zh_addThemePickerForSelector:(SEL)sel withArguments:(id)arguments, ...;
 
 Note:
-The all parameters must be id type. if the basic data types needs to be encapsulated into NSNumber; the struct type needs to be encapsulated into NSValue. / 注意: 所有的参数必须为id类型，若是基础数据类型则需要要封装成NSNumber传入；结构体类型则需要封装成NSValue传入
+The all parameters must be id type. 
+if the basic data types needs to be encapsulated into NSNumber; the struct type needs to be encapsulated into NSValue. 
 Example：
 NSNumber *number = [NSNumber numberWithInteger:2];
 NSValue *value = [NSValue valueWithCGSize:CGSizeMake(100, 100)];
