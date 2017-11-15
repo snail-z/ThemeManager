@@ -29,7 +29,7 @@ use_frameworks!
 
 target 'You Project' do
     
-	pod "ThemeManager", '~> 0.1.3'
+	pod "ThemeManager", '~> 1.0.0'
     
 end
 ```
