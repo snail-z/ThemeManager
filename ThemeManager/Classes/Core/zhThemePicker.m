@@ -1,62 +1,16 @@
 //
-//  zhThemePicker.m
-//  ThemeManager
+//  zhThemeImagePicker.m
+//  ThemeManager_Example
 //
 //  Created by zhanghao on 2017/5/22.
 //  Copyright © 2017年 snail-z. All rights reserved.
 //
 
 #import "zhThemePicker.h"
-#import "zhThemeManager.h"
-#import "zhThemeFiles.h"
 
-#ifndef __OPTIMIZE__
-#define zhThemeDebugLog(s, ...) NSLog(@"\n =======> [%@ in line %d] ** zhTheme Warning ** %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
-#else
-#define zhThemeDebugLog(...) {}
-#endif
-
-@implementation NSString (zhThemeImageHelper)
-
-- (NSString *)stringByAppendingNameScale:(CGFloat)scale {
-    if (fabs(scale - 1) <= __FLT_EPSILON__ || self.length == 0 || [self hasSuffix:@"/"]) return self.copy;
-    return [self stringByAppendingFormat:@"@%@x", @(scale)];
-}
-
-- (NSString *)stringByAppendingPathScale:(CGFloat)scale {
-    if (fabs(scale - 1) <= __FLT_EPSILON__ || self.length == 0 || [self hasSuffix:@"/"]) return self.copy;
-    NSString *ext = self.pathExtension;
-    NSRange extRange = NSMakeRange(self.length - ext.length, 0);
-    if (ext.length > 0) extRange.location -= 1;
-    NSString *scaleStr = [NSString stringWithFormat:@"@%@x", @(scale)];
-    return [self stringByReplacingCharactersInRange:extRange withString:scaleStr];
-}
-
+@interface zhThemePickerHelper : NSObject
 @end
-
-@interface zhThemeHelper : NSObject
-
-+ (UIImage *)imageNamed:(NSString *)name place:(id)place;
-+ (UIImage *)imageFromCheck:(id)object;
-+ (UIColor *)colorFromCheck:(id)object;
-
-@end
-
-@implementation zhThemeHelper
-
-+ (UIImage *)imageNamed:(NSString *)name atPath:(NSString *)path {
-    NSString *fullPath = [path stringByAppendingPathComponent:name];
-    return [UIImage imageWithContentsOfFile:fullPath];
-}
-
-+ (UIImage *)imageNamed:(NSString *)name inBundle:(NSBundle *)bundle {
-    NSString *ext = name.pathExtension;
-    if (ext.length == 0) ext = @"png";
-    else name = name.stringByDeletingPathExtension;
-    NSString *path = [self pathForScaledResource:name ofType:ext inBundle:bundle];
-    // todo... cache
-    return [UIImage imageWithContentsOfFile:path];
-}
+@implementation zhThemePickerHelper
 
 + (NSArray *)preferredScales {
     static NSArray *scales;
@@ -74,6 +28,20 @@
     return scales;
 }
 
++ (NSString *)stringByAppendingNameScale:(CGFloat)scale forString:(NSString *)string {
+    if (fabs(scale - 1) <= __FLT_EPSILON__ || string.length == 0 || [string hasSuffix:@"/"]) return string.copy;
+    return [string stringByAppendingFormat:@"@%@x", @(scale)];
+}
+
++ (NSString *)stringByAppendingPathScale:(CGFloat)scale forString:(NSString *)string {
+    if (fabs(scale - 1) <= __FLT_EPSILON__ || string.length == 0 || [string hasSuffix:@"/"]) return string.copy;
+    NSString *ext = string.pathExtension;
+    NSRange extRange = NSMakeRange(string.length - ext.length, 0);
+    if (ext.length > 0) extRange.location -= 1;
+    NSString *scaleStr = [NSString stringWithFormat:@"@%@x", @(scale)];
+    return [string stringByReplacingCharactersInRange:extRange withString:scaleStr];
+}
+
 + (NSString *)pathForScaledResource:(NSString *)name ofType:(NSString *)ext inBundle:(NSBundle *)bundle {
     if (name.length == 0) return nil;
     if ([name hasSuffix:@"/"]) return [bundle pathForResource:name ofType:ext];
@@ -81,12 +49,35 @@
     NSArray *scales = [self preferredScales];
     for (int s = 0; s < scales.count; s++) {
         CGFloat scale = ((NSNumber *)scales[s]).floatValue;
-        NSString *scaledName = ext.length ? [name stringByAppendingNameScale:scale]
-        : [name stringByAppendingPathScale:scale];
+        NSString *scaledName = ext.length ? [self stringByAppendingNameScale:scale forString:name]
+        : [self stringByAppendingPathScale:scale forString:name];
         path = [bundle pathForResource:scaledName ofType:ext];
         if (path) break;
     }
     return path;
+}
+
++ (UIImage *)imageNamed:(NSString *)name inBundle:(NSBundle *)bundle {
+    NSString *ext = name.pathExtension;
+    if (ext.length == 0) ext = @"png";
+    else name = name.stringByDeletingPathExtension;
+    NSString *path = [self pathForScaledResource:name ofType:ext inBundle:bundle];
+    return [UIImage imageWithContentsOfFile:path]; // todo... cache
+}
+
++ (UIImage *)imageNamed:(NSString *)name inPath:(NSString *)path {
+    NSString *fullPath = [path stringByAppendingPathComponent:name];
+    return [UIImage imageWithContentsOfFile:fullPath];
+}
+
+// source => bundle or path
++ (UIImage *)imageNamed:(NSString *)name fromResource:(id)source {
+    if ([source isKindOfClass:[NSBundle class]]) {
+        return [self imageNamed:name inBundle:source];
+    } else if ([source isKindOfClass:[NSString class]]) {
+        return [self imageNamed:name inPath:source];
+    }
+    return nil;
 }
 
 + (UIColor *)colorFromHexString:(NSString *)hexString {
@@ -104,159 +95,240 @@
     return color;
 }
 
-+ (UIImage *)imageNamed:(NSString *)name place:(id)place {
-    if ([place isKindOfClass:[NSBundle class]]) {
-        return [self imageNamed:name inBundle:place];
-    }
-    return [self imageNamed:name atPath:place];
-}
-
-+ (UIImage *)imageFromCheck:(id)object {
++ (UIColor *)colorFromCheckObject:(id)object {
+    UIColor *value = nil;
     if ([object isKindOfClass:[NSString class]]) {
-        return [UIImage imageNamed:(NSString *)object];
-    } else if ([object isKindOfClass:[UIImage class]]) {
-        return (UIImage *)object;
-    } else if ([object isKindOfClass:[NSData class]]) {
-        return [UIImage imageWithData:(NSData *)object];
-    }
-    return nil;
-}
-
-+ (UIColor *)colorFromCheck:(id)object {
-    if ([object isKindOfClass:[NSString class]]) {
-        return [self colorFromHexString:object];
+        value = [self colorFromHexString:object];
     } else if ([object isKindOfClass:[UIColor class]]) {
-        return (UIColor *)object;
+        value = (UIColor *)object;
     }
-    return nil;
+    return value;
+}
+
++ (UIImage *)imageFromCheckObject:(id)object {
+    UIImage *value = nil;
+    if ([object isKindOfClass:[NSString class]]) {
+        value = [UIImage imageNamed:(NSString *)object];
+    } else if ([object isKindOfClass:[UIImage class]]) {
+        value = (UIImage *)object;
+    } else if ([object isKindOfClass:[NSData class]]) {
+        value = [UIImage imageWithData:(NSData *)object];
+    }
+    return value;
 }
 
 @end
+
 
 @interface zhThemePicker ()
 
 @property (nonatomic, strong, readonly) NSString *pkey;
 @property (nonatomic, strong, readonly) NSDictionary<NSString *, id> *pDict;
-@property (nonatomic, assign, readonly) BOOL isAnimated;
-@property (nonatomic, assign, readonly) UIImageRenderingMode isImgRenderingMode;
+
 @end
 
 @implementation zhThemePicker
 
-+ (instancetype)pickerWithKey:(NSString *)pKey {
-    return [[self alloc] initWithKey:pKey dict:nil];
-}
-
-+ (instancetype)pickerWithDict:(NSDictionary *)pDict {
-    return [[self alloc] initWithKey:nil dict:pDict];
-}
-
-- (instancetype)initWithKey:(NSString *)key dict:(NSDictionary *)dict {
+- (instancetype)initWithKey:(NSString *)key
+                       dict:(NSDictionary *)dict
+                  valueType:(zhThemeValueType)valueType {
     if (self = [super init]) {
-        _isImgRenderingMode = -1;
-        _isAnimated = YES;
         _pkey = key;
         _pDict = dict;
+        _valueType = valueType;
     }
     return self;
 }
 
-- (zhThemePicker *(^)(UIImageRenderingMode))imageRenderingMode {
-    return ^id(UIImageRenderingMode renderingMode) {
-        _isImgRenderingMode = renderingMode;
+@end
+
+@implementation zhThemeColorPicker
+
++ (instancetype)pickerColorWithKey:(NSString *)pKey {
+    return [[self alloc] initWithKey:pKey dict:nil valueType:zhThemeValueTypeColor];
+}
+
++ (instancetype)pickerColorWithDict:(NSDictionary *)pDict {
+    return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeColor];
+}
+
+- (zhThemeColorPicker *(^)(BOOL))animated {
+    return ^id(BOOL isAnimated) {
+        _isAnimated = isAnimated;
         return self;
     };
 }
 
-- (zhThemePicker *(^)(BOOL))animated {
-    return ^id(BOOL animated) {
-        _isAnimated = animated;
-        return self;
+- (UIColor *)color {
+    UIColor* (^getValueBlock)(NSDictionary *) = ^(NSDictionary *dict) {
+        UIColor *value = nil;
+        NSString *currentKey = ThemeManager.currentStyle;
+        if ([dict.allKeys containsObject:currentKey]) {
+            value = [zhThemePickerHelper colorFromCheckObject:dict[currentKey]];
+        }
+        if (!value) {
+            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
+        }
+        return value;
     };
+    
+    if (self.pDict) {
+        return getValueBlock(self.pDict);
+    }
+    
+    NSDictionary<NSString *, NSDictionary *> *dict = ThemeManager.colorLibraries;
+    if (![dict.allKeys containsObject:self.pkey]) return nil;
+    return getValueBlock(dict[self.pkey]);
 }
 
 @end
 
-@implementation zhThemePicker (CurrentTheme)
+@implementation zhThemeImagePicker
 
-- (NSMutableDictionary<NSString *, NSMutableDictionary<NSString *, NSString *> *>*)getColorSources {
-    return [zhThemeFiles.defaultManager valueForKey:@"colorSources"];
+- (instancetype)initWithKey:(NSString *)key
+                       dict:(NSDictionary *)dict
+                  valueType:(zhThemeValueType)valueType {
+    _imageRenderingMode = -1;
+    return [super initWithKey:key dict:dict valueType:valueType];
 }
 
-- (NSMutableDictionary<NSString *, NSMutableDictionary<NSString *, NSString *> *>*)getImageSources {
-    return [zhThemeFiles.defaultManager valueForKey:@"imageSources"];
++ (instancetype)pickerImageWithKey:(NSString *)pKey {
+    return [[self alloc] initWithKey:pKey dict:nil valueType:zhThemeValueTypeImage];
 }
 
-- (id)getImagePlace {
-    return [zhThemeFiles.defaultManager valueForKey:@"imagesPlace"];
++ (instancetype)pickerImageWithDict:(NSDictionary *)pDict {
+    return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeImage];
 }
 
-- (UIColor *)themeColor {
+- (zhThemeImagePicker *(^)(UIImageRenderingMode))renderingMode {
+    return ^id(UIImageRenderingMode imageRenderingMode) {
+        _imageRenderingMode = imageRenderingMode;
+        return self;
+    };
+}
+
+- (zhThemeImagePicker *(^)(UIEdgeInsets))resizableCapInsets {
+    return ^id(UIEdgeInsets imageCapInsets) {
+        _imageCapInsets = imageCapInsets;
+        return self;
+    };
+}
+
+- (UIImage *)image {
+    UIImage* (^getValueBlock)(NSDictionary *) = ^(NSDictionary *dict) {
+        UIImage *value = nil;
+        NSString *currentKey = ThemeManager.currentStyle;
+        if ([dict.allKeys containsObject:currentKey]) {
+            id object = dict[currentKey];
+            UIImage *placeImage = [zhThemePickerHelper imageNamed:object fromResource:ThemeManager.imageSources];
+            if (placeImage) value = placeImage;
+            else value = [zhThemePickerHelper imageFromCheckObject:object];
+            if (value) {
+                if (!UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsetsZero, _imageCapInsets)) {
+                    value = [value resizableImageWithCapInsets:_imageCapInsets];
+                }
+                if (_imageRenderingMode >= 0) {
+                    value = [value imageWithRenderingMode:_imageRenderingMode];
+                }
+            }
+        }
+        if (!value) {
+            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
+        }
+        return value;
+    };
+    
     if (self.pDict) {
-        if ([self.pDict.allKeys containsObject:ThemeManager.currentStyle]) {
-            id object = self.pDict[ThemeManager.currentStyle];
-            return [zhThemeHelper colorFromCheck:object];
+        return getValueBlock(self.pDict);
+    }
+    
+    NSDictionary<NSString *, NSDictionary *> *dict = ThemeManager.imageLibraries;
+    if (![dict.allKeys containsObject:self.pkey]) return nil;
+    return getValueBlock(dict[self.pkey]);
+}
+
+@end
+
+@implementation zhThemeFontPicker
+
++ (instancetype)pickerFontWithDict:(NSDictionary *)pDict {
+    return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeFont];
+}
+
+- (UIFont *)font {
+    UIFont* (^getValueBlock)(NSDictionary *) = ^(NSDictionary *dict) {
+        UIFont *value = [UIFont systemFontOfSize:UIFont.systemFontSize];
+        NSString *currentKey = ThemeManager.currentStyle;
+        if ([dict.allKeys containsObject:currentKey]) {
+            id object = dict[currentKey];
+            if ([object isKindOfClass:[UIFont class]]) value = object;
         }
-        zhThemeDebugLog(@"Not found key (%@) in dict: %@", ThemeManager.currentStyle, self.pDict);
-    } else {
-        NSDictionary *dict = [self getColorSources];
-        if ([dict.allKeys containsObject:self.pkey]) {
-            // No judgment type. must be NSDictionary class.
-            id value = [dict[self.pkey] objectForKey:ThemeManager.currentStyle];
-            UIColor *color = [zhThemeHelper colorFromCheck:value];
-            if (!color) zhThemeDebugLog(@"Not hexadecimal color code. %@", value);
-            return color;
+        if (!value) {
+            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
         }
-        zhThemeDebugLog(@"Not found key (%@) in color profile: %@", self.pkey, [zhThemeFiles.defaultManager valueForKey:@"colorFile"]);
+        return value;
+    };
+    
+    if (self.pDict) {
+        return getValueBlock(self.pDict);
     }
     return nil;
 }
 
-- (UIImage *)themeImage {
+@end
+
+@implementation zhThemeNumberPicker
+
++ (instancetype)pickerNumberWithDict:(NSDictionary *)pDict {
+    return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeNumber];
+}
+
+- (NSNumber *)number {
+    NSNumber* (^getValueBlock)(NSDictionary *) = ^(NSDictionary *dict) {
+        NSNumber *value = [NSNumber numberWithDouble:1.f];
+        NSString *currentKey = ThemeManager.currentStyle;
+        if ([dict.allKeys containsObject:currentKey]) {
+            id object = dict[currentKey];
+            if ([object isKindOfClass:[NSNumber class]]) value = object;
+        }
+        if (!value) {
+            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
+        }
+        return value;
+    };
+    
     if (self.pDict) {
-        if ([self.pDict.allKeys containsObject:ThemeManager.currentStyle]) {
-            UIImage *image = [zhThemeHelper imageFromCheck:self.pDict[ThemeManager.currentStyle]];
-            if (self.isImgRenderingMode < 0) return image;
-            return [image imageWithRenderingMode:self.isImgRenderingMode];
+        return getValueBlock(self.pDict);
+    }
+    return @0;
+}
+
+@end
+
+@implementation zhThemeTextPicker
+
++ (instancetype)pickerTextWithDict:(NSDictionary *)pDict {
+    return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeText];
+}
+
+- (NSString *)text {
+    NSString* (^getValueBlock)(NSDictionary *) = ^(NSDictionary *dict) {
+        NSString *value = nil;
+        NSString *currentKey = ThemeManager.currentStyle;
+        if ([dict.allKeys containsObject:currentKey]) {
+            id object = dict[currentKey];
+            if ([object isKindOfClass:[NSString class]]) value = object;
         }
-        zhThemeDebugLog(@"Not found key (%@) in dict: %@", ThemeManager.currentStyle, self.pDict);
-        return nil;
-    } else {
-        NSDictionary *dict = [self getImageSources];
-        if ([dict.allKeys containsObject:self.pkey]) {
-            // No judgment type. must be NSDictionary class.
-            id value = [dict[self.pkey] objectForKey:ThemeManager.currentStyle];
-            UIImage *image = nil;
-            if ([self getImagePlace]) image = [zhThemeHelper imageNamed:value place:self.getImagePlace];
-            else image = [zhThemeHelper imageFromCheck:value];
-            if (self.isImgRenderingMode < 0) return image;
-            return [image imageWithRenderingMode:self.isImgRenderingMode];
+        if (!value) {
+            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
         }
-        zhThemeDebugLog(@"Not found key (%@) in image profile: %@", self.pkey, [zhThemeFiles.defaultManager valueForKey:@"imageFile"]);
+        return value;
+    };
+    
+    if (self.pDict) {
+        return getValueBlock(self.pDict);
     }
     return nil;
-}
-
-- (UIFont *)themeFont {
-    if (self.pDict) {
-        if ([self.pDict.allKeys containsObject:ThemeManager.currentStyle]) {
-            id object = self.pDict[ThemeManager.currentStyle];
-            if ([object isKindOfClass:[UIFont class]]) return (UIFont *)object;
-        }
-        zhThemeDebugLog(@"Not found key (%@) in dict: %@", ThemeManager.currentStyle, self.pDict);
-    }
-    return [UIFont systemFontOfSize:UIFont.systemFontSize];
-}
-
-- (NSNumber *)themeDouble {
-    if (self.pDict) {
-        if ([self.pDict.allKeys containsObject:ThemeManager.currentStyle]) {
-            id object = self.pDict[ThemeManager.currentStyle];
-            if ([object isKindOfClass:[NSNumber class]]) return object;
-        }
-        zhThemeDebugLog(@"Not found key (%@) in dict: %@", ThemeManager.currentStyle, self.pDict);
-    }
-    return @1.0;
 }
 
 @end

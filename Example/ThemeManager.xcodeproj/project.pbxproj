@@ -41,6 +41,7 @@
 		F24376331F584BC7000852C7 /* mf700-01036711.png in Resources */ = {isa = PBXBuildFile; fileRef = F24376281F584BC7000852C7 /* mf700-01036711.png */; };
 		F24376341F584BC7000852C7 /* mf700-02883145.png in Resources */ = {isa = PBXBuildFile; fileRef = F24376291F584BC7000852C7 /* mf700-02883145.png */; };
 		F24376371F58502E000852C7 /* NSObject+AssociatedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F24376361F58502E000852C7 /* NSObject+AssociatedObject.m */; };
+		F24B7C5C1FBB31CC00D1088B /* zhTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = F24B7C5B1FBB31CC00D1088B /* zhTestView.m */; };
 		F2500BE51F57DE6B002FF5CB /* UIColor+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = F2500BDE1F57DE6B002FF5CB /* UIColor+Extend.m */; };
 		F2500BE61F57DE6B002FF5CB /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = F2500BE01F57DE6B002FF5CB /* UIImage+Color.m */; };
 		F2500BE71F57DE6B002FF5CB /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = F2500BE21F57DE6B002FF5CB /* UIView+Layout.m */; };
@@ -136,6 +137,8 @@
 		F24376291F584BC7000852C7 /* mf700-02883145.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mf700-02883145.png"; sourceTree = "<group>"; };
 		F24376351F58502E000852C7 /* NSObject+AssociatedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AssociatedObject.h"; sourceTree = "<group>"; };
 		F24376361F58502E000852C7 /* NSObject+AssociatedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AssociatedObject.m"; sourceTree = "<group>"; };
+		F24B7C5A1FBB31CC00D1088B /* zhTestView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhTestView.h; sourceTree = "<group>"; };
+		F24B7C5B1FBB31CC00D1088B /* zhTestView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhTestView.m; sourceTree = "<group>"; };
 		F2500BDD1F57DE6B002FF5CB /* UIColor+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extend.h"; sourceTree = "<group>"; };
 		F2500BDE1F57DE6B002FF5CB /* UIColor+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extend.m"; sourceTree = "<group>"; };
 		F2500BDF1F57DE6B002FF5CB /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
@@ -387,6 +390,8 @@
 				F2500BEC1F57DFB2002FF5CB /* zhProgressView.m */,
 				F2BD440D1F6EB2B4005AED6E /* zhSwitchButton.h */,
 				F2BD440E1F6EB2B4005AED6E /* zhSwitchButton.m */,
+				F24B7C5A1FBB31CC00D1088B /* zhTestView.h */,
+				F24B7C5B1FBB31CC00D1088B /* zhTestView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -702,6 +707,7 @@
 				F2500BF91F57E0AA002FF5CB /* zhThirdViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* zhViewController.m in Sources */,
 				F2500BF81F57E0AA002FF5CB /* zhTabBarController.m in Sources */,
+				F24B7C5C1FBB31CC00D1088B /* zhTestView.m in Sources */,
 				F2500BE71F57DE6B002FF5CB /* UIView+Layout.m in Sources */,
 				F2500BE61F57DE6B002FF5CB /* UIImage+Color.m in Sources */,
 				F2500BE81F57DE6B002FF5CB /* UIViewController+zhStatusBarStyle.m in Sources */,

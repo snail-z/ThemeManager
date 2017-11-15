@@ -12,14 +12,14 @@
 
 + (void)config {
     NSString *path1 = [[NSBundle mainBundle] pathForResource:@"zhTheme_Color" ofType:@"plist"];
-    ThemeManager.defaultColorFile = path1;
+    [ThemeManager setDefaultThemeColorFile:path1];
     
     NSString *path2 = [[NSBundle mainBundle] pathForResource:@"zhTheme_Image" ofType:@"plist"];
-    ThemeManager.defaultImageFile = path2;
+    [ThemeManager setDefaultThemeImageFile:path2];
     
-    ThemeManager.defaultStyle = ThemeDay;
+    [ThemeManager setDefaultThemeStyle:ThemeDay];
     
-    ThemeManager.changeThemeColorAnimationDuration = 0.35;
+    ThemeManager.themeColorChangeInterval = 0.25;
     
     // 配置状态栏
     NSDictionary *d = @{ThemeDay : @(UIStatusBarStyleLightContent),

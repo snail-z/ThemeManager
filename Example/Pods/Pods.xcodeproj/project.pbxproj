@@ -7,28 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0818CFD58D94DEB8C14554BBA4B0A26D /* zhThemeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DDCC8950FF8C1F71FEEA196BBF1553 /* zhThemeManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E1E4AB4EC452499D2DD696FBC4AA173 /* zhThemePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A91033973C5C30E24C24A0D7937CCF4 /* zhThemePicker.m */; };
-		39E8B25CD4A1868DC604631230618A5E /* Supplementary+zhTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A68F7F4FFA689989918E0C4284DB79 /* Supplementary+zhTheme.m */; };
+		108E4A22EB5C65EF9243067A9CE38F84 /* zhThemeUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = A7F861538650EA888E630078FD2A1E80 /* zhThemeUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CDDAA5C761FF6960C61A51D027C0E2A /* Components+zhTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 661D5FE2458CBBBA146BADB3F87F0767 /* Components+zhTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4178C7A621389B390799AEBDCC7338EB /* Pods-ThemeManager_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C68A98EA3308E3E7CF5A62EABAB73F /* Pods-ThemeManager_Tests-dummy.m */; };
 		537FF9D2285F32CF661E95CFBADF2DA2 /* Pods-ThemeManager_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E91ACE0F0924333A59A09C8FD1A4189C /* Pods-ThemeManager_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55937EED64F664F78891CE63BEA3101C /* zhThemeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EAA25001783549930E46FE64D8F701B /* zhThemeManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55FE0C9473E8A5D78A281EAD35D48C00 /* NSObject+zhTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D58FDA83EFA0AE6ADDE37CD7616E9E /* NSObject+zhTheme.m */; };
 		596A505928C60465B582D414C732CB61 /* Pods-ThemeManager_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5052E9F3353D5E21D26E1517F43FB28E /* Pods-ThemeManager_Example-dummy.m */; };
-		5A9F2E55856F38E534A78E78A270000B /* Components+zhTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 551E5CFF12C0B557FF7C9F946EEA2353 /* Components+zhTheme.m */; };
 		5CF8B418B7D6742AD707B5332AFADB7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		66C4A87239B1B9BBEAF33366D3B53A40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		6AE462C1504CAF14A0DB984A3A921CAF /* zhThemePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E8E55F0106B2A93561F231FC3E55CF /* zhThemePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6FD1FE6926C3EE0C49D2BBB699C4A8DE /* ThemeManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D3FDD87F873B2A7DC59856966CD8D1AC /* ThemeManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75797BFA7A3FE1B56085581C5328F954 /* ThemeManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F9A717E202D90237EBD50A302F8E2A /* ThemeManager-dummy.m */; };
+		79ECEF19BA2E848915BAE0D464EF05FF /* Supplementary+zhTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A68F7F4FFA689989918E0C4284DB79 /* Supplementary+zhTheme.m */; };
 		7D33668385D6A479C988A7548B1434C7 /* Pods-ThemeManager_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E478F363460EC5B5A021FAE735EA6B9 /* Pods-ThemeManager_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		82E971D6774522E22BFAE3173F0A721F /* Components+zhTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 661D5FE2458CBBBA146BADB3F87F0767 /* Components+zhTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		955D080C39D132E9B77FA1D26DFB656D /* NSObject+zhTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 58E80C138CC0715BF996C72C2A5B3193 /* NSObject+zhTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		965B8AFB8F9583A31E14C3396CA8CED2 /* ThemeManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F9A717E202D90237EBD50A302F8E2A /* ThemeManager-dummy.m */; };
-		9AC51A64383AD4E53CD93946A0543059 /* zhThemeFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 2299097DD2466D1D025EE1857A90CBE8 /* zhThemeFiles.m */; };
-		9DBA001051B40AEF34521DC3DB42075F /* ThemeManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D3FDD87F873B2A7DC59856966CD8D1AC /* ThemeManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A1BE71AC6422A7E8EB14177BF87E9A55 /* zhThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D941FE75E2D110C3A7F9F0D0B752915A /* zhThemeManager.m */; };
+		8BAC8C298688D7B6BA81BFF00AF17637 /* zhThemeUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2A67253B235EDA584B25D5C95DFA3D /* zhThemeUtilities.m */; };
+		935D2552B60785BDA90CAA6AD9ABC9AA /* Supplementary+zhTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = EDF46DB2F4F5B021265F52770C90129C /* Supplementary+zhTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A330A6A1826529CDB9270E4CE752557C /* Components+zhTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 551E5CFF12C0B557FF7C9F946EEA2353 /* Components+zhTheme.m */; };
 		A669586A01CEF82025004C6B2B278614 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		A73A00B66276039C41E7FE61EABBCDE5 /* zhTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B3A5B75AAF456596D626DDD9B2533B9 /* zhTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D48A61FEB23773D15D222DE89993C036 /* zhThemeFiles.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F952D1E699D92911A62E2C9F491A39A /* zhThemeFiles.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D5DCC83FFF9C460ABF63B38D14F76C26 /* Supplementary+zhTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = EDF46DB2F4F5B021265F52770C90129C /* Supplementary+zhTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC12D8944CB15CD07A8C5968C25AB4D1 /* NSObject+zhTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D02601AEC4CA942DB30A20E96A7E02 /* NSObject+zhTheme.m */; };
+		AA3D1A2C1F24AB477AFE573E8BD9C0C3 /* zhTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B3A5B75AAF456596D626DDD9B2533B9 /* zhTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AB6D0D28660AE1D2CE57A7A4B6E06E7F /* NSObject+zhTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E13E698DC993B62D66105322BA4584A /* NSObject+zhTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C064F687E83E6FC1C2664B9BCA5BDE0C /* zhThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A542EBA57A55F7A0CFB03516528A7F7E /* zhThemeManager.m */; };
+		CFA770A4C3DE2C5CDB65F918DB8D4F14 /* zhThemePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E89106BBD601E83E08A345FDC9269A /* zhThemePicker.m */; };
+		E710778787025B5ED6F3BA9575CE041E /* zhThemePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = C4C127FD2713F007E5A564F77B635975 /* zhThemePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,10 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04D58FDA83EFA0AE6ADDE37CD7616E9E /* NSObject+zhTheme.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+zhTheme.m"; path = "ThemeManager/Classes/Core/NSObject+zhTheme.m"; sourceTree = "<group>"; };
 		0CDA1081AA5C35B8D97DD208BE17ED56 /* ThemeManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ThemeManager.framework; path = ThemeManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		151CB5492487CF9C6F2B62834B83DC2A /* ThemeManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ThemeManager.xcconfig; sourceTree = "<group>"; };
 		16F9A717E202D90237EBD50A302F8E2A /* ThemeManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ThemeManager-dummy.m"; sourceTree = "<group>"; };
-		2299097DD2466D1D025EE1857A90CBE8 /* zhThemeFiles.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = zhThemeFiles.m; path = ThemeManager/Classes/Core/zhThemeFiles.m; sourceTree = "<group>"; };
 		2B0BFA671A8641C2AD6D43C2011BEAAB /* Pods-ThemeManager_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ThemeManager_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		2D4FE8D93595CF402174B5C338E9FFF3 /* Pods-ThemeManager_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ThemeManager_Tests-resources.sh"; sourceTree = "<group>"; };
 		2EB684E4F67FD24BA5DCB25F9A125971 /* Pods-ThemeManager_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ThemeManager_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -55,32 +55,32 @@
 		5052E9F3353D5E21D26E1517F43FB28E /* Pods-ThemeManager_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ThemeManager_Example-dummy.m"; sourceTree = "<group>"; };
 		551E5CFF12C0B557FF7C9F946EEA2353 /* Components+zhTheme.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Components+zhTheme.m"; path = "ThemeManager/Classes/Components/Components+zhTheme.m"; sourceTree = "<group>"; };
 		571AA410DA33F05CACDE85ECB2C0F033 /* Pods_ThemeManager_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ThemeManager_Example.framework; path = "Pods-ThemeManager_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		58E80C138CC0715BF996C72C2A5B3193 /* NSObject+zhTheme.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+zhTheme.h"; path = "ThemeManager/Classes/Core/NSObject+zhTheme.h"; sourceTree = "<group>"; };
+		5A2A67253B235EDA584B25D5C95DFA3D /* zhThemeUtilities.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = zhThemeUtilities.m; path = ThemeManager/Classes/Core/zhThemeUtilities.m; sourceTree = "<group>"; };
+		5EAA25001783549930E46FE64D8F701B /* zhThemeManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zhThemeManager.h; path = ThemeManager/Classes/Core/zhThemeManager.h; sourceTree = "<group>"; };
 		60BE4F441E268DD786D830EC54864C83 /* Pods-ThemeManager_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ThemeManager_Tests.modulemap"; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		661D5FE2458CBBBA146BADB3F87F0767 /* Components+zhTheme.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Components+zhTheme.h"; path = "ThemeManager/Classes/Components/Components+zhTheme.h"; sourceTree = "<group>"; };
 		6B312A41847353DCECFD7A8EFC06A955 /* Pods_ThemeManager_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ThemeManager_Tests.framework; path = "Pods-ThemeManager_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E13E698DC993B62D66105322BA4584A /* NSObject+zhTheme.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+zhTheme.h"; path = "ThemeManager/Classes/Core/NSObject+zhTheme.h"; sourceTree = "<group>"; };
 		6E478F363460EC5B5A021FAE735EA6B9 /* Pods-ThemeManager_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ThemeManager_Tests-umbrella.h"; sourceTree = "<group>"; };
-		71E8E55F0106B2A93561F231FC3E55CF /* zhThemePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zhThemePicker.h; path = ThemeManager/Classes/Core/zhThemePicker.h; sourceTree = "<group>"; };
 		72E985A808DFB28499F341424B33E427 /* Pods-ThemeManager_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ThemeManager_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		78888CC0C0FD9462E5705B8B26C2033E /* Pods-ThemeManager_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ThemeManager_Example-resources.sh"; sourceTree = "<group>"; };
 		7DE7C735A40AB0A1393D1FE370B5DBB9 /* Pods-ThemeManager_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ThemeManager_Example-frameworks.sh"; sourceTree = "<group>"; };
 		83A1822DAB76E60D6200741FA18851FC /* Pods-ThemeManager_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ThemeManager_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		899308884E3E8D895FE24C5E65DC17AF /* Pods-ThemeManager_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ThemeManager_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		8A91033973C5C30E24C24A0D7937CCF4 /* zhThemePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = zhThemePicker.m; path = ThemeManager/Classes/Core/zhThemePicker.m; sourceTree = "<group>"; };
 		8C91F21D4020E4D18D2F70554744A543 /* Pods-ThemeManager_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ThemeManager_Example.modulemap"; sourceTree = "<group>"; };
-		90D02601AEC4CA942DB30A20E96A7E02 /* NSObject+zhTheme.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+zhTheme.m"; path = "ThemeManager/Classes/Core/NSObject+zhTheme.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		95BBEC549897ED2C262379835F0730E1 /* Pods-ThemeManager_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ThemeManager_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		9F952D1E699D92911A62E2C9F491A39A /* zhThemeFiles.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zhThemeFiles.h; path = ThemeManager/Classes/Core/zhThemeFiles.h; sourceTree = "<group>"; };
 		A1A68F7F4FFA689989918E0C4284DB79 /* Supplementary+zhTheme.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Supplementary+zhTheme.m"; path = "ThemeManager/Classes/Components/Supplementary+zhTheme.m"; sourceTree = "<group>"; };
+		A542EBA57A55F7A0CFB03516528A7F7E /* zhThemeManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = zhThemeManager.m; path = ThemeManager/Classes/Core/zhThemeManager.m; sourceTree = "<group>"; };
+		A7F861538650EA888E630078FD2A1E80 /* zhThemeUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zhThemeUtilities.h; path = ThemeManager/Classes/Core/zhThemeUtilities.h; sourceTree = "<group>"; };
 		AC7BE6BA4FAD64FB2A9E4254CDA115B2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6EECEB92F11FC4601940B7E16771A77 /* Pods-ThemeManager_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ThemeManager_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C6DDCC8950FF8C1F71FEEA196BBF1553 /* zhThemeManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zhThemeManager.h; path = ThemeManager/Classes/Core/zhThemeManager.h; sourceTree = "<group>"; };
+		C4C127FD2713F007E5A564F77B635975 /* zhThemePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zhThemePicker.h; path = ThemeManager/Classes/Core/zhThemePicker.h; sourceTree = "<group>"; };
 		CBCF21D59E1B1D983C4D85DAF48AFA80 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3C68A98EA3308E3E7CF5A62EABAB73F /* Pods-ThemeManager_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ThemeManager_Tests-dummy.m"; sourceTree = "<group>"; };
 		D3FDD87F873B2A7DC59856966CD8D1AC /* ThemeManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ThemeManager-umbrella.h"; sourceTree = "<group>"; };
-		D941FE75E2D110C3A7F9F0D0B752915A /* zhThemeManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = zhThemeManager.m; path = ThemeManager/Classes/Core/zhThemeManager.m; sourceTree = "<group>"; };
+		D7E89106BBD601E83E08A345FDC9269A /* zhThemePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = zhThemePicker.m; path = ThemeManager/Classes/Core/zhThemePicker.m; sourceTree = "<group>"; };
 		E91ACE0F0924333A59A09C8FD1A4189C /* Pods-ThemeManager_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ThemeManager_Example-umbrella.h"; sourceTree = "<group>"; };
 		EDC91E4C82D2C8221968CBC895F7437E /* ThemeManager-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ThemeManager-prefix.pch"; sourceTree = "<group>"; };
 		EDF46DB2F4F5B021265F52770C90129C /* Supplementary+zhTheme.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Supplementary+zhTheme.h"; path = "ThemeManager/Classes/Components/Supplementary+zhTheme.h"; sourceTree = "<group>"; };
@@ -155,27 +155,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8A79BB5914E2780B09926FDE783A9514 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6E13E698DC993B62D66105322BA4584A /* NSObject+zhTheme.h */,
+				04D58FDA83EFA0AE6ADDE37CD7616E9E /* NSObject+zhTheme.m */,
+				5EAA25001783549930E46FE64D8F701B /* zhThemeManager.h */,
+				A542EBA57A55F7A0CFB03516528A7F7E /* zhThemeManager.m */,
+				C4C127FD2713F007E5A564F77B635975 /* zhThemePicker.h */,
+				D7E89106BBD601E83E08A345FDC9269A /* zhThemePicker.m */,
+				A7F861538650EA888E630078FD2A1E80 /* zhThemeUtilities.h */,
+				5A2A67253B235EDA584B25D5C95DFA3D /* zhThemeUtilities.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
 		8C7EB18BDCD1326B9F5F0430D962701A /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
 				BE0339922F27EE92A6C17A26ADF83A4F /* ThemeManager */,
 			);
 			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		9CFBB8C7424DFB4D96A59ABA011FBAD1 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				58E80C138CC0715BF996C72C2A5B3193 /* NSObject+zhTheme.h */,
-				90D02601AEC4CA942DB30A20E96A7E02 /* NSObject+zhTheme.m */,
-				9F952D1E699D92911A62E2C9F491A39A /* zhThemeFiles.h */,
-				2299097DD2466D1D025EE1857A90CBE8 /* zhThemeFiles.m */,
-				C6DDCC8950FF8C1F71FEEA196BBF1553 /* zhThemeManager.h */,
-				D941FE75E2D110C3A7F9F0D0B752915A /* zhThemeManager.m */,
-				71E8E55F0106B2A93561F231FC3E55CF /* zhThemePicker.h */,
-				8A91033973C5C30E24C24A0D7937CCF4 /* zhThemePicker.m */,
-			);
-			name = Core;
 			sourceTree = "<group>";
 		};
 		A2B82AEF4C8A1E6EEED416C1B3293ECE /* Support Files */ = {
@@ -243,7 +243,7 @@
 			children = (
 				3B3A5B75AAF456596D626DDD9B2533B9 /* zhTheme.h */,
 				A8419B358DAF2FBF6D232BA40344B80E /* Components */,
-				9CFBB8C7424DFB4D96A59ABA011FBAD1 /* Core */,
+				8A79BB5914E2780B09926FDE783A9514 /* Core */,
 				A2B82AEF4C8A1E6EEED416C1B3293ECE /* Support Files */,
 			);
 			name = ThemeManager;
@@ -261,21 +261,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		12AF06F1A79370D03F3AF21138954481 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				82E971D6774522E22BFAE3173F0A721F /* Components+zhTheme.h in Headers */,
-				955D080C39D132E9B77FA1D26DFB656D /* NSObject+zhTheme.h in Headers */,
-				D5DCC83FFF9C460ABF63B38D14F76C26 /* Supplementary+zhTheme.h in Headers */,
-				9DBA001051B40AEF34521DC3DB42075F /* ThemeManager-umbrella.h in Headers */,
-				A73A00B66276039C41E7FE61EABBCDE5 /* zhTheme.h in Headers */,
-				D48A61FEB23773D15D222DE89993C036 /* zhThemeFiles.h in Headers */,
-				0818CFD58D94DEB8C14554BBA4B0A26D /* zhThemeManager.h in Headers */,
-				6AE462C1504CAF14A0DB984A3A921CAF /* zhThemePicker.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1694F6DC4EB91CA62F34EE64E17A67C4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -289,6 +274,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D33668385D6A479C988A7548B1434C7 /* Pods-ThemeManager_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0DF942813F43B5DB3EDFFAFBAA39F3D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CDDAA5C761FF6960C61A51D027C0E2A /* Components+zhTheme.h in Headers */,
+				AB6D0D28660AE1D2CE57A7A4B6E06E7F /* NSObject+zhTheme.h in Headers */,
+				935D2552B60785BDA90CAA6AD9ABC9AA /* Supplementary+zhTheme.h in Headers */,
+				6FD1FE6926C3EE0C49D2BBB699C4A8DE /* ThemeManager-umbrella.h in Headers */,
+				AA3D1A2C1F24AB477AFE573E8BD9C0C3 /* zhTheme.h in Headers */,
+				55937EED64F664F78891CE63BEA3101C /* zhThemeManager.h in Headers */,
+				E710778787025B5ED6F3BA9575CE041E /* zhThemePicker.h in Headers */,
+				108E4A22EB5C65EF9243067A9CE38F84 /* zhThemeUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,9 +334,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F46C3A88B81E15330CA508DBF4D07F4 /* Build configuration list for PBXNativeTarget "ThemeManager" */;
 			buildPhases = (
-				19D81DD8676EFA76F0288C8C0C1DC0CB /* Sources */,
+				B3FF5337E4E4EE17D82F79C3E8378439 /* Sources */,
 				A48B0DEF94B6D857279F2FFB9B003879 /* Frameworks */,
-				12AF06F1A79370D03F3AF21138954481 /* Headers */,
+				C0DF942813F43B5DB3EDFFAFBAA39F3D /* Headers */,
 			);
 			buildRules = (
 			);
@@ -376,20 +376,6 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		19D81DD8676EFA76F0288C8C0C1DC0CB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5A9F2E55856F38E534A78E78A270000B /* Components+zhTheme.m in Sources */,
-				EC12D8944CB15CD07A8C5968C25AB4D1 /* NSObject+zhTheme.m in Sources */,
-				39E8B25CD4A1868DC604631230618A5E /* Supplementary+zhTheme.m in Sources */,
-				965B8AFB8F9583A31E14C3396CA8CED2 /* ThemeManager-dummy.m in Sources */,
-				9AC51A64383AD4E53CD93946A0543059 /* zhThemeFiles.m in Sources */,
-				A1BE71AC6422A7E8EB14177BF87E9A55 /* zhThemeManager.m in Sources */,
-				1E1E4AB4EC452499D2DD696FBC4AA173 /* zhThemePicker.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		59C726386A0ABD56CF24386F0C7FB4BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -403,6 +389,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				596A505928C60465B582D414C732CB61 /* Pods-ThemeManager_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3FF5337E4E4EE17D82F79C3E8378439 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A330A6A1826529CDB9270E4CE752557C /* Components+zhTheme.m in Sources */,
+				55FE0C9473E8A5D78A281EAD35D48C00 /* NSObject+zhTheme.m in Sources */,
+				79ECEF19BA2E848915BAE0D464EF05FF /* Supplementary+zhTheme.m in Sources */,
+				75797BFA7A3FE1B56085581C5328F954 /* ThemeManager-dummy.m in Sources */,
+				C064F687E83E6FC1C2664B9BCA5BDE0C /* zhThemeManager.m in Sources */,
+				CFA770A4C3DE2C5CDB65F918DB8D4F14 /* zhThemePicker.m in Sources */,
+				8BAC8C298688D7B6BA81BFF00AF17637 /* zhThemeUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

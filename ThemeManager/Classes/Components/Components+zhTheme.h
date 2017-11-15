@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class zhThemePicker;
+@class
+zhThemeColorPicker,
+zhThemeImagePicker,
+zhThemeFontPicker,
+zhThemeNumberPicker,
+zhThemeTextPicker;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,70 +20,68 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_backgroundColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_tintColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_alphaPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_backgroundColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_tintColorPicker;
+@property (nonatomic, strong) zhThemeNumberPicker *zh_alphaPicker;
 
 @end
 
 @interface UILabel (zhTheme)
 
-// zh_fontPicker- Only supported by `ThemePickerWithDict(dict)` Settings. use the `ThemePickerWithKey(key)` is invalid.
-@property (nonatomic, strong) zhThemePicker *zh_fontPicker;
-@property (nonatomic, strong) zhThemePicker *zh_textColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_shadowColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_highlightedTextColorPicker;
+/// zh_fontPicker- Only supported by Through the dictionary Settings. use other method is invalid.
+@property (nonatomic, strong) zhThemeFontPicker *zh_fontPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_textColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_shadowColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_highlightedTextColorPicker;
 
 @end
 
 @interface UIButton (zhTheme)
 
-- (void)zh_setTitleColorPicker:(zhThemePicker *)picker forState:(UIControlState)state;
-- (void)zh_setImagePicker:(zhThemePicker *)picker forState:(UIControlState)state;
-- (void)zh_setBackgroundImagePicker:(zhThemePicker *)picker forState:(UIControlState)state;
-
-//@property (nonatomic, strong) zhThemePicker *yt_themePicker;
+- (void)zh_setTitleColorPicker:(zhThemeColorPicker *)picker forState:(UIControlState)state;
+- (void)zh_setImagePicker:(zhThemeImagePicker *)picker forState:(UIControlState)state;
+- (void)zh_setBackgroundImagePicker:(zhThemeImagePicker *)picker forState:(UIControlState)state;
 
 @end
 
 @interface UIImageView (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_imagePicker;
-@property (nonatomic, strong) zhThemePicker *zh_highlightedImagePicker; // When `highlighted` set YES is valid.
-- (instancetype)zh_initWithImagePicker:(zhThemePicker *)picker;
-- (instancetype)zh_initWithImagePicker:(zhThemePicker *)picker highlightedImagePicker:(zhThemePicker *)highlightedPicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_imagePicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_highlightedImagePicker; // When `highlighted` set YES is valid.
+- (instancetype)zh_initWithImagePicker:(zhThemeImagePicker *)picker;
+- (instancetype)zh_initWithImagePicker:(zhThemeImagePicker *)picker highlightedImagePicker:(zhThemeImagePicker *)highlightedPicker;
 
 @end
 
 @interface UITableView (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_separatorColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_separatorColorPicker;
 
 @end
 
 @interface UIPageControl (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_pageIndicatorTintColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_currentPageIndicatorTintColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_pageIndicatorTintColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_currentPageIndicatorTintColorPicker;
 
 @end
 
 @interface UIProgressView (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_progressTintColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_trackTintColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_progressImagePicker;
-@property (nonatomic, strong) zhThemePicker *zh_trackImagePicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_progressTintColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_trackTintColorPicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_progressImagePicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_trackImagePicker;
 
 @end
 
 @interface UITextField (zhTheme)
 
-// zh_fontPicker- Only supported by `ThemePickerWithDict(dict)` Settings. use the `ThemePickerWithKey(key)` is invalid.
-@property (nonatomic, strong) zhThemePicker *zh_fontPicker;
-@property (nonatomic, strong) zhThemePicker *zh_textColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_placeholderTextColorPicker;
-/*
+/// zh_fontPicker- Only supported by Through the dictionary Settings. use other method is invalid.
+@property (nonatomic, strong) zhThemeFontPicker *zh_fontPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_textColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_placeholderTextColorPicker;
+/**
  Example:
  NSDictionary *dict = @{ThemeStyle1 : @(UIKeyboardAppearanceDefault),
                         ThemeStyle2 : @(UIKeyboardAppearanceDark)};
@@ -90,38 +93,38 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextView (zhTheme)
 
-// zh_fontPicker- Only supported by `ThemePickerWithDict(dict)` Settings. use the `ThemePickerWithKey(key)` is invalid.
-@property (nonatomic, strong) zhThemePicker *zh_fontPicker;
-@property (nonatomic, strong) zhThemePicker *zh_textColorPicker;
+/// zh_fontPicker- Only supported by Through the dictionary Settings. use other method is invalid.
+@property (nonatomic, strong) zhThemeFontPicker *zh_fontPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_textColorPicker;
 - (void)zh_setKeyboardAppearance:(nullable NSDictionary<NSString *, NSNumber *> *)dict;
 
 @end
 
 @interface UISearchBar (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_barTintColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_barTintColorPicker;
 - (void)zh_setKeyboardAppearance:(nullable NSDictionary<NSString *, NSNumber *> *)dict;
 
 @end
 
 @interface UIToolbar (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_barTintColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_barTintColorPicker;
 
 @end
 
 @interface UITabBar (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_barTintColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_backgroundImagePicker;
-@property (nonatomic, strong) zhThemePicker *zh_shadowImagePicker;
-@property (nonatomic, strong) zhThemePicker *zh_selectionIndicatorImagePicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_barTintColorPicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_backgroundImagePicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_shadowImagePicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_selectionIndicatorImagePicker;
 
 @end
 
 @interface UIBarItem (zhTheme)
 
-@property (nonatomic, strong, nonnull) zhThemePicker *zh_imagePicker;
+@property (nonatomic, strong, nonnull) zhThemeImagePicker *zh_imagePicker;
 
 /// Currently only support NSForegroundColorAttributeName / NSFontAttributeName.
 - (void)zh_setTitleTextPickerAttributes:(nullable NSDictionary<NSString *,id> *)attributes forState:(UIControlState)state;
@@ -130,24 +133,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIBarButtonItem (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_tintColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_tintColorPicker;
 
 @end
 
 @interface UITabBarItem (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_selectedImagePicker;
-@property (nonatomic, strong) zhThemePicker *zh_badgeColorPicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_selectedImagePicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_badgeColorPicker;
 
 @end
 
 @interface UINavigationBar (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_barTintColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_shadowImagePicker;
-@property (nonatomic, strong) zhThemePicker *zh_backIndicatorImagePicker;
-@property (nonatomic, strong) zhThemePicker *zh_backIndicatorTransitionMaskImagePicker;
-- (void)zh_setBackgroundImagePicker:(zhThemePicker *)picker forBarMetrics:(UIBarMetrics)barMetrics;
+@property (nonatomic, strong) zhThemeColorPicker *zh_barTintColorPicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_shadowImagePicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_backIndicatorImagePicker;
+@property (nonatomic, strong) zhThemeImagePicker *zh_backIndicatorTransitionMaskImagePicker;
+- (void)zh_setBackgroundImagePicker:(zhThemeImagePicker *)picker forBarMetrics:(UIBarMetrics)barMetrics;
 
 /// Currently only support NSForegroundColorAttributeName / NSFontAttributeName.
 - (void)zh_setTitleTextAttributes:(nullable NSDictionary<NSString *, id> *)titleTextAttributes;
@@ -165,19 +168,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CALayer (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_backgroundColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_borderColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_shadowColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_borderWidthPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_backgroundColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_borderColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_shadowColorPicker;
+@property (nonatomic, strong) zhThemeNumberPicker *zh_borderWidthPicker;
 
 @end
 
 @interface CAShapeLayer (zhTheme)
 
-@property (nonatomic, strong) zhThemePicker *zh_fillColorPicker;
-@property (nonatomic, strong) zhThemePicker *zh_strokeColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_fillColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_strokeColorPicker;
 
 @end
 
 NS_ASSUME_NONNULL_END
-

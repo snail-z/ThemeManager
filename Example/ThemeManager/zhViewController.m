@@ -7,7 +7,8 @@
 //
 
 #import "zhViewController.h"
-#import <ThemeManager/zhTheme.h>
+#import <objc/runtime.h>
+
 
 @interface zhViewController ()
 
@@ -16,17 +17,7 @@
 @implementation zhViewController
 
 - (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    UIButton *btn = [UIButton new];
-//    btn.yt_themePicker = ThemePickerWithKey(@"").uiColor(@"df").uiImage(@"");
-//    ThemePicker.uiColorKey(@"d");
-    [self.view addSubview:btn];
-    
-    [zhThemePicker pickerWithKey:@""];
-    
-}
+{}
 
 - (void)didReceiveMemoryWarning
 {
