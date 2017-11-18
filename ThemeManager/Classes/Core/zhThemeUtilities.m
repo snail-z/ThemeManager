@@ -1,6 +1,6 @@
 //
 //  zhThemeUtilities.m
-//  ThemeManager_Example
+//  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/11/14.
 //  Copyright © 2017年 snail-z. All rights reserved.
@@ -105,4 +105,15 @@ id zh_getThemePickerValue(zhThemePicker *picker) {
             return [(zhThemeTextPicker *)picker text];
         default: return nil;
     }
+}
+
+UIImage* zh_themeImageFromColor(UIColor *color) {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
 }

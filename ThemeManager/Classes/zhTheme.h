@@ -1,6 +1,6 @@
 //
 //  zhTheme.h
-//  ThemeManager_Example
+//  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/5/29.
 //  Copyright © 2017年 snail-z. All rights reserved.

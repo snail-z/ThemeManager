@@ -1,6 +1,6 @@
 //
 //  zhThemeManager.m
-//  ThemeManager
+//  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/5/22.
 //  Copyright © 2017年 snail-z. All rights reserved.
@@ -270,6 +270,10 @@ NSString *const zhThemeStyleStorageKey = @"zhThemeStyleStorageKey";
 - (void)updateThemeImageFile:(NSString *)file {
     [[zhThemeFileManager defaultManager] setImageFile:file];
     [self reloadTheme];
+}
+
+- (void)setThemeImageResources:(NSString *)resourcesPath {
+    [[zhThemeFileManager defaultManager] setImageSourcesPath:resourcesPath];
 }
 
 - (NSDictionary<NSString *,NSDictionary *> *)colorLibraries {

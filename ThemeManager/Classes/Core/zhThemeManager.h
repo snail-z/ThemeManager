@@ -1,6 +1,6 @@
 //
 //  zhThemeManager.h
-//  ThemeManager
+//  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/5/22.
 //  Copyright © 2017年 snail-z. All rights reserved.
@@ -36,7 +36,7 @@ UIKIT_EXTERN NSNotificationName const zhThemeUpdateNotification; // Theme styles
 /// Reload Theme (will post `zhThemeUpdateNotification`)
 - (void)reloadTheme;
 
-/// Whether the same with theme current style. / 判断是否与当前主题样式相同
+/// Whether the same with theme current style.
 - (BOOL)isEqualCurrentThemeStyle:(zhThemeStyleName)themeStyle;
 
 /// Current theme style.
@@ -61,6 +61,9 @@ UIKIT_EXTERN NSNotificationName const zhThemeUpdateNotification; // Theme styles
 
 /// If set it. next start your app. will use `newImageFile`. default image file will not be used.
 - (void)updateThemeImageFile:(nullable NSString *)newImageFile;
+
+/// If set it, will get resource images from this directory. if set nil, get resource images from your app.
+- (void)setThemeImageResources:(nullable NSString *)resourcesPath; // support reads from your custom bundle. automatic check @2x/@3x images.
 
 @end
 

@@ -1,6 +1,6 @@
 //
 //  UIKit+zhTheme.h
-//  ThemeManager
+//  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/5/27.
 //  Copyright © 2017年 snail-z. All rights reserved.
@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)zh_setTitleColorPicker:(zhThemeColorPicker *)picker forState:(UIControlState)state;
 - (void)zh_setImagePicker:(zhThemeImagePicker *)picker forState:(UIControlState)state;
 - (void)zh_setBackgroundImagePicker:(zhThemeImagePicker *)picker forState:(UIControlState)state;
+- (void)zh_setBackgroundColorPicker:(zhThemeColorPicker *)picker forState:(UIControlState)state;
 
 @end
 
@@ -150,7 +151,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) zhThemeImagePicker *zh_shadowImagePicker;
 @property (nonatomic, strong) zhThemeImagePicker *zh_backIndicatorImagePicker;
 @property (nonatomic, strong) zhThemeImagePicker *zh_backIndicatorTransitionMaskImagePicker;
+
 - (void)zh_setBackgroundImagePicker:(zhThemeImagePicker *)picker forBarMetrics:(UIBarMetrics)barMetrics;
+- (void)zh_setBackgroundColorPicker:(zhThemeColorPicker *)picker forBarMetrics:(UIBarMetrics)barMetrics;
 
 /// Currently only support NSForegroundColorAttributeName / NSFontAttributeName.
 - (void)zh_setTitleTextAttributes:(nullable NSDictionary<NSString *, id> *)titleTextAttributes;

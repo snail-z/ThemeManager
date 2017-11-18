@@ -1,6 +1,6 @@
 //
 //  Supplementary+zhTheme.m
-//  ThemeManager
+//  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/5/29.
 //  Copyright © 2017年 snail-z. All rights reserved.
@@ -33,19 +33,20 @@
 - (UIView *)zh_themeOverlayView {
     UIView *zhThemeOverlayView = objc_getAssociatedObject(self, _cmd);
     if (!zhThemeOverlayView) {
-        zhThemeOverlayView = [[UIView alloc] init];
-        CGFloat height = [NSStringFromCGSize([UIScreen mainScreen].bounds.size) isEqualToString:@"{375, 812}"] ? 44 : 20;
-        zhThemeOverlayView.frame = CGRectMake(0, -height, UIScreen.mainScreen.bounds.size.width, height);
-        zhThemeOverlayView.userInteractionEnabled = NO;
-        zhThemeOverlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self addSubview:zhThemeOverlayView];
+        zhThemeOverlayView = [[UIImageView alloc] init];
+        CGFloat statusBarHeight = 20;
+        if ([NSStringFromCGSize([UIScreen mainScreen].bounds.size) isEqualToString:@"{375, 812}"]) {
+            statusBarHeight = 44; // iphone X
+        }
+        zhThemeOverlayView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + statusBarHeight);
+        zhThemeOverlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [self.subviews.firstObject insertSubview:zhThemeOverlayView atIndex:0];
         objc_setAssociatedObject(self, _cmd, zhThemeOverlayView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return zhThemeOverlayView;
 }
 
 - (void)zh_setOverlayViewBackgroundColor:(UIColor *)color {
-    self.layer.backgroundColor = color.CGColor;
     self.zh_themeOverlayView.backgroundColor = color;
 }
 

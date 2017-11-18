@@ -1,6 +1,6 @@
 //
 //  UIKit+zhTheme.m
-//  ThemeManager
+//  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/5/27.
 //  Copyright © 2017年 snail-z. All rights reserved.
@@ -87,6 +87,14 @@
 
 - (void)zh_setBackgroundImagePicker:(zhThemeImagePicker *)picker forState:(UIControlState)state {
     zh_setThemePickerWithState(self, @selector(setBackgroundImage:forState:), picker, state);
+}
+
+- (void)zh_setBackgroundColorPicker:(zhThemeColorPicker *)picker forState:(UIControlState)state {
+    zh_setThemePickerWithState(self, @selector(_set_zhThemeBackgroundColor:forState:), picker, state);
+}
+
+- (void)_set_zhThemeBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state {
+    [self setBackgroundImage:zh_themeImageFromColor(backgroundColor) forState:state];
 }
 
 @end
@@ -392,6 +400,14 @@
 
 - (void)setZh_backIndicatorTransitionMaskImagePicker:(zhThemeImagePicker *)zh_backIndicatorTransitionMaskImagePicker {
     zh_setThemePicker(zh_backIndicatorTransitionMaskImagePicker, self, @"backIndicatorTransitionMaskImage");
+}
+
+- (void)zh_setBackgroundColorPicker:(zhThemeImagePicker *)picker forBarMetrics:(UIBarMetrics)barMetrics {
+    zh_setThemePickerWithState(self, @selector(_set_zhThemeBackgroundColor:forBarMetrics:), picker, barMetrics);
+}
+
+- (void)_set_zhThemeBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics {
+    [self setBackgroundImage:zh_themeImageFromColor(backgroundColor) forBarMetrics:barMetrics];
 }
 
 - (void)zh_setBackgroundImagePicker:(zhThemeImagePicker *)picker forBarMetrics:(UIBarMetrics)barMetrics {

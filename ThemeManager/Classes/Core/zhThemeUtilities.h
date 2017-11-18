@@ -1,6 +1,6 @@
 //
 //  zhThemeUtilities.h
-//  ThemeManager_Example
+//  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/11/14.
 //  Copyright © 2017年 snail-z. All rights reserved.
@@ -25,3 +25,5 @@ void zh_setThemeTextAttributesWithState(id instance, SEL aSelector, NSDictionary
 void zh_setThemePickerWithState(id instance, SEL aSelector, zhThemePicker *picker, NSInteger state);
 // get current theme style value
 id zh_getThemePickerValue(zhThemePicker *picker);
+// image by color
+UIImage* zh_themeImageFromColor(UIColor *color);

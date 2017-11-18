@@ -1,6 +1,6 @@
 //
 //  NSObject+zhTheme.h
-//  ThemeManager
+//  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/5/22.
 //  Copyright © 2017年 snail-z. All rights reserved.
