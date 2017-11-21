@@ -24,6 +24,7 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		A2AD7D00B2B87E6EDECB4199 /* Pods_ThemeManager_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D4FB15F6719882C3CF6D48 /* Pods_ThemeManager_Tests.framework */; };
+		F23FFD681FC318BE0019B738 /* UISegmentedControl+zhTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = F23FFD671FC318BE0019B738 /* UISegmentedControl+zhTheme.m */; };
 		F243760F1F57F17C000852C7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F243760E1F57F17C000852C7 /* README.md */; };
 		F24376121F57F5B7000852C7 /* zhNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F24376111F57F5B7000852C7 /* zhNextViewController.m */; };
 		F24376151F580004000852C7 /* zhDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F24376141F580004000852C7 /* zhDetailViewController.m */; };
@@ -117,6 +118,8 @@
 		968CF9A2EA82CEE1FFE3110E /* Pods-ThemeManager_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThemeManager_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThemeManager_Tests/Pods-ThemeManager_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		CB9C930815CF1B253D8199BB /* Pods-ThemeManager_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThemeManager_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThemeManager_Tests/Pods-ThemeManager_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		F07BD4ADB09008B76194AE4D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		F23FFD661FC318BE0019B738 /* UISegmentedControl+zhTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+zhTheme.h"; sourceTree = "<group>"; };
+		F23FFD671FC318BE0019B738 /* UISegmentedControl+zhTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+zhTheme.m"; sourceTree = "<group>"; };
 		F243760E1F57F17C000852C7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F24376101F57F5B7000852C7 /* zhNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhNextViewController.h; sourceTree = "<group>"; };
 		F24376111F57F5B7000852C7 /* zhNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhNextViewController.m; sourceTree = "<group>"; };
@@ -379,6 +382,8 @@
 				F24376111F57F5B7000852C7 /* zhNextViewController.m */,
 				F24376131F580004000852C7 /* zhDetailViewController.h */,
 				F24376141F580004000852C7 /* zhDetailViewController.m */,
+				F23FFD661FC318BE0019B738 /* UISegmentedControl+zhTheme.h */,
+				F23FFD671FC318BE0019B738 /* UISegmentedControl+zhTheme.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -713,6 +718,7 @@
 				F2500BE81F57DE6B002FF5CB /* UIViewController+zhStatusBarStyle.m in Sources */,
 				F2500BED1F57DFB2002FF5CB /* zhProgressView.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				F23FFD681FC318BE0019B738 /* UISegmentedControl+zhTheme.m in Sources */,
 				F24376371F58502E000852C7 /* NSObject+AssociatedObject.m in Sources */,
 				F2500BFC1F57E0D1002FF5CB /* zhNavigationController.m in Sources */,
 				F24376151F580004000852C7 /* zhDetailViewController.m in Sources */,
