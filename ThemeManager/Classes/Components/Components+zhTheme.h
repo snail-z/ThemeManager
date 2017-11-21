@@ -167,6 +167,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UISegmentedControl (zhTheme)
+
+/// Currently only support NSForegroundColorAttributeName / NSFontAttributeName.
+- (void)zh_setTitleTextPickerAttributes:(nullable NSDictionary<NSString *,id> *)attributes forState:(UIControlState)state;
+
+@end
+
 /////////////////////////////// QuartzCore+zhTheme ///////////////////////////////
 
 @interface CALayer (zhTheme)

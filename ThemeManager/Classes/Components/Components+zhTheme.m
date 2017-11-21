@@ -428,6 +428,14 @@
 
 @end
 
+@implementation UISegmentedControl (zhTheme)
+
+- (void)zh_setTitleTextPickerAttributes:(NSDictionary<NSString *,id> *)attributes forState:(UIControlState)state {
+    zh_setThemeTextAttributesWithState(self, @selector(setTitleTextAttributes:forState:), attributes, state);
+}
+
+@end
+
 /////////////////////////////// QuartzCore+zhTheme ///////////////////////////////
 
 @implementation CALayer (zhTheme)
