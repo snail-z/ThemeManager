@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "zhThemeManager.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSInteger, zhThemeValueType) {
     zhThemeValueTypeColor = 0,
     zhThemeValueTypeImage,
@@ -39,7 +41,7 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 @property (nonatomic, assign, readonly) BOOL isAnimated;
 
-- (UIColor *)color; // The color value in the current theme style.
+- (nullable UIColor *)color; // The color value in the current theme style.
 
 @end
 
@@ -60,7 +62,7 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 @property (nonatomic, assign, readonly) UIImageRenderingMode imageRenderingMode;
 @property (nonatomic, assign, readonly) UIEdgeInsets imageCapInsets;
 
-- (UIImage *)image; // The color value in the current theme style.
+- (nullable UIImage *)image; // The color value in the current theme style.
 
 @end
 
@@ -70,7 +72,7 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 + (instancetype)pickerFontWithDict:(NSDictionary *)pDict;
 
-- (UIFont *)font; // The font value in the current theme style.
+- (nullable UIFont *)font; // The font value in the current theme style.
 
 @end
 
@@ -90,6 +92,8 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 + (instancetype)pickerTextWithDict:(NSDictionary *)pDict;
 
-- (NSString *)text; // The text value in the current theme style.
+- (nullable NSString *)text; // The text value in the current theme style.
 
 @end
+
+NS_ASSUME_NONNULL_END
