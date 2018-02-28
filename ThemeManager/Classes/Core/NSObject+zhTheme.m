@@ -46,15 +46,12 @@
 
 - (void)zh_themeUpdateForProperties { // for obj properties.
     [self.zh_themePropertiesDict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull propertyName, zhThemePicker * _Nonnull picker, BOOL * _Nonnull stop) {
-        void (^calls)(id) = ^(_Nullable id value) {
-            if (picker.valueType == zhThemeValueTypeColor) {
-                if ([(zhThemeColorPicker *)picker isAnimated]) {
-                    [UIView animateWithDuration:ThemeManager.themeColorChangeInterval animations:^{
-                        [self setValue:value forKeyPath:propertyName];
-                    }];
-                } else {
+        void (^callback)(id) = ^(_Nullable id value) {
+            if ((picker.valueType == zhThemeValueTypeColor) &&
+                ([(zhThemeColorPicker *)picker isAnimated])) {
+                [UIView animateWithDuration:ThemeManager.themeColorChangeInterval animations:^{
                     [self setValue:value forKeyPath:propertyName];
-                }
+                }];
             } else {
                 [self setValue:value forKeyPath:propertyName];
             }
@@ -62,9 +59,9 @@
         
         id value = zh_getThemePickerValue(picker);
         if ([value isKindOfClass:[UIColor class]] && [self isKindOfClass:[CALayer class]]) {
-            calls(((__bridge id _Nullable)[value CGColor])); // for CGColorRef
+            callback(((__bridge id _Nullable)[value CGColor])); // for CGColorRef
         } else {
-            calls(value);
+            callback(value);
         }
     }];
 }
@@ -92,11 +89,12 @@
 
 - (void)zh_themeUpdateForTextAttributes { // for textAttributes
     [self.zh_themeTextAttributesDict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary<NSString *,id> * _Nonnull dictionary, BOOL * _Nonnull stop) {
-        NSMutableDictionary* (^calls)(NSDictionary *) = ^(NSDictionary *dict){
+        NSMutableDictionary* (^callback)(NSDictionary *) = ^(NSDictionary *dict){
             __block NSMutableDictionary *textAttrs = [dict mutableCopy];
             [dict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                 if ([obj isKindOfClass:[zhThemePicker class]]) {
                     textAttrs[key] = zh_getThemePickerValue(obj);
+                    *stop = YES;
                 }
             }];
             return textAttrs;
@@ -107,11 +105,11 @@
         if ([scan scanInteger:&var] && [scan isAtEnd]) {
             [dictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull selName, NSDictionary<NSString *, id> * _Nonnull dict, BOOL * _Nonnull stop) {
                 void(*msgSend)(id, SEL, NSDictionary*, NSInteger) = (void(*)(id, SEL, NSDictionary*, NSInteger))objc_msgSend;
-                msgSend(self, NSSelectorFromString(selName), calls(dict), [key integerValue]);
+                msgSend(self, NSSelectorFromString(selName), callback(dict), [key integerValue]);
             }];
         } else {
             void(*msgSend)(id, SEL, NSDictionary*) = (void(*)(id, SEL, NSDictionary*))objc_msgSend;
-            msgSend(self, NSSelectorFromString(key), calls(dictionary));
+            msgSend(self, NSSelectorFromString(key), callback(dictionary));
         }
     }];
 }
@@ -126,14 +124,11 @@
         NSInteger state = [key integerValue];
         [dictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull selName, zhThemePicker * _Nonnull picker, BOOL * _Nonnull stop) {
             id value = zh_getThemePickerValue(picker);
-            if (picker.valueType == zhThemeValueTypeColor) {
-                if ([(zhThemeColorPicker *)picker isAnimated]) {
-                    [UIView animateWithDuration:ThemeManager.themeColorChangeInterval animations:^{
-                        msgSend(self, NSSelectorFromString(selName), value, state);
-                    }];
-                } else {
+            if ((picker.valueType == zhThemeValueTypeColor) &&
+                ([(zhThemeColorPicker *)picker isAnimated])) {
+                [UIView animateWithDuration:ThemeManager.themeColorChangeInterval animations:^{
                     msgSend(self, NSSelectorFromString(selName), value, state);
-                }
+                }];
             } else {
                 msgSend(self, NSSelectorFromString(selName), value, state);
             }
@@ -219,7 +214,7 @@ UIEdgeInsets value = [format UIEdgeInsetsValue]; \
 } break; \
 default: break;}
 
-#define __INFO_SET(obj) \
+#define __PARAMINFO_SET(obj) \
 NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init]; \
 [mutableDictionary setObject:obj forKey:@"_spValue"]; \
 [mutableDictionary setObject:[NSNumber numberWithChar:*type] forKey:@"_spType"]; \
@@ -234,23 +229,23 @@ NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init]; \
         char *type = (char *)[sig getArgumentTypeAtIndex:index];
         if (2 == index) {
             __CONVERT_SET(*type, arguments)
-            __INFO_SET(arguments)
+            __PARAMINFO_SET(arguments)
         } else {
             switch (*type) { // parameter type  // NSNumber -> base type
                 case 'B': case 'c': case 'i': case 'I': case 'l': case 'L': { // 'bool' 'char / BOOL' 'short' 'int' ... -> int
                     int arg = [va_arg(args, NSNumber *) intValue];
                     [inv setArgument:&arg atIndex:index];
-                    __INFO_SET([NSNumber numberWithInt:arg])
+                    __PARAMINFO_SET([NSNumber numberWithInt:arg])
                 } break;
                 case 'q': case 'Q': { // 'long long' 'unsigned long' 'NSInteger' ... -> long long
                     long long arg = [va_arg(args, NSNumber*) longLongValue];
                     [inv setArgument:&arg atIndex:index];
-                    __INFO_SET([NSNumber numberWithLongLong:arg])
+                    __PARAMINFO_SET([NSNumber numberWithLongLong:arg])
                 } break;
                 case 'f': case 'd': case 'D': { // 'float' 'CGFloat' 'long double'... -> double
                     double arg = [va_arg(args, NSNumber *) doubleValue];
                     [inv setArgument:&arg atIndex:index];
-                    __INFO_SET([NSNumber numberWithDouble:arg])
+                    __PARAMINFO_SET([NSNumber numberWithDouble:arg])
                 } break;
                 case '@': {
                     id arg = va_arg(args, id);
@@ -260,45 +255,46 @@ NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init]; \
                     } else {
                         [inv setArgument:&arg atIndex:index];
                     }
-                    __INFO_SET(arg)
+                    __PARAMINFO_SET(arg)
                 } break;
                 case '{': { // struct
+                    NSValue *value = va_arg(args, NSValue *);
                     if (strcmp(type, @encode(CGPoint)) == 0) {
-                        CGPoint arg = [va_arg(args, NSValue *) CGPointValue];
+                        CGPoint arg = [value CGPointValue];
                         [inv setArgument:&arg atIndex:index];
-                        __INFO_SET([NSValue valueWithCGPoint:arg])
+                        __PARAMINFO_SET(value)
                     } else if (strcmp(type, @encode(CGSize)) == 0) {
-                        CGSize arg = [va_arg(args, NSValue *) CGSizeValue];
+                        CGSize arg = [value CGSizeValue];
                         [inv setArgument:&arg atIndex:index];
-                        __INFO_SET([NSValue valueWithCGSize:arg])
+                        __PARAMINFO_SET(value)
                     } else if (strcmp(type, @encode(CGRect)) == 0) {
-                        CGRect arg = [va_arg(args, NSValue *) CGRectValue];
+                        CGRect arg = [value CGRectValue];
                         [inv setArgument:&arg atIndex:index];
-                        __INFO_SET([NSValue valueWithCGRect:arg])
+                        __PARAMINFO_SET(value)
                     } else if (strcmp(type, @encode(CGVector)) == 0) {
-                        CGVector arg = [va_arg(args, NSValue *) CGVectorValue];
+                        CGVector arg = [value CGVectorValue];
                         [inv setArgument:&arg atIndex:index];
-                        __INFO_SET([NSValue valueWithCGVector:arg])
+                        __PARAMINFO_SET(value)
                     } else if (strcmp(type, @encode(CGAffineTransform)) == 0) {
-                        CGAffineTransform arg = [va_arg(args, NSValue *) CGAffineTransformValue];
+                        CGAffineTransform arg = [value CGAffineTransformValue];
                         [inv setArgument:&arg atIndex:index];
-                        __INFO_SET([NSValue valueWithCGAffineTransform:arg])
+                        __PARAMINFO_SET(value)
                     } else if (strcmp(type, @encode(CATransform3D)) == 0) {
-                        CATransform3D arg = [va_arg(args, NSValue *) CATransform3DValue];
+                        CATransform3D arg = [value CATransform3DValue];
                         [inv setArgument:&arg atIndex:index];
-                        __INFO_SET([NSValue valueWithCATransform3D:arg])
+                        __PARAMINFO_SET(value)
                     } else if (strcmp(type, @encode(NSRange)) == 0) {
-                        NSRange arg = [va_arg(args, NSValue *) rangeValue];
+                        NSRange arg = [value rangeValue];
                         [inv setArgument:&arg atIndex:index];
-                        __INFO_SET([NSValue valueWithRange:arg])
+                        __PARAMINFO_SET(value)
                     } else if (strcmp(type, @encode(UIOffset)) == 0) {
-                        UIOffset arg = [va_arg(args, NSValue *) UIOffsetValue];
+                        UIOffset arg = [value UIOffsetValue];
                         [inv setArgument:&arg atIndex:index];
-                        __INFO_SET([NSValue valueWithUIOffset:arg])
+                        __PARAMINFO_SET(value)
                     } else if (strcmp(type, @encode(UIEdgeInsets)) == 0) {
-                        UIEdgeInsets arg = [va_arg(args, NSValue *) UIEdgeInsetsValue];
+                        UIEdgeInsets arg = [value UIEdgeInsetsValue];
                         [inv setArgument:&arg atIndex:index];
-                        __INFO_SET([NSValue valueWithUIEdgeInsets:arg])
+                        __PARAMINFO_SET(value)
                     } else {}
                 } break;
                 default: {
