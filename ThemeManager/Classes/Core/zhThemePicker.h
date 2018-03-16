@@ -15,8 +15,8 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
     zhThemeValueTypeColor = 0,
     zhThemeValueTypeImage,
     zhThemeValueTypeFont,
-    zhThemeValueTypeNumber,
-    zhThemeValueTypeText
+    zhThemeValueTypeText,
+    zhThemeValueTypeNumber
 };
 
 @interface zhThemePicker : NSObject
@@ -26,15 +26,15 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 @property (nonatomic, assign, readonly) zhThemeValueType valueType;
 
++ (instancetype)pickerWithKey:(NSString *)pKey;
++ (instancetype)pickerWithDictionary:(NSDictionary *)pDict;
+
 @end
 
-#define TMColorWithKey(key) [zhThemeColorPicker pickerColorWithKey:key]
-#define TMColorWithDict(dict) [zhThemeColorPicker pickerColorWithDict:dict]
+#define ThemeColorPickerWithKey(key) [zhThemeColorPicker pickerWithKey:key]
+#define ThemeColorPickerWithDictionary(dict) [zhThemeColorPicker pickerWithDictionary:dict]
 
 @interface zhThemeColorPicker : zhThemePicker
-
-+ (instancetype)pickerColorWithKey:(NSString *)pKey;
-+ (instancetype)pickerColorWithDict:(NSDictionary *)pDict;
 
 /// default is NO. if YES, When color change there will be a transition animation.
 - (zhThemeColorPicker *(^)(BOOL isAnimated))animated;
@@ -45,13 +45,10 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 @end
 
-#define TMImageWithKey(key) [zhThemeImagePicker pickerImageWithKey:key]
-#define TMImageWithDict(dict) [zhThemeImagePicker pickerImageWithDict:dict]
+#define ThemeImagePickerWithKey(key) [zhThemeImagePicker pickerWithKey:key]
+#define ThemeImagePickerWithDictionary(dict) [zhThemeImagePicker pickerWithDictionary:dict]
 
 @interface zhThemeImagePicker : zhThemePicker
-
-+ (instancetype)pickerImageWithKey:(NSString *)pKey;
-+ (instancetype)pickerImageWithDict:(NSDictionary *)pDict;
 
 /// Used to set the UIImage renderingMode
 - (zhThemeImagePicker *(^)(UIImageRenderingMode imageRenderingMode))renderingMode;
@@ -66,33 +63,27 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 @end
 
-#define TMFontWithDict(dict) [zhThemeFontPicker pickerFontWithDict:dict]
+#define ThemeFontPickerWithDictionary(dict) [zhThemeFontPicker pickerWithDictionary:dict]
 
 @interface zhThemeFontPicker : zhThemePicker
-
-+ (instancetype)pickerFontWithDict:(NSDictionary *)pDict;
 
 - (nullable UIFont *)font; // The font value in the current theme style.
 
 @end
 
-#define TMNumberWithDict(dict) [zhThemeNumberPicker pickerNumberWithDict:dict]
-
-@interface zhThemeNumberPicker : zhThemePicker // CGFloat / NSInteger
-
-+ (instancetype)pickerNumberWithDict:(NSDictionary *)pDict;
-
-- (NSNumber *)number; // The alpha / borderWidth /... value in the current theme style.
-
-@end
-
-#define TMTextWithDict(dict) [zhThemeTextPicker pickerTextWithDict:dict]
+#define ThemeTextPickerWithDictionary(dict) [zhThemeTextPicker pickerWithDictionary:dict]
 
 @interface zhThemeTextPicker : zhThemePicker
 
-+ (instancetype)pickerTextWithDict:(NSDictionary *)pDict;
-
 - (nullable NSString *)text; // The text value in the current theme style.
+
+@end
+
+#define ThemeNumberPickerWithDictionary(dict) [zhThemeNumberPicker pickerWithDictionary:dict]
+
+@interface zhThemeNumberPicker : zhThemePicker // CGFloat / NSInteger
+
+- (NSNumber *)number; // The alpha / borderWidth /... value in the current theme style.
 
 @end
 

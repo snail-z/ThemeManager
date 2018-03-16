@@ -6,6 +6,8 @@
 //  Copyright © 2017年 snail-z. All rights reserved.
 //
 
+#import <objc/runtime.h>
+#import <objc/message.h>
 #import "NSObject+zhTheme.h"
 #import "zhThemeUtilities.h"
 
@@ -328,12 +330,14 @@ NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init]; \
 @implementation NSObject (zhThemeSwizzling)
 
 + (void)load {
-    Class class = [self class];
-    SEL originalSelector = NSSelectorFromString(@"dealloc");
-    SEL swizzledSelector = @selector(zh_themeDealloc);
-    Method originalMethod = class_getInstanceMethod(class, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-    method_exchangeImplementations(originalMethod, swizzledMethod);
+    if (NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_8_x_Max) {
+        Class class = [self class];
+        SEL originalSelector = NSSelectorFromString(@"dealloc");
+        SEL swizzledSelector = @selector(zh_themeDealloc);
+        Method originalMethod = class_getInstanceMethod(class, originalSelector);
+        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
 }
 
 - (void)zh_themeDealloc {

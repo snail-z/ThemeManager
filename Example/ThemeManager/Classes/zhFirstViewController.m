@@ -43,16 +43,16 @@
     button.imageView.contentMode = UIViewContentModeScaleAspectFit;
     button.titleLabel.font = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:21];
     [button setTitle:@"Next" forState:UIControlStateNormal];
-    [button zh_setTitleColorPicker:TMColorWithKey(@"color04") forState:UIControlStateNormal];
+    [button zh_setTitleColorPicker:ThemeColorPickerWithKey(@"color04") forState:UIControlStateNormal];
     [button addTarget:self action:@selector(nextClicked) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
     textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25];
-    textAttrs[NSForegroundColorAttributeName] = TMColorWithKey(@"color04");
+    textAttrs[NSForegroundColorAttributeName] = ThemeColorPickerWithKey(@"color04");
     [self.navigationController.navigationBar zh_setTitleTextAttributes:textAttrs];
     
-    self.navigationController.navigationBar.zh_overlayColorPicker = TMColorWithKey(@"color01").animated(YES);
+    self.navigationController.navigationBar.zh_overlayColorPicker = ThemeColorPickerWithKey(@"color01").animated(YES);
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     NSMutableDictionary *backTextAttrs = [NSMutableDictionary dictionary];
@@ -76,7 +76,7 @@
     _tableView.rowHeight = 140;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
-    _tableView.zh_backgroundColorPicker = TMColorWithKey(@"color01");
+    _tableView.zh_backgroundColorPicker = ThemeColorPickerWithKey(@"color01");
     self.view = _tableView;
 }
 
@@ -104,16 +104,16 @@
                               Theme1 : [UIImage imageNamed:_array2[indexPath.row]],
                               Theme2 : [UIImage imageNamed:_array2[indexPath.row]],
                               Theme3 : [UIImage imageNamed:_array2[indexPath.row]]};
-    imgView.zh_imagePicker = TMImageWithDict(imgDict);
+    imgView.zh_imagePicker = ThemeImagePickerWithDictionary(imgDict);
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.zh_backgroundColorPicker = TMColorWithKey(@"color01").animated(YES);
+    cell.zh_backgroundColorPicker = ThemeColorPickerWithKey(@"color01").animated(YES);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([ThemeManager isEqualCurrentThemeStyle:ThemeNight]) {
+    if ([ThemeManager isEqualCurrentStyle:ThemeNight]) {
         [ThemeManager updateThemeStyle:ThemeDay];
     } else {
         [ThemeManager updateThemeStyle:ThemeNight];

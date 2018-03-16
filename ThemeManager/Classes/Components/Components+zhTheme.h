@@ -31,8 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// zh_fontPicker- Only supported by Through the dictionary Settings. use other method is invalid.
 @property (nonatomic, strong) zhThemeFontPicker *zh_fontPicker;
 @property (nonatomic, strong) zhThemeColorPicker *zh_textColorPicker;
-@property (nonatomic, strong) zhThemeColorPicker *zh_shadowColorPicker;
 @property (nonatomic, strong) zhThemeColorPicker *zh_highlightedTextColorPicker;
+@property (nonatomic, strong) zhThemeColorPicker *zh_shadowColorPicker;
 
 @end
 

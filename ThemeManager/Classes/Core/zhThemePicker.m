@@ -71,50 +71,43 @@
 }
 
 // source => bundle or path
-+ (UIImage *)imageNamed:(NSString *)name fromResource:(id)source {
-    if ([source isKindOfClass:[NSBundle class]]) {
-        return [self imageNamed:name inBundle:source];
-    } else if ([source isKindOfClass:[NSString class]]) {
-        return [self imageNamed:name inPath:source];
-    }
-    return nil;
++ (UIImage *)imageNamed:(NSString *)name from:(id)from {
+    if ([from isKindOfClass:[NSBundle class]]) {
+        return [self imageNamed:name inBundle:from];
+    } else if ([from isKindOfClass:[NSString class]]) {
+        return [self imageNamed:name inPath:from];
+    } else return nil;
 }
 
 + (UIColor *)colorFromHexString:(NSString *)hexString {
     if (!hexString) return nil;
-    NSString* hex = [NSString stringWithString:hexString];
-    if ([hex hasPrefix:@"#"])
-        hex = [hex substringFromIndex:1];
-    if (hex.length == 6)
+    NSString *hex = [NSString stringWithString:hexString];
+    if ([hex hasPrefix:@"#"]) hex = [hex substringFromIndex:1];
+    if (hex.length == 6) {
         hex = [hex stringByAppendingString:@"FF"];
-    else if (hex.length != 8) return nil;
+    } else if (hex.length != 8) return nil;
     uint32_t rgba;
     NSScanner *scanner = [NSScanner scannerWithString:hex];
     [scanner scanHexInt:&rgba];
-    UIColor *color = [UIColor colorWithRed:((rgba >> 24)&0xFF) / 255. green:((rgba >> 16)&0xFF) / 255. blue:((rgba >> 8)&0xFF) / 255. alpha:(rgba&0xFF) / 255.];
-    return color;
+    return [UIColor colorWithRed:((rgba >> 24)&0xFF) / 255. green:((rgba >> 16)&0xFF) / 255. blue:((rgba >> 8)&0xFF) / 255. alpha:(rgba&0xFF) / 255.];;
 }
 
-+ (UIColor *)colorFromCheckObject:(id)object {
-    UIColor *value = nil;
-    if ([object isKindOfClass:[NSString class]]) {
-        value = [self colorFromHexString:object];
-    } else if ([object isKindOfClass:[UIColor class]]) {
-        value = (UIColor *)object;
-    }
-    return value;
++ (UIColor *)colorCheck:(id)obj {
+    if ([obj isKindOfClass:[NSString class]]) {
+        return [self colorFromHexString:obj];
+    } else if ([obj isKindOfClass:[UIColor class]]) {
+        return (UIColor *)obj;
+    } else return nil;
 }
 
-+ (UIImage *)imageFromCheckObject:(id)object {
-    UIImage *value = nil;
-    if ([object isKindOfClass:[NSString class]]) {
-        value = [UIImage imageNamed:(NSString *)object];
-    } else if ([object isKindOfClass:[UIImage class]]) {
-        value = (UIImage *)object;
-    } else if ([object isKindOfClass:[NSData class]]) {
-        value = [UIImage imageWithData:(NSData *)object];
-    }
-    return value;
++ (UIImage *)imageCheck:(id)obj {
+    if ([obj isKindOfClass:[NSString class]]) {
+        return [UIImage imageNamed:(NSString *)obj];
+    } else if ([obj isKindOfClass:[UIImage class]]) {
+        return (UIImage *)obj;
+    } else if ([obj isKindOfClass:[NSData class]]) {
+        return [UIImage imageWithData:(NSData *)obj];
+    } else return nil;
 }
 
 @end
@@ -140,15 +133,25 @@
     return self;
 }
 
++ (instancetype)pickerWithKey:(NSString *)pKey {
+    NSAssert1(0, @"%@ This method should be handed to the subclass call!", NSStringFromSelector(_cmd));
+    return [[self alloc] init];
+}
+
++ (instancetype)pickerWithDictionary:(NSDictionary *)pDict {
+    NSAssert1(0, @"%@ This method should be handed to the subclass call!", NSStringFromSelector(_cmd));
+    return [[self alloc] init];
+}
+
 @end
 
 @implementation zhThemeColorPicker
 
-+ (instancetype)pickerColorWithKey:(NSString *)pKey {
++ (instancetype)pickerWithKey:(NSString *)pKey {
     return [[self alloc] initWithKey:pKey dict:nil valueType:zhThemeValueTypeColor];
 }
 
-+ (instancetype)pickerColorWithDict:(NSDictionary *)pDict {
++ (instancetype)pickerWithDictionary:(NSDictionary *)pDict {
     return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeColor];
 }
 
@@ -160,11 +163,11 @@
 }
 
 - (UIColor *)color {
-    UIColor* (^getValueBlock)(NSDictionary *) = ^(NSDictionary *dict) {
+    UIColor* (^callback)(NSDictionary *) = ^(NSDictionary *dict) {
         UIColor *value = nil;
         NSString *currentKey = ThemeManager.currentStyle;
         if ([dict.allKeys containsObject:currentKey]) {
-            value = [zhThemePickerHelper colorFromCheckObject:dict[currentKey]];
+            value = [zhThemePickerHelper colorCheck:dict[currentKey]];
         }
         if (!value) {
             [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
@@ -173,12 +176,12 @@
     };
     
     if (self.pDict) {
-        return getValueBlock(self.pDict);
+        return callback(self.pDict);
     }
     
     NSDictionary<NSString *, NSDictionary *> *dict = ThemeManager.colorLibraries;
     if (![dict.allKeys containsObject:self.pkey]) return nil;
-    return getValueBlock(dict[self.pkey]);
+    return callback(dict[self.pkey]);
 }
 
 @end
@@ -192,11 +195,11 @@
     return [super initWithKey:key dict:dict valueType:valueType];
 }
 
-+ (instancetype)pickerImageWithKey:(NSString *)pKey {
++ (instancetype)pickerWithKey:(NSString *)pKey {
     return [[self alloc] initWithKey:pKey dict:nil valueType:zhThemeValueTypeImage];
 }
 
-+ (instancetype)pickerImageWithDict:(NSDictionary *)pDict {
++ (instancetype)pickerWithDictionary:(NSDictionary *)pDict {
     return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeImage];
 }
 
@@ -215,14 +218,14 @@
 }
 
 - (UIImage *)image {
-    UIImage* (^getValueBlock)(NSDictionary *) = ^(NSDictionary *dict) {
+    UIImage* (^callback)(NSDictionary *) = ^(NSDictionary *dict) {
         UIImage *value = nil;
         NSString *currentKey = ThemeManager.currentStyle;
         if ([dict.allKeys containsObject:currentKey]) {
-            id object = dict[currentKey];
-            UIImage *placeImage = [zhThemePickerHelper imageNamed:object fromResource:ThemeManager.imageSources];
+            id obj = [dict objectForKey:currentKey];
+            UIImage *placeImage = [zhThemePickerHelper imageNamed:obj from:ThemeManager.pathOfImageSources];
             if (placeImage) value = placeImage;
-            else value = [zhThemePickerHelper imageFromCheckObject:object];
+            else value = [zhThemePickerHelper imageCheck:obj];
             if (value) {
                 if (!UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsetsZero, _imageCapInsets)) {
                     value = [value resizableImageWithCapInsets:_imageCapInsets];
@@ -239,29 +242,29 @@
     };
     
     if (self.pDict) {
-        return getValueBlock(self.pDict);
+        return callback(self.pDict);
     }
     
     NSDictionary<NSString *, NSDictionary *> *dict = ThemeManager.imageLibraries;
     if (![dict.allKeys containsObject:self.pkey]) return nil;
-    return getValueBlock(dict[self.pkey]);
+    return callback(dict[self.pkey]);
 }
 
 @end
 
 @implementation zhThemeFontPicker
 
-+ (instancetype)pickerFontWithDict:(NSDictionary *)pDict {
++ (instancetype)pickerWithDictionary:(NSDictionary *)pDict {
     return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeFont];
 }
 
 - (UIFont *)font {
-    UIFont* (^getValueBlock)(NSDictionary *) = ^(NSDictionary *dict) {
+    UIFont* (^callback)(NSDictionary *) = ^(NSDictionary *dict) {
         UIFont *value = [UIFont systemFontOfSize:UIFont.systemFontSize];
         NSString *currentKey = ThemeManager.currentStyle;
         if ([dict.allKeys containsObject:currentKey]) {
-            id object = dict[currentKey];
-            if ([object isKindOfClass:[UIFont class]]) value = object;
+            id obj = [dict objectForKey:currentKey];
+            if ([obj isKindOfClass:[UIFont class]]) value = obj;
         }
         if (!value) {
             [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
@@ -270,7 +273,35 @@
     };
     
     if (self.pDict) {
-        return getValueBlock(self.pDict);
+        return callback(self.pDict);
+    }
+    return nil;
+}
+
+@end
+
+@implementation zhThemeTextPicker
+
++ (instancetype)pickerWithDictionary:(NSDictionary *)pDict {
+    return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeText];
+}
+
+- (NSString *)text {
+    NSString* (^callback)(NSDictionary *) = ^(NSDictionary *dict) {
+        NSString *value = nil;
+        NSString *currentKey = ThemeManager.currentStyle;
+        if ([dict.allKeys containsObject:currentKey]) {
+            id obj = [dict objectForKey:currentKey];
+            if ([obj isKindOfClass:[NSString class]]) value = obj;
+        }
+        if (!value) {
+            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
+        }
+        return value;
+    };
+    
+    if (self.pDict) {
+        return callback(self.pDict);
     }
     return nil;
 }
@@ -279,17 +310,17 @@
 
 @implementation zhThemeNumberPicker
 
-+ (instancetype)pickerNumberWithDict:(NSDictionary *)pDict {
++ (instancetype)pickerWithDictionary:(NSDictionary *)pDict {
     return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeNumber];
 }
 
 - (NSNumber *)number {
-    NSNumber* (^getValueBlock)(NSDictionary *) = ^(NSDictionary *dict) {
+    NSNumber* (^callback)(NSDictionary *) = ^(NSDictionary *dict) {
         NSNumber *value = [NSNumber numberWithDouble:1.f];
         NSString *currentKey = ThemeManager.currentStyle;
         if ([dict.allKeys containsObject:currentKey]) {
-            id object = dict[currentKey];
-            if ([object isKindOfClass:[NSNumber class]]) value = object;
+            id obj = [dict objectForKey:currentKey];
+            if ([obj isKindOfClass:[NSNumber class]]) value = obj;
         }
         if (!value) {
             [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
@@ -298,35 +329,7 @@
     };
     
     if (self.pDict) {
-        return getValueBlock(self.pDict);
-    }
-    return @0;
-}
-
-@end
-
-@implementation zhThemeTextPicker
-
-+ (instancetype)pickerTextWithDict:(NSDictionary *)pDict {
-    return [[self alloc] initWithKey:nil dict:pDict valueType:zhThemeValueTypeText];
-}
-
-- (NSString *)text {
-    NSString* (^getValueBlock)(NSDictionary *) = ^(NSDictionary *dict) {
-        NSString *value = nil;
-        NSString *currentKey = ThemeManager.currentStyle;
-        if ([dict.allKeys containsObject:currentKey]) {
-            id object = dict[currentKey];
-            if ([object isKindOfClass:[NSString class]]) value = object;
-        }
-        if (!value) {
-            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
-        }
-        return value;
-    };
-    
-    if (self.pDict) {
-        return getValueBlock(self.pDict);
+        return callback(self.pDict);
     }
     return nil;
 }

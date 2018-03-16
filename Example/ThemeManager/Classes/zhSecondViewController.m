@@ -18,7 +18,7 @@
 @implementation zhSecondViewController
 
 - (void)switchThemeClicked:(UIButton *)sender {
-    if ([ThemeManager isEqualCurrentThemeStyle:ThemeNight]) {
+    if ([ThemeManager isEqualCurrentStyle:ThemeNight]) {
         [ThemeManager updateThemeStyle:ThemeDay];
     } else {
         [ThemeManager updateThemeStyle:ThemeNight];
@@ -30,17 +30,17 @@
     
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
     textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25];
-    textAttrs[NSForegroundColorAttributeName] = TMColorWithKey(@"color04");
+    textAttrs[NSForegroundColorAttributeName] = ThemeColorPickerWithKey(@"color04");
     [self.navigationController.navigationBar zh_setTitleTextAttributes:textAttrs];
     
-    self.navigationController.navigationBar.zh_overlayColorPicker = TMColorWithKey(@"color01").animated(YES);
+    self.navigationController.navigationBar.zh_overlayColorPicker = ThemeColorPickerWithKey(@"color01").animated(YES);
     
     self.navigationItem.title = @"Day or Night";
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 60, 37);
     button.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [button zh_setImagePicker:TMImageWithKey(@"image05") forState:UIControlStateNormal];
+    [button zh_setImagePicker:ThemeImagePickerWithKey(@"image05") forState:UIControlStateNormal];
     [button addTarget:self action:@selector(switchThemeClicked:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 
@@ -55,7 +55,7 @@
     _tableView.rowHeight = 140;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
-    _tableView.zh_backgroundColorPicker = TMColorWithKey(@"color01").animated(YES);
+    _tableView.zh_backgroundColorPicker = ThemeColorPickerWithKey(@"color01").animated(YES);
     [self.view addSubview:_tableView];
 }
 
@@ -76,7 +76,7 @@
         label.size = CGSizeMake(self.view.width, tableView.rowHeight);
         label.text = @"「Stay hungry. Stay foolish」";
         label.font = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25];
-        label.zh_textColorPicker = TMColorWithKey(@"color06");
+        label.zh_textColorPicker = ThemeColorPickerWithKey(@"color06");
         [cell.contentView addSubview:label];
         
         UIView *spLine = [UIView new];
@@ -89,7 +89,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.zh_backgroundColorPicker = TMColorWithKey(@"color01").animated(YES);
+    cell.zh_backgroundColorPicker = ThemeColorPickerWithKey(@"color01").animated(YES);
 }
 
 @end

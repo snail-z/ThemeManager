@@ -66,7 +66,7 @@
     [self subviewsLayout:imgSize];
     
     NSLog(@"输出imgsize=============> %@", NSStringFromCGSize(imgSize));
-    NSLog(@"输出state=============> %lu", state);
+    NSLog(@"输出state=============> %@", @(state));
 }
 
 @end

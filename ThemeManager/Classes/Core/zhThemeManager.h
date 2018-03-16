@@ -10,22 +10,27 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#define ThemeManager [zhThemeManager sharedManager]
-
 typedef NSString *zhThemeStyleName NS_EXTENSIBLE_STRING_ENUM;
 
-UIKIT_EXTERN NSNotificationName const zhThemeUpdateNotification; // Theme styles change of notification.
+@interface zhThemeDefaultConfiguration : NSObject
+
+@property (nonatomic, strong) NSString *colorFilePath;
+@property (nonatomic, strong) NSString *imageFilePath;
+@property (nonatomic, strong) zhThemeStyleName style;
+
+@end
 
 @interface zhThemeManager : NSObject
 
-@property (nonatomic, strong, readonly) NSDictionary<NSString *, NSDictionary *> *colorLibraries;
-@property (nonatomic, strong, readonly) NSDictionary<NSString *, NSDictionary *> *imageLibraries;
-@property (nonatomic, strong, readonly) id imageSources;  // path or bundle
+@property (nonatomic, strong, readonly, nullable) NSDictionary<NSString *, NSDictionary *> *colorLibraries;
+@property (nonatomic, strong, readonly, nullable) NSDictionary<NSString *, NSDictionary *> *imageLibraries;
+@property (nonatomic, strong, readonly, nullable) id pathOfImageSources;  
+
+@property (nonatomic, strong, readonly) zhThemeStyleName currentStyle; // Current theme style.
 
 + (instancetype)sharedManager;
 
-/// The transition duration when theme background colors change. default is 0.25s
-@property (nonatomic, assign) NSTimeInterval themeColorChangeInterval;
+- (BOOL)isEqualCurrentStyle:(zhThemeStyleName)style;
 
 /// Default NO, log by NSLog.
 @property (nonatomic, assign) BOOL debugLogEnabled;
@@ -33,38 +38,31 @@ UIKIT_EXTERN NSNotificationName const zhThemeUpdateNotification; // Theme styles
 /// Debug log controlled by "debugLogEnabled".
 - (void)debugLog:(nullable NSString *)description, ...;
 
+/// The transition duration when theme background colors change. default is 0.25s
+@property (nonatomic, assign) NSTimeInterval themeColorChangeInterval;
+
+// Set the default configuration for your theme. When the updated file is invalid, will be used it.
+@property (nonatomic, strong) zhThemeDefaultConfiguration *defaultConfiguration;
+
+// If set it. next start your app. will use `style`. default configuration `style` will not be used.
+- (void)updateThemeStyle:(zhThemeStyleName)style; // You can customize your theme style name. change it will change the overall theme, this will post `zhThemeUpdateNotification`, you can observe this notification to customize your theme. (your config file name, must keep the same with it.)
+
+// Update your theme color file path.
+- (void)updateThemeColorFilePath:(NSString *)path; // If set it. default configuration `colorFilePath` will not be used.
+
+// Update your theme image file path.
+- (void)updateThemeImageFilePath:(NSString *)path; // If set it. default configuration `imageFilePath` will not be used.
+
+// If set it, will get resource images from this directory. if set nil, get resource images from your app.
+- (void)setThemeImageResourcesPath:(NSString *)path; // support reads from your custom bundle. automatic check @2x/@3x images.
+
 /// Reload Theme (will post `zhThemeUpdateNotification`)
 - (void)reloadTheme;
 
-/// Whether the same with theme current style.
-- (BOOL)isEqualCurrentThemeStyle:(zhThemeStyleName)themeStyle;
-
-/// Current theme style.
-@property (nonatomic, strong, readonly) zhThemeStyleName currentStyle;
-
-/// Set theme default style.
-- (void)setDefaultThemeStyle:(zhThemeStyleName)defaultStyle; // You can customize your theme style name. change it to change the global theme, this will post `zhThemeUpdateNotification`, you can observe this notification to customize your theme. (your config file or dictionary the key, must keep the same with it.)
-
-/// If set it. next start your app. will use `style`. default style will not be used.
-- (void)updateThemeStyle:(zhThemeStyleName)style;
-
-/// The file type support `json` and `plist`. (must set full path) ☟
-
-/// Set theme default color file.
-- (void)setDefaultThemeColorFile:(NSString *)defaultColorFile;
-
-/// If set it. next start your app. will use `newColorFile`. default color file will not be used.
-- (void)updateThemeColorFile:(nullable NSString *)newColorFile;
-
-/// Set theme default image file.
-- (void)setDefaultThemeImageFile:(NSString *)defaultImageFile;
-
-/// If set it. next start your app. will use `newImageFile`. default image file will not be used.
-- (void)updateThemeImageFile:(nullable NSString *)newImageFile;
-
-/// If set it, will get resource images from this directory. if set nil, get resource images from your app.
-- (void)setThemeImageResources:(nullable NSString *)resourcesPath; // support reads from your custom bundle. automatic check @2x/@3x images.
-
 @end
+
+#define ThemeManager [zhThemeManager sharedManager]
+
+UIKIT_EXTERN NSNotificationName const zhThemeUpdateNotification; // Theme styles change of notification.
 
 NS_ASSUME_NONNULL_END

@@ -33,11 +33,11 @@
                             
                             @{kClassVC : @"zhThirdViewController",
                               kTitle   : @"Me"} ];
-    
+
     NSArray<zhThemeImagePicker *> *nolArr = @[
-                                         TMImageWithKey(@"image01").renderingMode(UIImageRenderingModeAlwaysOriginal),
-                                         TMImageWithKey(@"image02").renderingMode(UIImageRenderingModeAlwaysOriginal),
-                                         TMImageWithKey(@"image03").renderingMode(UIImageRenderingModeAlwaysOriginal)];
+                                         ThemeImagePickerWithKey(@"image01").renderingMode(UIImageRenderingModeAlwaysOriginal),
+                                         ThemeImagePickerWithKey(@"image02").renderingMode(UIImageRenderingModeAlwaysOriginal),
+                                         ThemeImagePickerWithKey(@"image03").renderingMode(UIImageRenderingModeAlwaysOriginal)];
     
     [itemsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIViewController *vc = [NSClassFromString(obj[kClassVC]) new];
@@ -49,11 +49,11 @@
         item.zh_selectedImagePicker = nolArr[idx];
         
         NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-        textAttrs[NSForegroundColorAttributeName] = TMColorWithKey(@"color02");
+        textAttrs[NSForegroundColorAttributeName] = ThemeColorPickerWithKey(@"color02");
         textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:12];
         [item zh_setTitleTextPickerAttributes:textAttrs forState:UIControlStateNormal];
 
-        self.tabBar.zh_overlayColorPicker = TMColorWithKey(@"color05").animated(YES);
+        self.tabBar.zh_overlayColorPicker = ThemeColorPickerWithKey(@"color05").animated(YES);
         self.tabBar.translucent = NO;
         [self addChildViewController:nav];
     }];

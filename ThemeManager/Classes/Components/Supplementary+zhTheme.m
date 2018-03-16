@@ -6,6 +6,7 @@
 //  Copyright © 2017年 snail-z. All rights reserved.
 //
 
+#import <objc/runtime.h>
 #import "Supplementary+zhTheme.h"
 #import "zhThemeUtilities.h"
 
@@ -65,7 +66,7 @@
     [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     objc_setAssociatedObject(self, @selector(zh_overlayColorPicker), zh_overlayColorPicker, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self zh_setOverlayViewBackgroundColor:zh_overlayColorPicker.color];
-    [self.zh_themeForExternalDict setObject:zh_overlayColorPicker forKey:NSStringFromSelector(@selector(zh_setOverlayViewBackgroundColor:))];
+    [self.zh_themeForExternalDict setValue:zh_overlayColorPicker forKey:NSStringFromSelector(@selector(zh_setOverlayViewBackgroundColor:))];
 }
 
 @end

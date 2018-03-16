@@ -11,23 +11,24 @@
 @implementation MyThemeConfig
 
 + (void)config {
-    NSString *path1 = [[NSBundle mainBundle] pathForResource:@"zhTheme_Color" ofType:@"plist"];
-    [ThemeManager setDefaultThemeColorFile:path1];
+    NSString *defColorPath = [[NSBundle mainBundle] pathForResource:@"zhTheme_Color" ofType:@"plist"];
+    NSString *defImagePath = [[NSBundle mainBundle] pathForResource:@"zhTheme_Image" ofType:@"plist"];
     
-    NSString *path2 = [[NSBundle mainBundle] pathForResource:@"zhTheme_Image" ofType:@"plist"];
-    [ThemeManager setDefaultThemeImageFile:path2];
+    zhThemeDefaultConfiguration *defaultConfiguration = [[zhThemeDefaultConfiguration alloc] init];
+    defaultConfiguration.colorFilePath = defColorPath;
+    defaultConfiguration.imageFilePath = defImagePath;
+    defaultConfiguration.style = ThemeDay;
     
-    [ThemeManager setDefaultThemeStyle:ThemeDay];
-    
+    ThemeManager.defaultConfiguration = defaultConfiguration;
     ThemeManager.themeColorChangeInterval = 0.25;
     
-    // 配置状态栏
-    NSDictionary *d = @{ThemeDay : @(UIStatusBarStyleLightContent),
-                        ThemeNight : @(UIStatusBarStyleDefault),
-                        Theme1 : @(UIStatusBarStyleLightContent),
-                        Theme2 : @(UIStatusBarStyleLightContent),
-                        Theme3 : @(UIStatusBarStyleLightContent)};
-    [[UIApplication sharedApplication] zh_setStatusBarStyle:d];
+//    // 配置状态栏
+//    NSDictionary *d = @{ThemeDay : @(UIStatusBarStyleLightContent),
+//                        ThemeNight : @(UIStatusBarStyleDefault),
+//                        Theme1 : @(UIStatusBarStyleLightContent),
+//                        Theme2 : @(UIStatusBarStyleLightContent),
+//                        Theme3 : @(UIStatusBarStyleLightContent)};
+//    [[UIApplication sharedApplication] zh_setStatusBarStyle:d];
 }
 
 @end
