@@ -81,7 +81,7 @@ NSNumber *number = [NSNumber numberWithInteger:2];
 NSValue *value = [NSValue valueWithCGSize:CGSizeMake(100, 100)];
 zhThemeColorPicker *picker = ThemeColorPickerWithKey(@"key");
 [object zh_addThemePickerForSelector:@selector(setColor:Integer:setCGSize:)
-					  withArguments:picker, number, value];
+		       withArguments:picker, number, value];
 ```
 
 
