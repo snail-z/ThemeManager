@@ -7,18 +7,18 @@
 //
 
 #import "zhAppDelegate.h"
+#import "zhAppDelegate+ThemeConfig.h"
 #import "zhTabBarController.h"
-#import "MyThemeConfig.h"
 
 @implementation zhAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [MyThemeConfig config];
+    [self themeConfig];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [zhTabBarController new];
+    self.window.rootViewController = [[zhTabBarController alloc] init];
     [self.window makeKeyAndVisible];
     
     return YES;

@@ -22,12 +22,6 @@ typedef NSString *zhThemeStyleName NS_EXTENSIBLE_STRING_ENUM;
 
 @interface zhThemeManager : NSObject
 
-@property (nonatomic, strong, readonly, nullable) NSDictionary<NSString *, NSDictionary *> *colorLibraries;
-@property (nonatomic, strong, readonly, nullable) NSDictionary<NSString *, NSDictionary *> *imageLibraries;
-@property (nonatomic, strong, readonly, nullable) id pathOfImageSources;  
-
-@property (nonatomic, strong, readonly) zhThemeStyleName currentStyle; // Current theme style.
-
 + (instancetype)sharedManager;
 
 - (BOOL)isEqualCurrentStyle:(zhThemeStyleName)style;
@@ -58,6 +52,15 @@ typedef NSString *zhThemeStyleName NS_EXTENSIBLE_STRING_ENUM;
 
 /// Reload Theme (will post `zhThemeUpdateNotification`)
 - (void)reloadTheme;
+
+@property (nonatomic, strong, readonly) zhThemeStyleName currentStyle; // Current theme style.
+
+@property (nonatomic, strong, readonly, nullable) NSDictionary<NSString *, NSDictionary *> *colorLibraries;
+@property (nonatomic, strong, readonly, nullable) NSDictionary<NSString *, NSDictionary *> *imageLibraries;
+@property (nonatomic, strong, readonly, nullable) id pathOfImageSources;
+@property (nonatomic, strong, readonly, nullable) NSString *currentColorFilePath;
+@property (nonatomic, strong, readonly, nullable) NSString *currentImageFilePath;
+@property (nonatomic, strong, readonly, nullable) NSString *currentImageResourcesPath;
 
 @end
 

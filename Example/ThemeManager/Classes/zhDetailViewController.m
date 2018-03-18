@@ -164,4 +164,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
+- (void)dealloc {
+    NSLog(@"dealloc - %@", NSStringFromClass(self.class));
+}
+
 @end

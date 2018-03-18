@@ -12,7 +12,7 @@
 
 @interface UINavigationBar ()
 
-@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, id> *zh_themeForExternalDict;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, id> *zhThemeExternalDictionary;
 
 @end
 
@@ -20,7 +20,7 @@
 
 // overwrite `zh_themeUpdateForExternal`
 - (void)zh_themeUpdateForExternal {
-    [self.zh_themeForExternalDict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, zhThemeColorPicker *  _Nonnull picker, BOOL * _Nonnull stop) {
+    [self.zhThemeExternalDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, zhThemeColorPicker *  _Nonnull picker, BOOL * _Nonnull stop) {
         if (picker.isAnimated) {
             [UIView animateWithDuration:ThemeManager.themeColorChangeInterval animations:^{
                 [self zh_setOverlayViewBackgroundColor:picker.color];
@@ -60,13 +60,13 @@
         [self setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
         [self.zh_themeOverlayView removeFromSuperview];
         objc_setAssociatedObject(self, @selector(zh_themeOverlayView), nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        [self.zh_themeForExternalDict removeObjectForKey:NSStringFromSelector(@selector(zh_setOverlayViewBackgroundColor:))];
+        [self.zhThemeExternalDictionary removeObjectForKey:NSStringFromSelector(@selector(zh_setOverlayViewBackgroundColor:))];
         return;
     }
     [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     objc_setAssociatedObject(self, @selector(zh_overlayColorPicker), zh_overlayColorPicker, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self zh_setOverlayViewBackgroundColor:zh_overlayColorPicker.color];
-    [self.zh_themeForExternalDict setValue:zh_overlayColorPicker forKey:NSStringFromSelector(@selector(zh_setOverlayViewBackgroundColor:))];
+    [self.zhThemeExternalDictionary setValue:zh_overlayColorPicker forKey:NSStringFromSelector(@selector(zh_setOverlayViewBackgroundColor:))];
 }
 
 @end

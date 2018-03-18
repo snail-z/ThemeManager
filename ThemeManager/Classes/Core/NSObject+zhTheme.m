@@ -13,11 +13,11 @@
 
 @interface NSObject ()
 
-@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, zhThemePicker *> *zh_themePropertiesDict;
-@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *zh_themeEnumerationsDict;
-@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *zh_themeTextAttributesDict;
-@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, NSDictionary<NSString *, zhThemePicker *> *> *zh_themeMethodStateDict;
-@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, id> *zh_themeForExternalDict;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, zhThemePicker *> *zhThemePropertiesDictionary;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *zhThemeEnumerationsDictionary;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, NSDictionary<NSString *, id> *> *zhThemeTextAttributesDictionary;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, NSDictionary<NSString *, zhThemePicker *> *> *zhThemeMethodStateDictionary;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, id> *zhThemeExternalDictionary;
 
 @end
 
@@ -42,12 +42,12 @@
     return dictionary;
 }
 
-- (NSMutableDictionary<NSString *, id> *)zh_themePropertiesDict {
+- (NSMutableDictionary<NSString *, id> *)zhThemePropertiesDictionary {
     return [self zh_themeAddListener:_cmd sel:@selector(zh_themeUpdateForProperties)];
 }
 
 - (void)zh_themeUpdateForProperties { // for obj properties.
-    [self.zh_themePropertiesDict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull propertyName, zhThemePicker * _Nonnull picker, BOOL * _Nonnull stop) {
+    [self.zhThemePropertiesDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull propertyName, zhThemePicker * _Nonnull picker, BOOL * _Nonnull stop) {
         void (^callback)(id) = ^(_Nullable id value) {
             if ((picker.valueType == zhThemeValueTypeColor) &&
                 ([(zhThemeColorPicker *)picker isAnimated])) {
@@ -68,12 +68,12 @@
     }];
 }
 
-- (NSMutableDictionary<NSString *, id> *)zh_themeEnumerationsDict {
+- (NSMutableDictionary<NSString *, id> *)zhThemeEnumerationsDictionary {
     return [self zh_themeAddListener:_cmd sel:@selector(zh_themeUpdateForEnumerations)];
 }
 
 - (void)zh_themeUpdateForEnumerations { // for keyboardAppearance / statusBarStyle
-    [self.zh_themeEnumerationsDict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull selName, NSDictionary<NSString *,NSNumber *> * _Nonnull dictionary, BOOL * _Nonnull stop) {
+    [self.zhThemeEnumerationsDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull selName, NSDictionary<NSString *,NSNumber *> * _Nonnull dictionary, BOOL * _Nonnull stop) {
         NSNumber *number = [dictionary objectForKey:ThemeManager.currentStyle];
         void(*msgSend)(id, SEL, NSInteger) = (void(*)(id, SEL, NSInteger))objc_msgSend;
         msgSend(self, NSSelectorFromString(selName), [number integerValue]);
@@ -85,12 +85,12 @@
     }];
 }
 
-- (NSMutableDictionary<NSString *, id> *)zh_themeTextAttributesDict {
+- (NSMutableDictionary<NSString *, id> *)zhThemeTextAttributesDictionary {
     return [self zh_themeAddListener:_cmd sel:@selector(zh_themeUpdateForTextAttributes)];
 }
 
 - (void)zh_themeUpdateForTextAttributes { // for textAttributes
-    [self.zh_themeTextAttributesDict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary<NSString *,id> * _Nonnull dictionary, BOOL * _Nonnull stop) {
+    [self.zhThemeTextAttributesDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary<NSString *,id> * _Nonnull dictionary, BOOL * _Nonnull stop) {
         NSMutableDictionary* (^callback)(NSDictionary *) = ^(NSDictionary *dict){
             __block NSMutableDictionary *textAttrs = [dict mutableCopy];
             [dict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -116,13 +116,13 @@
     }];
 }
 
-- (NSMutableDictionary<NSString *,id> *)zh_themeMethodStateDict {
+- (NSMutableDictionary<NSString *,id> *)zhThemeMethodStateDictionary {
     return [self zh_themeAddListener:_cmd sel:@selector(zh_themeUpdateForMethodState)];
 }
 
 - (void)zh_themeUpdateForMethodState { // for picker. with state
     void(*msgSend)(id, SEL, id, NSInteger) = (void(*)(id, SEL, id, NSInteger))objc_msgSend;
-    [self.zh_themeMethodStateDict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary<NSString *,zhThemePicker *> * _Nonnull dictionary, BOOL * _Nonnull stop) {
+    [self.zhThemeMethodStateDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary<NSString *,zhThemePicker *> * _Nonnull dictionary, BOOL * _Nonnull stop) {
         NSInteger state = [key integerValue];
         [dictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull selName, zhThemePicker * _Nonnull picker, BOOL * _Nonnull stop) {
             id value = zh_getThemePickerValue(picker);
@@ -139,7 +139,7 @@
 }
 
 ////// for external custom object/ medthod //////
-- (NSMutableDictionary<NSString *,id> *)zh_themeForExternalDict {
+- (NSMutableDictionary<NSString *,id> *)zhThemeExternalDictionary {
     return [self zh_themeAddListener:_cmd sel:@selector(zh_themeUpdateForExternal)];
 }
 
@@ -307,12 +307,12 @@ NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init]; \
     }
     va_end(args);
     [inv invoke];
-    NSMutableDictionary *objects = [self valueForKey:@"zh_themeForExternalDict"];
+    NSMutableDictionary *objects = [self valueForKey:@"zhThemeExternalDictionary"];
     [objects setObject:paramInfo forKey:NSStringFromSelector(sel)];
 }
 
 - (void)zh_themeUpdateForExternal {
-    [self.zh_themeForExternalDict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull selName, NSDictionary<NSNumber *, NSMutableDictionary *> * _Nonnull dict, BOOL * _Nonnull stop) {
+    [self.zhThemeExternalDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull selName, NSDictionary<NSNumber *, NSMutableDictionary *> * _Nonnull dict, BOOL * _Nonnull stop) {
         SEL sel = NSSelectorFromString(selName);
         __INV_INVOKE(sel)
         for (int index = 2; index < count; index++) {

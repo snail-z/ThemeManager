@@ -8,6 +8,12 @@
 
 #import "zhThemeManager.h"
 
+@interface zhThemeManager ()
+- (void)setCurrentColorFilePath:(NSString *)currentColorFilePath;
+- (void)setCurrentImageFilePath:(NSString *)currentImageFilePath;
+- (void)setCurrentImageResourcesPath:(NSString *)currentImageResourcesPath;
+@end
+
 NSString *const zhThemeFileModelStorageColorKey = @"zhTheme_storageColorFileKey";
 NSString *const zhThemeFileModelStorageImageKey = @"zhTheme_storageImageFileKey";
 
@@ -92,7 +98,7 @@ typedef NS_ENUM(NSInteger, zhThemeFilePathType) {
 }
 
 - (void)setColorFilePath:(NSString *)path {
-    if (!path) return;
+    [ThemeManager setCurrentColorFilePath:path];
     zhThemeFilePathModel *model = [self convertPathToModel:path];
     if (model.pathType == zhThemeFilePathTypeUnknown) return;
     
@@ -103,7 +109,7 @@ typedef NS_ENUM(NSInteger, zhThemeFilePathType) {
 }
 
 - (void)setImageFilePath:(NSString *)path {
-    if (!path) return;
+    [ThemeManager setCurrentImageFilePath:path];
     zhThemeFilePathModel *model = [self convertPathToModel:path];
     if (model.pathType == zhThemeFilePathTypeUnknown) return;
     
@@ -114,7 +120,7 @@ typedef NS_ENUM(NSInteger, zhThemeFilePathType) {
 }
 
 - (void)setImageSourcesPath:(NSString *)path {
-    if (!path) return;
+    [ThemeManager setThemeImageResourcesPath:path];
     zhThemeFilePathModel *model = [self convertPathToModel:path];
     if (model.pathType == zhThemeFilePathTypeUnknown) return;
     
@@ -185,6 +191,7 @@ typedef NS_ENUM(NSInteger, zhThemeFilePathType) {
 NSNotificationName const zhThemeUpdateNotification = @"zh.theme.update.notification";
 NSString *const zhThemeStyleStorageKey = @"zhThemeStyleStorageKey";
 
+
 @implementation zhThemeManager
 
 + (instancetype)sharedManager {
@@ -220,6 +227,18 @@ NSString *const zhThemeStyleStorageKey = @"zhThemeStyleStorageKey";
     return ThemeFileHandle.imageSources;
 }
 
+- (void)setCurrentColorFilePath:(NSString *)currentColorFilePath {
+    _currentColorFilePath = currentColorFilePath;
+}
+
+- (void)setCurrentImageFilePath:(NSString *)currentImageFilePath {
+    _currentImageFilePath = currentImageFilePath;
+}
+
+- (void)setCurrentImageResourcesPath:(NSString *)currentImageResourcesPath {
+    _currentImageResourcesPath = currentImageResourcesPath;
+}
+
 - (void)updateThemeStyle:(zhThemeStyleName)style {
     if (!style ||  [self.currentStyle isEqualToString:style]) return;
     [[NSUserDefaults standardUserDefaults] setObject:style forKey:zhThemeStyleStorageKey];
@@ -227,16 +246,19 @@ NSString *const zhThemeStyleStorageKey = @"zhThemeStyleStorageKey";
 }
 
 - (void)updateThemeColorFilePath:(NSString *)path {
+    if (!path) return;
     [ThemeFileHandle setColorFilePath:path];
     [[NSNotificationCenter defaultCenter] postNotificationName:zhThemeUpdateNotification object:nil];
 }
 
 - (void)updateThemeImageFilePath:(NSString *)path {
+    if (!path) return;
     [ThemeFileHandle setImageFilePath:path];
     [[NSNotificationCenter defaultCenter] postNotificationName:zhThemeUpdateNotification object:nil];
 }
 
 - (void)setThemeImageResourcesPath:(NSString *)path {
+    if (!path) return;
     [ThemeFileHandle setImageSourcesPath:path];
 }
 

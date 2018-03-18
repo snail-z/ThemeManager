@@ -15,7 +15,9 @@
  Example：
  NSNumber *number = [NSNumber numberWithInteger:2];
  NSValue *value = [NSValue valueWithCGSize:CGSizeMake(100, 100)];
- [object zh_addThemePickerForSelector:@selector(setInteger:setCGSize:) withArguments:number, value];
+ zhThemeColorPicker *picker = ThemeColorPickerWithKey(@"key");
+ [object zh_addThemePickerForSelector:@selector(setColor:Integer:setCGSize:)
+                        withArguments:picker, number, value];
  **/
 - (void)zh_addThemePickerForSelector:(SEL)sel withArguments:(id)arguments, ...; // When the external custom methods, you can use it.
 

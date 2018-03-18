@@ -28,11 +28,11 @@ void zh_setThemePicker(zhThemePicker *picker, id instance, NSString *propertyNam
         id value = zh_getThemePickerValue(picker);
         [instance setValue:value forKeyPath:propertyName];
     }
-    NSMutableDictionary *pickers = [instance valueForKey:@"zh_themePropertiesDict"];
+    NSMutableDictionary *pickers = [instance valueForKey:@"zhThemePropertiesDictionary"];
     [pickers setValue:picker forKey:propertyName];
 }
 
-// for enumerations type. exp: keyboardAppearance / statusBarStyle
+// for enumerations type. e.g. keyboardAppearance / statusBarStyle
 void zh_setThemeEnumerations(id instance, SEL aSelector, NSDictionary<NSString *,NSNumber *> *dict) {
     id obj = [dict objectForKey:ThemeManager.currentStyle];
     if ([obj isKindOfClass:[NSNumber class]]) {
@@ -43,7 +43,7 @@ void zh_setThemeEnumerations(id instance, SEL aSelector, NSDictionary<NSString *
             void(*msgSend)(id, SEL) = (void(*)(id, SEL))objc_msgSend;
             msgSend(instance, NSSelectorFromString(@"reloadInputViews"));
         }
-        NSMutableDictionary *dictionary = [instance valueForKey:@"zh_themeEnumerationsDict"];
+        NSMutableDictionary *dictionary = [instance valueForKey:@"zhThemeEnumerationsDictionary"];
         [dictionary setValue:dict forKey:NSStringFromSelector(aSelector)];
     }
 }
@@ -58,7 +58,7 @@ void zh_setThemeTextAttributes(id instance, SEL aSelector, NSDictionary<NSString
     }];
     void(*msgSend)(id, SEL, NSDictionary*) = (void(*)(id, SEL, NSDictionary*))objc_msgSend;
     msgSend(instance, aSelector, textAttr);
-    NSMutableDictionary *attributes = [instance valueForKey:@"zh_themeTextAttributesDict"];
+    NSMutableDictionary *attributes = [instance valueForKey:@"zhThemeTextAttributesDictionary"];
     [attributes setValue:attrs forKey:NSStringFromSelector(aSelector)];
 }
 
@@ -72,7 +72,7 @@ void zh_setThemeTextAttributesWithState(id instance, SEL aSelector, NSDictionary
     }];
     void(*msgSend)(id, SEL, NSDictionary*, NSInteger) = (void(*)(id, SEL, NSDictionary*, NSInteger))objc_msgSend;
     msgSend(instance, aSelector, textAttr, state);
-    NSMutableDictionary *attributes = [instance valueForKey:@"zh_themeTextAttributesDict"];
+    NSMutableDictionary *attributes = [instance valueForKey:@"zhThemeTextAttributesDictionary"];
     NSString *stateKey = [NSString stringWithFormat:@"%@", @(state)];
     NSMutableDictionary<NSString *, NSDictionary *> *dictionary = [attributes objectForKey:stateKey];
     if (!dictionary) dictionary = [[NSMutableDictionary alloc] init];
@@ -85,7 +85,7 @@ void zh_setThemePickerWithState(id instance, SEL aSelector, zhThemePicker *picke
     id value = zh_getThemePickerValue(picker);
     void(*msgSend)(id, SEL, id, NSInteger) = (void(*)(id, SEL, id, NSInteger))objc_msgSend;
     msgSend(instance, aSelector, value, state);
-    NSMutableDictionary *objects = [instance valueForKey:@"zh_themeMethodStateDict"];
+    NSMutableDictionary *objects = [instance valueForKey:@"zhThemeMethodStateDictionary"];
     NSString *stateKey = [NSString stringWithFormat:@"%@", @(state)];
     NSMutableDictionary<NSString *, zhThemePicker *> *dictionary = [objects objectForKey:stateKey];
     if (!dictionary) dictionary = [[NSMutableDictionary alloc] init];

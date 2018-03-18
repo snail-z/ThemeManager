@@ -21,10 +21,12 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		61F094DF205E01B600551ABA /* zhAppDelegate+ThemeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F094DE205E01B600551ABA /* zhAppDelegate+ThemeConfig.m */; };
+		61F094E2205E16C200551ABA /* ThemeImage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61F094E0205E16C200551ABA /* ThemeImage.plist */; };
+		61F094E3205E16C200551ABA /* ThemeColor.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61F094E1205E16C200551ABA /* ThemeColor.plist */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		A2AD7D00B2B87E6EDECB4199 /* Pods_ThemeManager_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D4FB15F6719882C3CF6D48 /* Pods_ThemeManager_Tests.framework */; };
-		F243760F1F57F17C000852C7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F243760E1F57F17C000852C7 /* README.md */; };
 		F24376121F57F5B7000852C7 /* zhNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F24376111F57F5B7000852C7 /* zhNextViewController.m */; };
 		F24376151F580004000852C7 /* zhDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F24376141F580004000852C7 /* zhDetailViewController.m */; };
 		F24376181F583281000852C7 /* details_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = F24376161F583281000852C7 /* details_dark.png */; };
@@ -71,9 +73,6 @@
 		F2500C2C1F57EB9F002FF5CB /* style3_discover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2500C181F57EB9F002FF5CB /* style3_discover@3x.png */; };
 		F2500C2D1F57EB9F002FF5CB /* style3_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2500C191F57EB9F002FF5CB /* style3_home@3x.png */; };
 		F2500C2E1F57EB9F002FF5CB /* style3_me@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2500C1A1F57EB9F002FF5CB /* style3_me@3x.png */; };
-		F2500C321F57EC64002FF5CB /* zhTheme_Color.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2500C301F57EC64002FF5CB /* zhTheme_Color.plist */; };
-		F2500C331F57EC64002FF5CB /* zhTheme_Image.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2500C311F57EC64002FF5CB /* zhTheme_Image.plist */; };
-		F2500C361F57EC73002FF5CB /* MyThemeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F2500C351F57EC73002FF5CB /* MyThemeConfig.m */; };
 		F2BD440F1F6EB2B4005AED6E /* zhSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD440E1F6EB2B4005AED6E /* zhSwitchButton.m */; };
 /* End PBXBuildFile section */
 
@@ -111,13 +110,16 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		61F094DD205E01B600551ABA /* zhAppDelegate+ThemeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zhAppDelegate+ThemeConfig.h"; sourceTree = "<group>"; };
+		61F094DE205E01B600551ABA /* zhAppDelegate+ThemeConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "zhAppDelegate+ThemeConfig.m"; sourceTree = "<group>"; };
+		61F094E0205E16C200551ABA /* ThemeImage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThemeImage.plist; sourceTree = "<group>"; };
+		61F094E1205E16C200551ABA /* ThemeColor.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThemeColor.plist; sourceTree = "<group>"; };
 		670CBCC380D6C087D870257F /* Pods_ThemeManager_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThemeManager_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		968CF9A2EA82CEE1FFE3110E /* Pods-ThemeManager_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThemeManager_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThemeManager_Tests/Pods-ThemeManager_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		CB9C930815CF1B253D8199BB /* Pods-ThemeManager_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThemeManager_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThemeManager_Tests/Pods-ThemeManager_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		F07BD4ADB09008B76194AE4D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		F243760E1F57F17C000852C7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F24376101F57F5B7000852C7 /* zhNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhNextViewController.h; sourceTree = "<group>"; };
 		F24376111F57F5B7000852C7 /* zhNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhNextViewController.m; sourceTree = "<group>"; };
 		F24376131F580004000852C7 /* zhDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhDetailViewController.h; sourceTree = "<group>"; };
@@ -178,10 +180,6 @@
 		F2500C181F57EB9F002FF5CB /* style3_discover@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "style3_discover@3x.png"; sourceTree = "<group>"; };
 		F2500C191F57EB9F002FF5CB /* style3_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "style3_home@3x.png"; sourceTree = "<group>"; };
 		F2500C1A1F57EB9F002FF5CB /* style3_me@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "style3_me@3x.png"; sourceTree = "<group>"; };
-		F2500C301F57EC64002FF5CB /* zhTheme_Color.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zhTheme_Color.plist; sourceTree = "<group>"; };
-		F2500C311F57EC64002FF5CB /* zhTheme_Image.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zhTheme_Image.plist; sourceTree = "<group>"; };
-		F2500C341F57EC73002FF5CB /* MyThemeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyThemeConfig.h; sourceTree = "<group>"; };
-		F2500C351F57EC73002FF5CB /* MyThemeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyThemeConfig.m; sourceTree = "<group>"; };
 		F2BD440D1F6EB2B4005AED6E /* zhSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhSwitchButton.h; sourceTree = "<group>"; };
 		F2BD440E1F6EB2B4005AED6E /* zhSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhSwitchButton.m; sourceTree = "<group>"; };
 		FC0182FC93C96567267FDA70 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -263,11 +261,13 @@
 		6003F593195388D20070C39A /* Example for ThemeManager */ = {
 			isa = PBXGroup;
 			children = (
-				F2500C2F1F57EC3E002FF5CB /* ThemeConfig */,
+				F2500C2F1F57EC3E002FF5CB /* ThemeFiles */,
 				F2500BEA1F57DFA3002FF5CB /* Views */,
 				F2500BE91F57DF83002FF5CB /* Classes */,
 				6003F59C195388D20070C39A /* zhAppDelegate.h */,
 				6003F59D195388D20070C39A /* zhAppDelegate.m */,
+				61F094DD205E01B600551ABA /* zhAppDelegate+ThemeConfig.h */,
+				61F094DE205E01B600551ABA /* zhAppDelegate+ThemeConfig.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* zhViewController.h */,
 				6003F5A6195388D20070C39A /* zhViewController.m */,
@@ -443,16 +443,13 @@
 			path = tabbar_icon;
 			sourceTree = "<group>";
 		};
-		F2500C2F1F57EC3E002FF5CB /* ThemeConfig */ = {
+		F2500C2F1F57EC3E002FF5CB /* ThemeFiles */ = {
 			isa = PBXGroup;
 			children = (
-				F243760E1F57F17C000852C7 /* README.md */,
-				F2500C341F57EC73002FF5CB /* MyThemeConfig.h */,
-				F2500C351F57EC73002FF5CB /* MyThemeConfig.m */,
-				F2500C301F57EC64002FF5CB /* zhTheme_Color.plist */,
-				F2500C311F57EC64002FF5CB /* zhTheme_Image.plist */,
+				61F094E1205E16C200551ABA /* ThemeColor.plist */,
+				61F094E0205E16C200551ABA /* ThemeImage.plist */,
 			);
-			path = ThemeConfig;
+			path = ThemeFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -559,14 +556,14 @@
 				F24376311F584BC7000852C7 /* mf700-00014344.png in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				F24376341F584BC7000852C7 /* mf700-02883145.png in Resources */,
+				61F094E2205E16C200551ABA /* ThemeImage.plist in Resources */,
 				F243762E1F584BC7000852C7 /* ph1449-p02098.png in Resources */,
 				F2500C291F57EB9F002FF5CB /* style2_discover@3x.png in Resources */,
 				F2500C1F1F57EB9F002FF5CB /* switchover.png in Resources */,
+				61F094E3205E16C200551ABA /* ThemeColor.plist in Resources */,
 				F243762A1F584BC7000852C7 /* 604-p00551.png in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				F2500C2B1F57EB9F002FF5CB /* style2_me@3x.png in Resources */,
-				F2500C331F57EC64002FF5CB /* zhTheme_Image.plist in Resources */,
-				F2500C321F57EC64002FF5CB /* zhTheme_Color.plist in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				F2500C281F57EB9F002FF5CB /* style1_me@3x.png in Resources */,
 				F2500C221F57EB9F002FF5CB /* day_me@3x.png in Resources */,
@@ -699,10 +696,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61F094DF205E01B600551ABA /* zhAppDelegate+ThemeConfig.m in Sources */,
 				F2500BF71F57E0AA002FF5CB /* zhSecondViewController.m in Sources */,
 				F24376121F57F5B7000852C7 /* zhNextViewController.m in Sources */,
 				F2BD440F1F6EB2B4005AED6E /* zhSwitchButton.m in Sources */,
-				F2500C361F57EC73002FF5CB /* MyThemeConfig.m in Sources */,
 				6003F59E195388D20070C39A /* zhAppDelegate.m in Sources */,
 				F2500BF91F57E0AA002FF5CB /* zhThirdViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* zhViewController.m in Sources */,
@@ -716,7 +713,6 @@
 				F24376371F58502E000852C7 /* NSObject+AssociatedObject.m in Sources */,
 				F2500BFC1F57E0D1002FF5CB /* zhNavigationController.m in Sources */,
 				F24376151F580004000852C7 /* zhDetailViewController.m in Sources */,
-				F243760F1F57F17C000852C7 /* README.md in Sources */,
 				F2500BF61F57E0AA002FF5CB /* zhFirstViewController.m in Sources */,
 				F2500BE51F57DE6B002FF5CB /* UIColor+Extend.m in Sources */,
 			);

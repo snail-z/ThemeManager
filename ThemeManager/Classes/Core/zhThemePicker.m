@@ -1,5 +1,5 @@
 //
-//  zhThemeImagePicker.m
+//  zhThemePicker.m
 //  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/5/22.
@@ -8,9 +8,7 @@
 
 #import "zhThemePicker.h"
 
-@interface zhThemePickerHelper : NSObject
-@end
-@implementation zhThemePickerHelper
+@implementation zhThemePicker (Helper)
 
 + (NSArray *)preferredScales {
     static NSArray *scales;
@@ -57,25 +55,16 @@
     return path;
 }
 
-+ (UIImage *)imageNamed:(NSString *)name inBundle:(NSBundle *)bundle {
-    NSString *ext = name.pathExtension;
-    if (ext.length == 0) ext = @"png";
-    else name = name.stringByDeletingPathExtension;
-    NSString *path = [self pathForScaledResource:name ofType:ext inBundle:bundle];
-    return [UIImage imageWithContentsOfFile:path]; // todo... cache
-}
-
-+ (UIImage *)imageNamed:(NSString *)name inPath:(NSString *)path {
-    NSString *fullPath = [path stringByAppendingPathComponent:name];
-    return [UIImage imageWithContentsOfFile:fullPath];
-}
-
-// source => bundle or path
-+ (UIImage *)imageNamed:(NSString *)name from:(id)from {
++ (UIImage *)imageNamed:(NSString *)name from:(id)from { // bundle / path
     if ([from isKindOfClass:[NSBundle class]]) {
-        return [self imageNamed:name inBundle:from];
+        NSString *ext = name.pathExtension;
+        if (ext.length == 0) ext = @"png";
+        else name = name.stringByDeletingPathExtension;
+        NSString *path = [self pathForScaledResource:name ofType:ext inBundle:from];
+        return [UIImage imageWithContentsOfFile:path]; //  cache todo...
     } else if ([from isKindOfClass:[NSString class]]) {
-        return [self imageNamed:name inPath:from];
+        NSString *fullPath = [from stringByAppendingPathComponent:name];
+        return [UIImage imageWithContentsOfFile:fullPath];
     } else return nil;
 }
 
@@ -92,15 +81,15 @@
     return [UIColor colorWithRed:((rgba >> 24)&0xFF) / 255. green:((rgba >> 16)&0xFF) / 255. blue:((rgba >> 8)&0xFF) / 255. alpha:(rgba&0xFF) / 255.];;
 }
 
-+ (UIColor *)colorCheck:(id)obj {
++ (UIColor *)checkColor:(id)obj {
     if ([obj isKindOfClass:[NSString class]]) {
         return [self colorFromHexString:obj];
     } else if ([obj isKindOfClass:[UIColor class]]) {
         return (UIColor *)obj;
-    } else return nil;
+    } return nil;
 }
 
-+ (UIImage *)imageCheck:(id)obj {
++ (UIImage *)checkImage:(id)obj {
     if ([obj isKindOfClass:[NSString class]]) {
         return [UIImage imageNamed:(NSString *)obj];
     } else if ([obj isKindOfClass:[UIImage class]]) {
@@ -163,25 +152,29 @@
 }
 
 - (UIColor *)color {
-    UIColor* (^callback)(NSDictionary *) = ^(NSDictionary *dict) {
-        UIColor *value = nil;
-        NSString *currentKey = ThemeManager.currentStyle;
-        if ([dict.allKeys containsObject:currentKey]) {
-            value = [zhThemePickerHelper colorCheck:dict[currentKey]];
-        }
-        if (!value) {
-            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
-        }
-        return value;
-    };
-    
+    NSString *styleKey = ThemeManager.currentStyle;
+
     if (self.pDict) {
-        return callback(self.pDict);
+        if (![self.pDict.allKeys containsObject:styleKey]) {
+            [ThemeManager debugLog:@"Not found key - \"%@\" in dictionary. \n%@", styleKey, self.pDict];
+            return nil;
+        }
+        return [zhThemePicker checkColor:self.pDict[styleKey]];
     }
     
-    NSDictionary<NSString *, NSDictionary *> *dict = ThemeManager.colorLibraries;
-    if (![dict.allKeys containsObject:self.pkey]) return nil;
-    return callback(dict[self.pkey]);
+    NSDictionary<NSString *, NSDictionary *> *libraries = ThemeManager.colorLibraries;
+    if (![libraries.allKeys containsObject:styleKey]) {
+         [ThemeManager debugLog:@"Not found key - \"%@\". Please check if your configuration file is correct! \n%@ ", styleKey, ThemeManager.currentColorFilePath];
+        return nil;
+    }
+    NSDictionary *dictionary = libraries[styleKey];
+    if (![dictionary.allKeys containsObject:self.pkey]) {
+        [ThemeManager debugLog:@"Not found key - \"%@\" in \"%@\" theme style. Please check if your configuration file is correct! \n%@ ", self.pkey, styleKey, ThemeManager.currentColorFilePath];
+        return nil;
+    }
+    NSString *value = dictionary[self.pkey];
+    NSParameterAssert([value isKindOfClass:[NSString class]]);
+    return [zhThemePicker checkColor:value];
 }
 
 @end
@@ -218,36 +211,52 @@
 }
 
 - (UIImage *)image {
-    UIImage* (^callback)(NSDictionary *) = ^(NSDictionary *dict) {
+    UIImage* (^callback)(id) = ^(id unconfirmed) {
         UIImage *value = nil;
-        NSString *currentKey = ThemeManager.currentStyle;
-        if ([dict.allKeys containsObject:currentKey]) {
-            id obj = [dict objectForKey:currentKey];
-            UIImage *placeImage = [zhThemePickerHelper imageNamed:obj from:ThemeManager.pathOfImageSources];
-            if (placeImage) value = placeImage;
-            else value = [zhThemePickerHelper imageCheck:obj];
-            if (value) {
-                if (!UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsetsZero, _imageCapInsets)) {
-                    value = [value resizableImageWithCapInsets:_imageCapInsets];
-                }
-                if (_imageRenderingMode >= 0) {
-                    value = [value imageWithRenderingMode:_imageRenderingMode];
-                }
-            }
+        NSString *sources = ThemeManager.pathOfImageSources;
+        if (sources) {
+            value = [zhThemePicker imageNamed:unconfirmed from:sources];
         }
-        if (!value) {
-            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
+        else {
+            value = [zhThemePicker checkImage:unconfirmed];
+        }
+        if (value) {
+            if (!UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsetsZero, _imageCapInsets)) {
+                value = [value resizableImageWithCapInsets:_imageCapInsets];
+            }
+            if (_imageRenderingMode >= 0) {
+                value = [value imageWithRenderingMode:_imageRenderingMode];
+            }
         }
         return value;
     };
     
+    NSString *styleKey = ThemeManager.currentStyle;
+    
     if (self.pDict) {
-        return callback(self.pDict);
+        if (![self.pDict.allKeys containsObject:styleKey]) {
+            [ThemeManager debugLog:@"Not found key - \"%@\" in dictionary. \n%@", styleKey, self.pDict];
+            return nil;
+        }
+        return callback(self.pDict[styleKey]);
     }
     
-    NSDictionary<NSString *, NSDictionary *> *dict = ThemeManager.imageLibraries;
-    if (![dict.allKeys containsObject:self.pkey]) return nil;
-    return callback(dict[self.pkey]);
+    NSDictionary<NSString *, NSDictionary *> *libraries = ThemeManager.imageLibraries;
+    if (![libraries.allKeys containsObject:styleKey]) {
+        [ThemeManager debugLog:@"Not found key - \"%@\". Please check if your configuration file is correct! \n%@ ", styleKey, ThemeManager.currentImageFilePath];
+        return nil;
+    }
+    NSDictionary *dictionary = libraries[styleKey];
+    if (![dictionary.allKeys containsObject:self.pkey]) {
+        [ThemeManager debugLog:@"Not found key - \"%@\" in \"%@\" theme style. Please check if your configuration file is correct! \n%@ ", self.pkey, styleKey, ThemeManager.currentImageFilePath];
+        return nil;
+    }
+    NSString *value = dictionary[self.pkey];
+    NSParameterAssert([value isKindOfClass:[NSString class]]);
+    if ([value stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet].length) {
+        return callback(value);
+    }
+    return nil;
 }
 
 @end
@@ -259,21 +268,14 @@
 }
 
 - (UIFont *)font {
-    UIFont* (^callback)(NSDictionary *) = ^(NSDictionary *dict) {
-        UIFont *value = [UIFont systemFontOfSize:UIFont.systemFontSize];
-        NSString *currentKey = ThemeManager.currentStyle;
-        if ([dict.allKeys containsObject:currentKey]) {
-            id obj = [dict objectForKey:currentKey];
-            if ([obj isKindOfClass:[UIFont class]]) value = obj;
-        }
-        if (!value) {
-            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
-        }
-        return value;
-    };
-    
+    NSString *styleKey = ThemeManager.currentStyle;
     if (self.pDict) {
-        return callback(self.pDict);
+        if (![self.pDict.allKeys containsObject:styleKey]) {
+            [ThemeManager debugLog:@"Not found key - \"%@\" in dictionary. \n%@", styleKey, self.pDict];
+            return nil;
+        }
+        id obj = self.pDict[styleKey];
+        if ([obj isKindOfClass:[UIFont class]]) return (UIFont *)obj;
     }
     return nil;
 }
@@ -287,21 +289,14 @@
 }
 
 - (NSString *)text {
-    NSString* (^callback)(NSDictionary *) = ^(NSDictionary *dict) {
-        NSString *value = nil;
-        NSString *currentKey = ThemeManager.currentStyle;
-        if ([dict.allKeys containsObject:currentKey]) {
-            id obj = [dict objectForKey:currentKey];
-            if ([obj isKindOfClass:[NSString class]]) value = obj;
-        }
-        if (!value) {
-            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
-        }
-        return value;
-    };
-    
+    NSString *styleKey = ThemeManager.currentStyle;
     if (self.pDict) {
-        return callback(self.pDict);
+        if (![self.pDict.allKeys containsObject:styleKey]) {
+            [ThemeManager debugLog:@"Not found key - \"%@\" in dictionary. \n%@", styleKey, self.pDict];
+            return nil;
+        }
+        id obj = self.pDict[styleKey];
+        if ([obj isKindOfClass:[NSString class]]) return (NSString *)obj;
     }
     return nil;
 }
@@ -315,21 +310,14 @@
 }
 
 - (NSNumber *)number {
-    NSNumber* (^callback)(NSDictionary *) = ^(NSDictionary *dict) {
-        NSNumber *value = [NSNumber numberWithDouble:1.f];
-        NSString *currentKey = ThemeManager.currentStyle;
-        if ([dict.allKeys containsObject:currentKey]) {
-            id obj = [dict objectForKey:currentKey];
-            if ([obj isKindOfClass:[NSNumber class]]) value = obj;
-        }
-        if (!value) {
-            [ThemeManager debugLog:@"Not found key (%@) in dict: %@", currentKey, dict];
-        }
-        return value;
-    };
-    
+    NSString *styleKey = ThemeManager.currentStyle;
     if (self.pDict) {
-        return callback(self.pDict);
+        if (![self.pDict.allKeys containsObject:styleKey]) {
+            [ThemeManager debugLog:@"Not found key - \"%@\" in dictionary. \n%@", styleKey, self.pDict];
+            return nil;
+        }
+        id obj = self.pDict[styleKey];
+        if ([obj isKindOfClass:[NSNumber class]]) return (NSNumber *)obj;
     }
     return nil;
 }

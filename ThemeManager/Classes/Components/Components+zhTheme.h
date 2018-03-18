@@ -1,5 +1,5 @@
 //
-//  UIKit+zhTheme.h
+//  Components+zhTheme.h
 //  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/5/27.
