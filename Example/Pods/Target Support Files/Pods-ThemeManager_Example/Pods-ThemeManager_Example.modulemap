@@ -1,6 +1,0 @@
-framework module Pods_ThemeManager_Example {
-  umbrella header "Pods-ThemeManager_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}
