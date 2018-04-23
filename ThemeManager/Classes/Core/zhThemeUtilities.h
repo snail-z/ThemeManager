@@ -25,3 +25,5 @@ void zh_setThemePickerWithState(id instance, SEL aSelector, zhThemePicker *picke
 id zh_getThemePickerValue(zhThemePicker *picker);
 // image by color
 UIImage* zh_themeImageFromColor(UIColor *color);
+// color by hexstring
+UIColor* zh_themeColorFromHexString(NSString *hexString);

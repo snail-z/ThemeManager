@@ -7,6 +7,7 @@
 //
 
 #import "zhThemePicker.h"
+#import "zhThemeUtilities.h"
 
 @implementation zhThemePicker (Helper)
 
@@ -55,7 +56,7 @@
     return path;
 }
 
-+ (UIImage *)imageNamed:(NSString *)name from:(id)from { // bundle / path
++ (UIImage *)imageNamed:(NSString *)name from:(id)from {
     if ([from isKindOfClass:[NSBundle class]]) {
         NSString *ext = name.pathExtension;
         if (ext.length == 0) ext = @"png";
@@ -68,22 +69,9 @@
     } else return nil;
 }
 
-+ (UIColor *)colorFromHexString:(NSString *)hexString {
-    if (!hexString) return nil;
-    NSString *hex = [NSString stringWithString:hexString];
-    if ([hex hasPrefix:@"#"]) hex = [hex substringFromIndex:1];
-    if (hex.length == 6) {
-        hex = [hex stringByAppendingString:@"FF"];
-    } else if (hex.length != 8) return nil;
-    uint32_t rgba;
-    NSScanner *scanner = [NSScanner scannerWithString:hex];
-    [scanner scanHexInt:&rgba];
-    return [UIColor colorWithRed:((rgba >> 24)&0xFF) / 255. green:((rgba >> 16)&0xFF) / 255. blue:((rgba >> 8)&0xFF) / 255. alpha:(rgba&0xFF) / 255.];;
-}
-
 + (UIColor *)checkColor:(id)obj {
     if ([obj isKindOfClass:[NSString class]]) {
-        return [self colorFromHexString:obj];
+        return zh_themeColorFromHexString(((NSString *)obj));
     } else if ([obj isKindOfClass:[UIColor class]]) {
         return (UIColor *)obj;
     } return nil;
@@ -123,13 +111,13 @@
 }
 
 + (instancetype)pickerWithKey:(NSString *)pKey {
-    NSAssert1(0, @"%@ This method should be handed to the subclass call!", NSStringFromSelector(_cmd));
-    return [[self alloc] init];
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
 + (instancetype)pickerWithDictionary:(NSDictionary *)pDict {
-    NSAssert1(0, @"%@ This method should be handed to the subclass call!", NSStringFromSelector(_cmd));
-    return [[self alloc] init];
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
 @end
@@ -216,8 +204,7 @@
         NSString *sources = ThemeManager.pathOfImageSources;
         if (sources) {
             value = [zhThemePicker imageNamed:unconfirmed from:sources];
-        }
-        else {
+        } else {
             value = [zhThemePicker checkImage:unconfirmed];
         }
         if (value) {

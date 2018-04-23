@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 @property (nonatomic, assign, readonly) zhThemeValueType valueType;
 
+// The following two methods should be handed to the subclass call.
 + (instancetype)pickerWithKey:(NSString *)pKey;
 + (instancetype)pickerWithDictionary:(NSDictionary *)pDict;
 
@@ -81,9 +82,9 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 #define ThemeNumberPickerWithDictionary(dict) [zhThemeNumberPicker pickerWithDictionary:dict]
 
-@interface zhThemeNumberPicker : zhThemePicker // CGFloat / NSInteger
+@interface zhThemeNumberPicker : zhThemePicker // CGFloat / NSInteger ...
 
-- (NSNumber *)number; // The alpha / borderWidth /... value in the current theme style.
+- (nullable NSNumber *)number; // The alpha / borderWidth /... value in the current theme style.
 
 @end
 

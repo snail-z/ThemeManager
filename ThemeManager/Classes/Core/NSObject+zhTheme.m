@@ -143,10 +143,6 @@
     return [self zh_themeAddListener:_cmd sel:@selector(zh_themeUpdateForExternal)];
 }
 
-/*
- NSInvocation is much slower than objc_msgSend()...
- Do not use it if you have performance issues.
- */
 #define __INV_INVOKE(sel) \
 NSMethodSignature *sig = [self methodSignatureForSelector:sel]; \
 if (!sig) { [self doesNotRecognizeSelector:sel]; } \
@@ -226,7 +222,7 @@ NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init]; \
     __INV_INVOKE(sel)
     va_list args;
     va_start(args, arguments);
-    NSMutableDictionary<NSNumber *, NSMutableDictionary *> *paramInfo =[NSMutableDictionary dictionary];
+    NSMutableDictionary<NSNumber *, NSMutableDictionary<NSString *, id> *> *paramInfo = [NSMutableDictionary dictionary];
     for (int index = 2; index < count; index++) {
         char *type = (char *)[sig getArgumentTypeAtIndex:index];
         if (2 == index) {

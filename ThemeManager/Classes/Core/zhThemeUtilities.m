@@ -119,3 +119,17 @@ UIImage* zh_themeImageFromColor(UIColor *color) {
     UIGraphicsEndImageContext();
     return image;
 }
+
+UIColor* zh_themeColorFromHexString(NSString *hexString) {
+    if (!hexString) return nil;
+    NSString *hex = [NSString stringWithString:hexString];
+    if ([hex hasPrefix:@"#"]) hex = [hex substringFromIndex:1];
+    if (hex.length == 6) {
+        hex = [hex stringByAppendingString:@"FF"];
+    } else if (hex.length != 8) return nil;
+    uint32_t rgba;
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    [scanner scanHexInt:&rgba];
+    return [UIColor colorWithRed:((rgba >> 24)&0xFF) / 255. green:((rgba >> 16)&0xFF) / 255. blue:((rgba >> 8)&0xFF) / 255. alpha:(rgba&0xFF) / 255.];
+}
+

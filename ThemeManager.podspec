@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ThemeManager'
-  s.version          = '1.1.0'
+  s.version          = '1.1.1'
   s.summary          = 'ThemeManager is a lightweight library for application to switching themes.'
 
 # This description is used to generate tags and improve search results.
@@ -43,12 +43,4 @@ Pod::Spec.new do |s|
     ss.public_header_files = 'ThemeManager/Classes/Components/**/*.h'
     ss.dependency 'ThemeManager/Core'
   end
-  
-  # s.resource_bundles = {
-  #   'ThemeManager' => ['ThemeManager/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
