@@ -1,7 +1,7 @@
   <img src="http://oqebi7u13.bkt.clouddn.com/ThemeManager.png" alt="ThemeManager" title="ThemeManager">
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/ThemeManager)
-[![Version](https://img.shields.io/badge/pod-v1.1.1-brightgreen.svg)](http://cocoapods.org/pods/ThemeManager)
+[![Version](https://img.shields.io/badge/pod-v1.1.2-brightgreen.svg)](http://cocoapods.org/pods/ThemeManager)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/ThemeManager)
 [![Platform](https://img.shields.io/badge/platform-%20iOS7.0+%20-lightgrey.svg)](http://cocoapods.org/pods/ThemeManager)
 
