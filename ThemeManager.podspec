@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ThemeManager'
-  s.version          = '1.1.2'
+  s.version          = '1.1.3'
   s.summary          = 'ThemeManager is a lightweight library for application to switching themes.'
 
 # This description is used to generate tags and improve search results.

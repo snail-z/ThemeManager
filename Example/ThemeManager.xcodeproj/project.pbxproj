@@ -88,7 +88,7 @@
 
 /* Begin PBXFileReference section */
 		18C7129AA7E184CCBCEE6E6D /* Pods-ThemeManager_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThemeManager_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThemeManager_Example/Pods-ThemeManager_Example.release.xcconfig"; sourceTree = "<group>"; };
-		3D3070FFBF3E247D63B2FB41 /* ThemeManager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ThemeManager.podspec; path = ../ThemeManager.podspec; sourceTree = "<group>"; };
+		3D3070FFBF3E247D63B2FB41 /* ThemeManager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ThemeManager.podspec; path = ../ThemeManager.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		43D5C051C418BF7CA0C9CE51 /* Pods-ThemeManager_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThemeManager_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThemeManager_Example/Pods-ThemeManager_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		49D4FB15F6719882C3CF6D48 /* Pods_ThemeManager_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThemeManager_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* ThemeManager_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThemeManager_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -464,7 +464,6 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				B7B9735264349E0F8A23AEB4 /* [CP] Embed Pods Frameworks */,
-				6A3817698480FA49B511287D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -483,8 +482,6 @@
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				959F83FFEC34443924E7E78E /* [CP] Embed Pods Frameworks */,
-				AB58CE47AC41C4A5BB34B024 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -606,51 +603,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6A3817698480FA49B511287D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThemeManager_Example/Pods-ThemeManager_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		959F83FFEC34443924E7E78E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThemeManager_Tests/Pods-ThemeManager_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AB58CE47AC41C4A5BB34B024 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThemeManager_Tests/Pods-ThemeManager_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B7B9735264349E0F8A23AEB4 /* [CP] Embed Pods Frameworks */ = {

@@ -8,11 +8,9 @@
 
 #import "zhThemeManager.h"
 
-@interface zhThemeManager ()
-- (void)setCurrentColorFilePath:(NSString *)currentColorFilePath;
-- (void)setCurrentImageFilePath:(NSString *)currentImageFilePath;
-- (void)setCurrentImageResourcesPath:(NSString *)currentImageResourcesPath;
-@end
+#ifndef STRINGSEL
+#define STRINGSEL(sel) NSStringFromSelector(@selector(sel))
+#endif
 
 NSString *const zhThemeFileModelStorageColorKey = @"zhTheme_storageColorFileKey";
 NSString *const zhThemeFileModelStorageImageKey = @"zhTheme_storageImageFileKey";
@@ -28,28 +26,26 @@ typedef NS_ENUM(NSInteger, zhThemeFilePathType) {
 };
 @property (nonatomic, assign) zhThemeFilePathType pathType;
 
-+ (instancetype)modelWithFixed:(NSString *)fixedPath pathType:(zhThemeFilePathType)pathType;
-
 @end
 
 @implementation zhThemeFilePathModel
 
-+ (instancetype)modelWithFixed:(NSString *)fixedPath pathType:(zhThemeFilePathType)pathType {
-    zhThemeFilePathModel *model = [zhThemeFilePathModel new];
++ (instancetype)modelWithPath:(NSString *)fixedPath pathType:(zhThemeFilePathType)pathType {
+    zhThemeFilePathModel *model = [[zhThemeFilePathModel alloc] init];
     model.fixedPath = fixedPath;
     model.pathType = pathType;
     return model;
 }
 
--(void)encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:self.fixedPath forKey:@"fixedPath"];
-    [aCoder encodeObject:@(self.pathType) forKey:@"pathType"];
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.fixedPath forKey:STRINGSEL(fixedPath)];
+    [aCoder encodeObject:@(self.pathType) forKey:STRINGSEL(pathType)];
 }
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
-        self.fixedPath = [aDecoder decodeObjectForKey:@"fixedPath"];
-        self.pathType = [[aDecoder decodeObjectForKey:@"pathType"] integerValue];
+        self.fixedPath = [aDecoder decodeObjectForKey:STRINGSEL(fixedPath)];
+        self.pathType = [[aDecoder decodeObjectForKey:STRINGSEL(pathType)] integerValue];
     }
     return self;
 }
@@ -98,23 +94,27 @@ typedef NS_ENUM(NSInteger, zhThemeFilePathType) {
 }
 
 - (void)setColorFilePath:(NSString *)path {
-    [ThemeManager setCurrentColorFilePath:path];
+    [ThemeManager setValue:path forKeyPath:STRINGSEL(currentColorFilePath)];
     zhThemeFilePathModel *model = [self convertPathToModel:path];
     if (model.pathType == zhThemeFilePathTypeUnknown) return;
     
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:zhThemeFileModelStorageColorKey];
-        
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:zhThemeFileModelStorageColorKey];
+    });
+    
     self.colorDictionary = [self parsePath:path].mutableCopy;
 }
 
 - (void)setImageFilePath:(NSString *)path {
-    [ThemeManager setCurrentImageFilePath:path];
+    [ThemeManager setValue:path forKeyPath:STRINGSEL(currentImageFilePath)];
     zhThemeFilePathModel *model = [self convertPathToModel:path];
     if (model.pathType == zhThemeFilePathTypeUnknown) return;
     
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:zhThemeFileModelStorageImageKey];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:zhThemeFileModelStorageImageKey];
+    });
     
     self.imageDictionary = [self parsePath:path].mutableCopy;
 }
@@ -148,16 +148,16 @@ typedef NS_ENUM(NSInteger, zhThemeFilePathType) {
         NSRange range = [path rangeOfString:[NSBundle mainBundle].bundlePath];
         if (range.location != NSNotFound) {
             [path deleteCharactersInRange:range];
-            return [zhThemeFilePathModel modelWithFixed:path pathType:zhThemeFilePathTypeBundle];
+            return [zhThemeFilePathModel modelWithPath:path pathType:zhThemeFilePathTypeBundle];
         }
         range = [path rangeOfString:NSHomeDirectory()];
         if (range.location != NSNotFound) {
             [path deleteCharactersInRange:range];
-            return [zhThemeFilePathModel modelWithFixed:path pathType:zhThemeFilePathTypeSandbox];
+            return [zhThemeFilePathModel modelWithPath:path pathType:zhThemeFilePathTypeSandbox];
         }
     }
     [ThemeManager debugLog:@"Files not exist: %@", path];
-    return [zhThemeFilePathModel modelWithFixed:path pathType:zhThemeFilePathTypeUnknown];
+    return [zhThemeFilePathModel modelWithPath:path pathType:zhThemeFilePathTypeUnknown];
 }
 
 - (NSDictionary *)parsePath:(NSString *)path {
@@ -209,8 +209,7 @@ NSString *const zhThemeStyleStorageKey = @"zhThemeStyleStorageKey";
 }
 
 - (zhThemeStyleName)currentStyle {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *style = [userDefaults stringForKey:zhThemeStyleStorageKey];
+    NSString *style = [[NSUserDefaults standardUserDefaults] stringForKey:zhThemeStyleStorageKey];
     if (style) return style;
     return self.defaultConfiguration.style;
 }
@@ -225,18 +224,6 @@ NSString *const zhThemeStyleStorageKey = @"zhThemeStyleStorageKey";
 
 - (id)pathOfImageSources { // path or bundle
     return ThemeFileHandle.imageSources;
-}
-
-- (void)setCurrentColorFilePath:(NSString *)currentColorFilePath {
-    _currentColorFilePath = currentColorFilePath;
-}
-
-- (void)setCurrentImageFilePath:(NSString *)currentImageFilePath {
-    _currentImageFilePath = currentImageFilePath;
-}
-
-- (void)setCurrentImageResourcesPath:(NSString *)currentImageResourcesPath {
-    _currentImageResourcesPath = currentImageResourcesPath;
 }
 
 - (void)updateThemeStyle:(zhThemeStyleName)style {

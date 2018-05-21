@@ -134,7 +134,7 @@
 
 - (zhThemeColorPicker *(^)(BOOL))animated {
     return ^id(BOOL isAnimated) {
-        _isAnimated = isAnimated;
+        self->_isAnimated = isAnimated;
         return self;
     };
 }
@@ -186,14 +186,14 @@
 
 - (zhThemeImagePicker *(^)(UIImageRenderingMode))renderingMode {
     return ^id(UIImageRenderingMode imageRenderingMode) {
-        _imageRenderingMode = imageRenderingMode;
+        self->_imageRenderingMode = imageRenderingMode;
         return self;
     };
 }
 
 - (zhThemeImagePicker *(^)(UIEdgeInsets))resizableCapInsets {
     return ^id(UIEdgeInsets imageCapInsets) {
-        _imageCapInsets = imageCapInsets;
+        self->_imageCapInsets = imageCapInsets;
         return self;
     };
 }
@@ -208,11 +208,11 @@
             value = [zhThemePicker checkImage:unconfirmed];
         }
         if (value) {
-            if (!UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsetsZero, _imageCapInsets)) {
-                value = [value resizableImageWithCapInsets:_imageCapInsets];
+            if (!UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsetsZero, self->_imageCapInsets)) {
+                value = [value resizableImageWithCapInsets:self->_imageCapInsets];
             }
-            if (_imageRenderingMode >= 0) {
-                value = [value imageWithRenderingMode:_imageRenderingMode];
+            if (self->_imageRenderingMode >= 0) {
+                value = [value imageWithRenderingMode:self->_imageRenderingMode];
             }
         }
         return value;
