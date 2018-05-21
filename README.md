@@ -69,6 +69,7 @@ See demo. please wait...
 - Support iOS 11
 
 - Support custom method theme switch
+
 ```objc
 // When the external custom methods, you can use it.
 - (void)zh_addThemePickerForSelector:(SEL)sel withArguments:(id)arguments, ...;
@@ -83,11 +84,6 @@ zhThemeColorPicker *picker = ThemeColorPickerWithKey(@"key");
 [object zh_addThemePickerForSelector:@selector(setColor:Integer:setCGSize:)
 		       withArguments:picker, number, value];
 ```
-
-
-
-
-  ​
 
 ## Author
 
