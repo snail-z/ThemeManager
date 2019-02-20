@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>COLOR</key>
+	<dict>
+		<key>color01</key>
+		<string>D3366F</string>
+		<key>color02</key>
+		<string>D3366F</string>
+		<key>color03</key>
+		<string>F0FFFF</string>
+		<key>color04</key>
+		<string>F8F8FF</string>
+		<key>color05</key>
+		<string>F0FFFF</string>
+		<key>color06</key>
+		<string>F0FFFF</string>
+	</dict>
+	<key>IMAGE</key>
+	<dict>
+		<key>image01</key>
+		<string>style1_home</string>
+		<key>image02</key>
+		<string>style1_discover</string>
+		<key>image03</key>
+		<string>style1_me</string>
+		<key>image04</key>
+		<string>details_white</string>
+		<key>image05</key>
+		<string>switch_on</string>
+	</dict>
+</dict>
+</plist>

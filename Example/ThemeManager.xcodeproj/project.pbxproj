@@ -14,16 +14,15 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* zhAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* zhAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* zhViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* zhViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		61F094DF205E01B600551ABA /* zhAppDelegate+ThemeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F094DE205E01B600551ABA /* zhAppDelegate+ThemeConfig.m */; };
-		61F094E2205E16C200551ABA /* ThemeImage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61F094E0205E16C200551ABA /* ThemeImage.plist */; };
-		61F094E3205E16C200551ABA /* ThemeColor.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61F094E1205E16C200551ABA /* ThemeColor.plist */; };
+		6193F9D1221BF3470028BBA8 /* mybundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6193F9CF221BF3460028BBA8 /* mybundle.bundle */; };
+		6193F9D2221BF3470028BBA8 /* ThemeInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6193F9D0221BF3470028BBA8 /* ThemeInfo.plist */; };
+		6193F9D5221BF5F00028BBA8 /* zhThemeOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6193F9D4221BF5F00028BBA8 /* zhThemeOperator.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		A2AD7D00B2B87E6EDECB4199 /* Pods_ThemeManager_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D4FB15F6719882C3CF6D48 /* Pods_ThemeManager_Tests.framework */; };
@@ -101,8 +100,6 @@
 		6003F59B195388D20070C39A /* ThemeManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ThemeManager-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* zhAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* zhAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* zhViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* zhViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* ThemeManager_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThemeManager_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -110,10 +107,10 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		61F094DD205E01B600551ABA /* zhAppDelegate+ThemeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zhAppDelegate+ThemeConfig.h"; sourceTree = "<group>"; };
-		61F094DE205E01B600551ABA /* zhAppDelegate+ThemeConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "zhAppDelegate+ThemeConfig.m"; sourceTree = "<group>"; };
-		61F094E0205E16C200551ABA /* ThemeImage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThemeImage.plist; sourceTree = "<group>"; };
-		61F094E1205E16C200551ABA /* ThemeColor.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThemeColor.plist; sourceTree = "<group>"; };
+		6193F9CF221BF3460028BBA8 /* mybundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mybundle.bundle; sourceTree = "<group>"; };
+		6193F9D0221BF3470028BBA8 /* ThemeInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThemeInfo.plist; sourceTree = "<group>"; };
+		6193F9D3221BF5F00028BBA8 /* zhThemeOperator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhThemeOperator.h; sourceTree = "<group>"; };
+		6193F9D4221BF5F00028BBA8 /* zhThemeOperator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhThemeOperator.m; sourceTree = "<group>"; };
 		670CBCC380D6C087D870257F /* Pods_ThemeManager_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThemeManager_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -266,11 +263,9 @@
 				F2500BE91F57DF83002FF5CB /* Classes */,
 				6003F59C195388D20070C39A /* zhAppDelegate.h */,
 				6003F59D195388D20070C39A /* zhAppDelegate.m */,
-				61F094DD205E01B600551ABA /* zhAppDelegate+ThemeConfig.h */,
-				61F094DE205E01B600551ABA /* zhAppDelegate+ThemeConfig.m */,
+				6193F9D3221BF5F00028BBA8 /* zhThemeOperator.h */,
+				6193F9D4221BF5F00028BBA8 /* zhThemeOperator.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* zhViewController.h */,
-				6003F5A6195388D20070C39A /* zhViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -446,8 +441,8 @@
 		F2500C2F1F57EC3E002FF5CB /* ThemeFiles */ = {
 			isa = PBXGroup;
 			children = (
-				61F094E1205E16C200551ABA /* ThemeColor.plist */,
-				61F094E0205E16C200551ABA /* ThemeImage.plist */,
+				6193F9D0221BF3470028BBA8 /* ThemeInfo.plist */,
+				6193F9CF221BF3460028BBA8 /* mybundle.bundle */,
 			);
 			path = ThemeFiles;
 			sourceTree = "<group>";
@@ -463,7 +458,7 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				B7B9735264349E0F8A23AEB4 /* [CP] Embed Pods Frameworks */,
+				4C959283CA8F0FD29AA35089 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -500,7 +495,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = zh;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "snail-z";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
@@ -551,15 +546,15 @@
 				F243762C1F584BC7000852C7 /* 604-p01505.png in Resources */,
 				F2500C2C1F57EB9F002FF5CB /* style3_discover@3x.png in Resources */,
 				F24376311F584BC7000852C7 /* mf700-00014344.png in Resources */,
+				6193F9D2221BF3470028BBA8 /* ThemeInfo.plist in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				F24376341F584BC7000852C7 /* mf700-02883145.png in Resources */,
-				61F094E2205E16C200551ABA /* ThemeImage.plist in Resources */,
 				F243762E1F584BC7000852C7 /* ph1449-p02098.png in Resources */,
 				F2500C291F57EB9F002FF5CB /* style2_discover@3x.png in Resources */,
 				F2500C1F1F57EB9F002FF5CB /* switchover.png in Resources */,
-				61F094E3205E16C200551ABA /* ThemeColor.plist in Resources */,
 				F243762A1F584BC7000852C7 /* 604-p00551.png in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				6193F9D1221BF3470028BBA8 /* mybundle.bundle in Resources */,
 				F2500C2B1F57EB9F002FF5CB /* style2_me@3x.png in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				F2500C281F57EB9F002FF5CB /* style1_me@3x.png in Resources */,
@@ -605,7 +600,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7B9735264349E0F8A23AEB4 /* [CP] Embed Pods Frameworks */ = {
+		4C959283CA8F0FD29AA35089 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -648,13 +643,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61F094DF205E01B600551ABA /* zhAppDelegate+ThemeConfig.m in Sources */,
 				F2500BF71F57E0AA002FF5CB /* zhSecondViewController.m in Sources */,
 				F24376121F57F5B7000852C7 /* zhNextViewController.m in Sources */,
 				F2BD440F1F6EB2B4005AED6E /* zhSwitchButton.m in Sources */,
 				6003F59E195388D20070C39A /* zhAppDelegate.m in Sources */,
 				F2500BF91F57E0AA002FF5CB /* zhThirdViewController.m in Sources */,
-				6003F5A7195388D20070C39A /* zhViewController.m in Sources */,
 				F2500BF81F57E0AA002FF5CB /* zhTabBarController.m in Sources */,
 				F24B7C5C1FBB31CC00D1088B /* zhTestView.m in Sources */,
 				F2500BE71F57DE6B002FF5CB /* UIView+Layout.m in Sources */,
@@ -664,6 +657,7 @@
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				F24376371F58502E000852C7 /* NSObject+AssociatedObject.m in Sources */,
 				F2500BFC1F57E0D1002FF5CB /* zhNavigationController.m in Sources */,
+				6193F9D5221BF5F00028BBA8 /* zhThemeOperator.m in Sources */,
 				F24376151F580004000852C7 /* zhDetailViewController.m in Sources */,
 				F2500BF61F57E0AA002FF5CB /* zhFirstViewController.m in Sources */,
 				F2500BE51F57DE6B002FF5CB /* UIColor+Extend.m in Sources */,
@@ -728,12 +722,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -779,12 +775,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

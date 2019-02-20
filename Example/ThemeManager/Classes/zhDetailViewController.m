@@ -36,14 +36,16 @@
                                          action:@selector(switchThemeClicked)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     
-    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-    NSDictionary *fontAttrs = @{ThemeDay : [UIFont fontWithName:@"Baskerville-BoldItalic" size:25],
-                                ThemeNight : [UIFont fontWithName:@"ArialHebrew-Bold" size:22],
-                                Theme1 : [UIFont fontWithName:@"ArialHebrew-Bold" size:22],
-                                Theme2 : [UIFont fontWithName:@"ArialHebrew-Bold" size:20],
-                                Theme3 : [UIFont fontWithName:@"ArialHebrew-Bold" size:17]};
-    textAttrs[NSFontAttributeName] = ThemeFontPickerWithDictionary(fontAttrs);
-    [self.navigationController.navigationBar zh_setTitleTextAttributes:textAttrs];
+    [self.navigationController.navigationBar zh_themeUpdateCallback:^(UINavigationBar* target) {
+        NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+        NSDictionary *fontAttrs = @{AppThemeLight : [UIFont fontWithName:@"Baskerville-BoldItalic" size:25],
+                                    AppThemeNight : [UIFont fontWithName:@"ArialHebrew-Bold" size:22],
+                                    AppThemeStyle1 : [UIFont fontWithName:@"ArialHebrew-Bold" size:22],
+                                    AppThemeStyle2 : [UIFont fontWithName:@"ArialHebrew-Bold" size:20],
+                                    AppThemeStyle3 : [UIFont fontWithName:@"ArialHebrew-Bold" size:17]};
+        textAttrs[NSFontAttributeName] = ThemePickerFontSets(fontAttrs).font;
+        [target setTitleTextAttributes:textAttrs];
+    }];
     
     self.navigationItem.title = @"Switch the theme";
     
@@ -61,21 +63,25 @@
     textField.textColor = [UIColor whiteColor];
     textField.placeholder = @"I'm a text field.";
     
-    textField.zh_placeholderTextColorPicker = ThemeColorPickerWithKey(@"color03");
+    textField.zh_placeholderTextColorPicker = ThemePickerColorKey(@"color03");
     
-    NSDictionary *fieldFontAttrs = @{ThemeDay : [UIFont fontWithName:@"Palatino-BoldItalic" size:32],
-                                     ThemeNight : [UIFont fontWithName:@"Palatino-Bold" size:27],
-                                     Theme1 : [UIFont fontWithName:@"Palatino-BoldItalic" size:32],
-                                     Theme2 : [UIFont fontWithName:@"Palatino-BoldItalic" size:32],
-                                     Theme3 : [UIFont fontWithName:@"Palatino-BoldItalic" size:32]};
-    textField.zh_fontPicker = ThemeFontPickerWithDictionary(fieldFontAttrs);
+    NSDictionary *fieldFontAttrs = @{AppThemeLight : [UIFont fontWithName:@"Palatino-BoldItalic" size:32],
+                                     AppThemeNight : [UIFont fontWithName:@"Palatino-Bold" size:27],
+                                     AppThemeStyle1 : [UIFont fontWithName:@"Palatino-BoldItalic" size:32],
+                                     AppThemeStyle2 : [UIFont fontWithName:@"Palatino-BoldItalic" size:32],
+                                     AppThemeStyle3 : [UIFont fontWithName:@"Palatino-BoldItalic" size:32]};
+    textField.zh_fontPicker = ThemePickerFontSets(fieldFontAttrs);
     
-    NSDictionary *KeyboardAttrs = @{ThemeDay : @(UIKeyboardAppearanceDefault),
-                                    ThemeNight : @(UIKeyboardAppearanceDark),
-                                    Theme1 : @(UIKeyboardAppearanceDefault),
-                                    Theme2 : @(UIKeyboardAppearanceDefault),
-                                    Theme3 : @(UIKeyboardAppearanceDefault)};
-    [textField zh_setKeyboardAppearance:KeyboardAttrs];
+    [textField zh_themeUpdateCallback:^(UITextField* target) {
+        NSDictionary *KeyboardAttrs = @{AppThemeLight : @(UIKeyboardAppearanceDefault),
+                                        AppThemeNight : @(UIKeyboardAppearanceDark),
+                                        AppThemeStyle1 : @(UIKeyboardAppearanceDefault),
+                                        AppThemeStyle2 : @(UIKeyboardAppearanceDefault),
+                                        AppThemeStyle3 : @(UIKeyboardAppearanceDefault)};
+        NSInteger state = [KeyboardAttrs[ThemeManager.style] integerValue];
+        [target setKeyboardAppearance:state];
+        [target reloadInputViews];
+    }];
     
     [self.view addSubview:textField];
     
@@ -88,12 +94,12 @@
     label1.backgroundColor = [UIColor colorWithHexString:@"272727"];
     label1.textColor = [UIColor whiteColor];
     label1.text = @"Scorpions";
-    NSDictionary *fontAttrs1 = @{ThemeDay : [UIFont fontWithName:@"CourierNewPS-BoldItalicMT" size:29],
-                                 ThemeNight : [UIFont fontWithName:@"CourierNewPS-BoldMT" size:33],
-                                 Theme1 : [UIFont fontWithName:@"CourierNewPS-BoldItalicMT" size:29],
-                                 Theme2 : [UIFont fontWithName:@"CourierNewPS-BoldItalicMT" size:29],
-                                 Theme3 : [UIFont fontWithName:@"CourierNewPS-BoldItalicMT" size:29]};
-    label1.zh_fontPicker = ThemeFontPickerWithDictionary(fontAttrs1);
+    NSDictionary *fontAttrs1 = @{AppThemeLight : [UIFont fontWithName:@"CourierNewPS-BoldItalicMT" size:29],
+                                 AppThemeNight : [UIFont fontWithName:@"CourierNewPS-BoldMT" size:33],
+                                 AppThemeStyle1 : [UIFont fontWithName:@"CourierNewPS-BoldItalicMT" size:29],
+                                 AppThemeStyle2 : [UIFont fontWithName:@"CourierNewPS-BoldItalicMT" size:29],
+                                 AppThemeStyle3 : [UIFont fontWithName:@"CourierNewPS-BoldItalicMT" size:29]};
+    label1.zh_fontPicker = ThemePickerFontSets(fontAttrs1);
     [self.view addSubview:label1];
     
     
@@ -105,12 +111,12 @@
     label2.backgroundColor = [UIColor colorWithHexString:@"272727"];
     label2.textColor = [UIColor whiteColor];
     label2.text = @"Metallica";
-    NSDictionary *fontAttrs2 = @{ThemeDay : [UIFont fontWithName:@"AvenirNextCondensed-HeavyItalic" size:35],
-                                 ThemeNight : [UIFont fontWithName:@"AvenirNextCondensed-Heavy" size:25],
-                                 Theme1 : [UIFont fontWithName:@"AvenirNextCondensed-HeavyItalic" size:35],
-                                 Theme2 : [UIFont fontWithName:@"AvenirNextCondensed-HeavyItalic" size:35],
-                                 Theme3 : [UIFont fontWithName:@"AvenirNextCondensed-HeavyItalic" size:35]};
-    label2.zh_fontPicker = ThemeFontPickerWithDictionary(fontAttrs2);
+    NSDictionary *fontAttrs2 = @{AppThemeLight : [UIFont fontWithName:@"AvenirNextCondensed-HeavyItalic" size:35],
+                                 AppThemeNight : [UIFont fontWithName:@"AvenirNextCondensed-Heavy" size:25],
+                                 AppThemeStyle1 : [UIFont fontWithName:@"AvenirNextCondensed-HeavyItalic" size:35],
+                                 AppThemeStyle2 : [UIFont fontWithName:@"AvenirNextCondensed-HeavyItalic" size:35],
+                                 AppThemeStyle3 : [UIFont fontWithName:@"AvenirNextCondensed-HeavyItalic" size:35]};
+    label2.zh_fontPicker = ThemePickerFontSets(fontAttrs2);
     [self.view addSubview:label2];
     
     
@@ -122,12 +128,12 @@
     label3.backgroundColor =[UIColor clearColor];
     label3.textColor = [UIColor blackColor];
     label3.text = @"ThemeManager";
-    NSDictionary *fontAttrs3 = @{ThemeDay : [UIFont fontWithName:@"Baskerville-BoldItalic" size:37],
-                                 ThemeNight : [UIFont fontWithName:@"Baskerville-Bold" size:32],
-                                 Theme1 : [UIFont fontWithName:@"Baskerville-BoldItalic" size:37],
-                                 Theme2 : [UIFont fontWithName:@"Baskerville-BoldItalic" size:37],
-                                 Theme3 : [UIFont fontWithName:@"Baskerville-BoldItalic" size:37]};
-    label3.zh_fontPicker = ThemeFontPickerWithDictionary(fontAttrs3);
+    NSDictionary *fontAttrs3 = @{AppThemeLight : [UIFont fontWithName:@"Baskerville-BoldItalic" size:37],
+                                 AppThemeNight : [UIFont fontWithName:@"Baskerville-Bold" size:32],
+                                 AppThemeStyle1 : [UIFont fontWithName:@"Baskerville-BoldItalic" size:37],
+                                 AppThemeStyle2 : [UIFont fontWithName:@"Baskerville-BoldItalic" size:37],
+                                 AppThemeStyle3 : [UIFont fontWithName:@"Baskerville-BoldItalic" size:37]};
+    label3.zh_fontPicker = ThemePickerFontSets(fontAttrs3);
     [self.view addSubview:label3];
     
     
@@ -136,12 +142,12 @@
     maskView.bottom  = self.view.bottom;
     maskView.backgroundColor = [UIColor blackColor];
     
-    NSDictionary *alphaAttrs = @{ThemeDay : @0.00,
-                                 ThemeNight : @0.45,
-                                 Theme1 : @0.00,
-                                 Theme2 : @0.00,
-                                 Theme3 : @0.00};
-    maskView.zh_alphaPicker = ThemeNumberPickerWithDictionary(alphaAttrs);
+    NSDictionary *alphaAttrs = @{AppThemeLight : @0.00,
+                                 AppThemeNight : @0.45,
+                                 AppThemeStyle1 : @0.00,
+                                 AppThemeStyle2 : @0.00,
+                                 AppThemeStyle3 : @0.00};
+    maskView.zh_alphaPicker = ThemePickerNumberSets(alphaAttrs);
     [self.view addSubview:maskView];
 }
 
@@ -156,11 +162,7 @@
 }
 
 - (void)switchThemeClicked {
-    if ([ThemeManager isEqualCurrentStyle:ThemeNight]) {
-        [ThemeManager updateThemeStyle:ThemeDay];
-    } else {
-        [ThemeManager updateThemeStyle:ThemeNight];
-    }
+    [zhThemeOperator changeThemeDayOrNight];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 

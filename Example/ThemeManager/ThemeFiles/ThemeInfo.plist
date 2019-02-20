@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NIGHT</key>
+	<array>
+		<string>@(SANDBOX)/Library/Caches/mytheme_style1.plist</string>
+		<string>@(MAINBUNDLE)/mybundle.bundle/NIGHT.plist</string>
+	</array>
+	<key>DAY</key>
+	<array>
+		<string>@(MAINBUNDLE)/mybundle.bundle/DAY.plist</string>
+	</array>
+	<key>STYLE1</key>
+	<array>
+		<string>@(MAINBUNDLE)/mybundle.bundle/SKIN_01.plist</string>
+	</array>
+	<key>STYLE2</key>
+	<array>
+		<string>@(MAINBUNDLE)/mybundle.bundle/SKIN_02.plist</string>
+	</array>
+	<key>STYLE3</key>
+	<array>
+		<string>@(MAINBUNDLE)/mybundle.bundle/SKIN_03.plist</string>
+	</array>
+</dict>
+</plist>

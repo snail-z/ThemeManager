@@ -28,26 +28,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.zh_backgroundColorPicker = ThemeColorPickerWithKey(@"color01");
+    self.view.zh_backgroundColorPicker = ThemePickerColorKey(@"color01");
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 50, 35);
     button.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [button zh_setImagePicker:ThemeImagePickerWithKey(@"image04") forState:UIControlStateNormal];
+    [button zh_setImagePicker:ThemePickerImageKey(@"image04") forState:UIControlStateNormal];
     [button addTarget:self action:@selector(detailsClicked) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [self.navigationController.navigationBar zh_themeUpdateCallback:^(UINavigationBar* target) {
+        NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+        textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25];
+        textAttrs[NSForegroundColorAttributeName] = ThemePickerColorKey(@"color04").color;
+        [target setTitleTextAttributes:textAttrs];
+    }];
     
-    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-    textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25];
-    textAttrs[NSForegroundColorAttributeName] = ThemeColorPickerWithKey(@"color04");
-    [self.navigationController.navigationBar zh_setTitleTextAttributes:textAttrs];
-    
-    self.navigationController.navigationBar.zh_overlayColorPicker = ThemeColorPickerWithKey(@"color01").animated(YES);
+    [self.navigationController.navigationBar zh_setBackgroundColorPicker:ThemePickerColorKey(@"color01") forBarMetrics:UIBarMetricsDefault];
     
     self.navigationItem.title = @"Download the theme";
 
     _scrollView = [UIScrollView new];
-    _scrollView.zh_backgroundColorPicker = ThemeColorPickerWithKey(@"color01");
+    _scrollView.zh_backgroundColorPicker = ThemePickerColorKey(@"color01");
     _scrollView.frame = self.view.frame;
     _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
     _scrollView.showsVerticalScrollIndicator = NO;
@@ -67,12 +68,12 @@
         progressView.textLabel.font = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:47];
         progressView.tag = idx;
         [progressView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(progressViewClicked:)]];
-        [_scrollView addSubview:progressView];
+        [self->_scrollView addSubview:progressView];
         
         progressView.layer.borderColor = [UIColor colorWithHexString:@"F8F8FF"].CGColor;
-        NSDictionary *d = @{ThemeDay : @0.0, ThemeNight : @0.0,
-                            Theme1 : @0.5, Theme2 : @2.0, Theme3 : @3.5};
-        progressView.layer.zh_borderWidthPicker = ThemeNumberPickerWithDictionary(d);
+        NSDictionary *d = @{AppThemeLight : @0.0, AppThemeNight : @0.0,
+                            AppThemeStyle1 : @0.5, AppThemeStyle2 : @2.0, AppThemeStyle3 : @3.5};
+        progressView.layer.zh_borderWidthPicker = ThemePickerNumberSets(d);
     }];
 }
 
@@ -87,7 +88,7 @@
     NSInteger idx = progressView.tag;
 
     NSArray *colors = @[@"D3366F", @"6CC1A2", @"E5B648"];
-    NSArray *themeStyles = @[Theme1, Theme2, Theme3];
+    NSArray *themeStyles = @[AppThemeStyle1, AppThemeStyle2, AppThemeStyle3];
     progressView.fillColor = [UIColor colorWithHexString:colors[idx]];
     
     if (progressView.progress < 1) {
@@ -96,7 +97,7 @@
         [_timer invalidate];
         _timer = nil;
         progressView.textLabel.text = [NSString stringWithFormat:@"style%@", @(idx + 1)];
-        [ThemeManager updateThemeStyle:themeStyles[idx]];
+        [zhThemeOperator changeThemeStyleWithKey:themeStyles[idx]];
     }
 }
 

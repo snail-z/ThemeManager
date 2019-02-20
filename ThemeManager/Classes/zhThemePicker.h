@@ -11,20 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, zhThemeValueType) {
-    zhThemeValueTypeColor = 0,
-    zhThemeValueTypeImage,
-    zhThemeValueTypeFont,
-    zhThemeValueTypeText,
-    zhThemeValueTypeNumber
-};
-
 @interface zhThemePicker : NSObject
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
-
-@property (nonatomic, assign, readonly) zhThemeValueType valueType;
 
 // The following two methods should be handed to the subclass call.
 + (instancetype)pickerWithKey:(NSString *)pKey;
@@ -32,8 +22,8 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 @end
 
-#define ThemeColorPickerWithKey(key) [zhThemeColorPicker pickerWithKey:key]
-#define ThemeColorPickerWithDictionary(dict) [zhThemeColorPicker pickerWithDictionary:dict]
+#define ThemePickerColorKey(key) [zhThemeColorPicker pickerWithKey:key]
+#define ThemePickerColorSets(dict) [zhThemeColorPicker pickerWithDictionary:dict]
 
 @interface zhThemeColorPicker : zhThemePicker
 
@@ -46,17 +36,21 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 @end
 
-#define ThemeImagePickerWithKey(key) [zhThemeImagePicker pickerWithKey:key]
-#define ThemeImagePickerWithDictionary(dict) [zhThemeImagePicker pickerWithDictionary:dict]
+#define ThemePickerImageKey(key) [zhThemeImagePicker pickerWithKey:key]
+#define ThemePickerImageSets(dict) [zhThemeImagePicker pickerWithDictionary:dict]
 
 @interface zhThemeImagePicker : zhThemePicker
+
+// Used to set whether to enable UIImage cache. default is NO.
+- (zhThemeImagePicker *(^)(BOOL imageCacheEnabled))cacheEnabled;
 
 /// Used to set the UIImage renderingMode
 - (zhThemeImagePicker *(^)(UIImageRenderingMode imageRenderingMode))renderingMode;
 
-/// default is NO. if YES, When color change there will be a transition animation.
+/// Used to set the UIImage imageCapInsets
 - (zhThemeImagePicker *(^)(UIEdgeInsets imageCapInsets))resizableCapInsets;
 
+@property (nonatomic, assign, readonly) BOOL imageCacheEnabled;
 @property (nonatomic, assign, readonly) UIImageRenderingMode imageRenderingMode;
 @property (nonatomic, assign, readonly) UIEdgeInsets imageCapInsets;
 
@@ -64,7 +58,7 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 @end
 
-#define ThemeFontPickerWithDictionary(dict) [zhThemeFontPicker pickerWithDictionary:dict]
+#define ThemePickerFontSets(dict) [zhThemeFontPicker pickerWithDictionary:dict]
 
 @interface zhThemeFontPicker : zhThemePicker
 
@@ -72,7 +66,7 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 @end
 
-#define ThemeTextPickerWithDictionary(dict) [zhThemeTextPicker pickerWithDictionary:dict]
+#define ThemePickerTextSets(dict) [zhThemeTextPicker pickerWithDictionary:dict]
 
 @interface zhThemeTextPicker : zhThemePicker
 
@@ -80,7 +74,7 @@ typedef NS_ENUM(NSInteger, zhThemeValueType) {
 
 @end
 
-#define ThemeNumberPickerWithDictionary(dict) [zhThemeNumberPicker pickerWithDictionary:dict]
+#define ThemePickerNumberSets(dict) [zhThemeNumberPicker pickerWithDictionary:dict]
 
 @interface zhThemeNumberPicker : zhThemePicker // CGFloat / NSInteger ...
 

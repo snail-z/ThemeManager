@@ -10,8 +10,6 @@
 #define zhTheme_h
 
 #import "zhThemePicker.h"
-#import "NSObject+zhTheme.h"
-#import "Components+zhTheme.h"
-#import "Supplementary+zhTheme.h"
+#import "zhTheme+Components.h"
 
 #endif /* zhTheme_h */

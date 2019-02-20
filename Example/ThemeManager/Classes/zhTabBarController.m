@@ -21,6 +21,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 配置app主题
+    [zhThemeOperator themeConfiguration];
+    
+    // 配置状态栏
+    [[UIApplication sharedApplication] zh_themeUpdateCallback:^(UIApplication* target) {
+        NSDictionary *d = @{AppThemeLight : @(UIStatusBarStyleDefault),
+                            AppThemeNight : @(UIStatusBarStyleLightContent),
+                            AppThemeStyle1 : @(UIStatusBarStyleLightContent),
+                            AppThemeStyle2 : @(UIStatusBarStyleLightContent),
+                            AppThemeStyle3 : @(UIStatusBarStyleLightContent)};
+        UIStatusBarStyle status = [[d objectForKey:ThemeManager.style] integerValue];
+        [target setStatusBarStyle:status];
+    }];
+    
     [self commonInitialization];
 }
 
@@ -35,9 +49,9 @@
                               kTitle   : @"Me"} ];
 
     NSArray<zhThemeImagePicker *> *nolArr = @[
-                                         ThemeImagePickerWithKey(@"image01").renderingMode(UIImageRenderingModeAlwaysOriginal),
-                                         ThemeImagePickerWithKey(@"image02").renderingMode(UIImageRenderingModeAlwaysOriginal),
-                                         ThemeImagePickerWithKey(@"image03").renderingMode(UIImageRenderingModeAlwaysOriginal)];
+                                         ThemePickerImageKey(@"image01").renderingMode(UIImageRenderingModeAlwaysOriginal),
+                                         ThemePickerImageKey(@"image02").renderingMode(UIImageRenderingModeAlwaysOriginal),
+                                         ThemePickerImageKey(@"image03").renderingMode(UIImageRenderingModeAlwaysOriginal)];
     
     [itemsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIViewController *vc = [NSClassFromString(obj[kClassVC]) new];
@@ -48,12 +62,14 @@
         item.zh_imagePicker = nolArr[idx];
         item.zh_selectedImagePicker = nolArr[idx];
         
-        NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-        textAttrs[NSForegroundColorAttributeName] = ThemeColorPickerWithKey(@"color02");
-        textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:12];
-        [item zh_setTitleTextPickerAttributes:textAttrs forState:UIControlStateNormal];
-
-        self.tabBar.zh_overlayColorPicker = ThemeColorPickerWithKey(@"color05").animated(YES);
+        [item zh_themeUpdateCallback:^(id  _Nonnull target) {
+            NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+            textAttrs[NSForegroundColorAttributeName] = ThemePickerColorKey(@"color02").color;
+            textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:12];
+            [target setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
+        }];
+        
+        self.tabBar.zh_barTintColorPicker = ThemePickerColorKey(@"color05");
         self.tabBar.translucent = NO;
         [self addChildViewController:nav];
     }];

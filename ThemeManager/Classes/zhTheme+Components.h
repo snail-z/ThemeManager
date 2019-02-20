@@ -1,5 +1,5 @@
 //
-//  Components+zhTheme.h
+//  zhTheme+Components.h
 //  <https://github.com/snail-z/ThemeManager>
 //
 //  Created by zhanghao on 2017/5/27.
@@ -16,7 +16,18 @@ zhThemeTextPicker;
 
 NS_ASSUME_NONNULL_BEGIN
 
-/////////////////////////////// UIKit+zhTheme ///////////////////////////////
+@interface NSObject (zhTheme)
+
+/**
+ The theme to update callbacks
+ usage:
+    [self.view zh_themeUpdateCallback:^(id _Nonnull target) { // target = self.view
+        target.backgroundColor = ThemePickerColorKey(@"colorKey").color;
+    }];
+ **/
+- (void)zh_themeUpdateCallback:(void (^)(id target))block;
+
+@end
 
 @interface UIView (zhTheme)
 
@@ -28,7 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UILabel (zhTheme)
 
-/// zh_fontPicker- Only supported by Through the dictionary Settings. use other method is invalid.
 @property (nonatomic, strong) zhThemeFontPicker *zh_fontPicker;
 @property (nonatomic, strong) zhThemeColorPicker *zh_textColorPicker;
 @property (nonatomic, strong) zhThemeColorPicker *zh_highlightedTextColorPicker;
@@ -38,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIButton (zhTheme)
 
-- (void)zh_setTitleColorPicker:(zhThemeColorPicker *)picker forState:(UIControlState)state;
+- (void)zh_setTitleColorPicker:(zhThemeColorPicker *)picker forState:(UIControlState)state; // Temporarily does't support multiple state.
 - (void)zh_setImagePicker:(zhThemeImagePicker *)picker forState:(UIControlState)state;
 - (void)zh_setBackgroundImagePicker:(zhThemeImagePicker *)picker forState:(UIControlState)state;
 - (void)zh_setBackgroundColorPicker:(zhThemeColorPicker *)picker forState:(UIControlState)state;
@@ -49,8 +59,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) zhThemeImagePicker *zh_imagePicker;
 @property (nonatomic, strong) zhThemeImagePicker *zh_highlightedImagePicker; // When `highlighted` set YES is valid.
+
 - (instancetype)zh_initWithImagePicker:(zhThemeImagePicker *)picker;
-- (instancetype)zh_initWithImagePicker:(zhThemeImagePicker *)picker highlightedImagePicker:(zhThemeImagePicker *)highlightedPicker;
+- (instancetype)zh_initWithImagePicker:(zhThemeImagePicker *)picker
+                highlightedImagePicker:(zhThemeImagePicker *)highlightedPicker;
 
 @end
 
@@ -78,33 +90,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextField (zhTheme)
 
-/// zh_fontPicker- Only supported by Through the dictionary Settings. use other method is invalid.
 @property (nonatomic, strong) zhThemeFontPicker *zh_fontPicker;
 @property (nonatomic, strong) zhThemeColorPicker *zh_textColorPicker;
 @property (nonatomic, strong) zhThemeColorPicker *zh_placeholderTextColorPicker;
-/**
- Example:
- NSDictionary *dict = @{ThemeStyle1 : @(UIKeyboardAppearanceDefault),
-                        ThemeStyle2 : @(UIKeyboardAppearanceDark)};
- [self.textField zh_setKeyboardAppearance:dict];
- */
-- (void)zh_setKeyboardAppearance:(nullable NSDictionary<NSString *, NSNumber *> *)dict;
 
 @end
 
 @interface UITextView (zhTheme)
 
-/// zh_fontPicker- Only supported by Through the dictionary Settings. use other method is invalid.
 @property (nonatomic, strong) zhThemeFontPicker *zh_fontPicker;
 @property (nonatomic, strong) zhThemeColorPicker *zh_textColorPicker;
-- (void)zh_setKeyboardAppearance:(nullable NSDictionary<NSString *, NSNumber *> *)dict;
 
 @end
 
 @interface UISearchBar (zhTheme)
 
 @property (nonatomic, strong) zhThemeColorPicker *zh_barTintColorPicker;
-- (void)zh_setKeyboardAppearance:(nullable NSDictionary<NSString *, NSNumber *> *)dict;
 
 @end
 
@@ -126,9 +127,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIBarItem (zhTheme)
 
 @property (nonatomic, strong, nonnull) zhThemeImagePicker *zh_imagePicker;
-
-/// Currently only support NSForegroundColorAttributeName / NSFontAttributeName.
-- (void)zh_setTitleTextPickerAttributes:(nullable NSDictionary<NSString *,id> *)attributes forState:(UIControlState)state;
 
 @end
 
@@ -155,26 +153,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)zh_setBackgroundImagePicker:(zhThemeImagePicker *)picker forBarMetrics:(UIBarMetrics)barMetrics;
 - (void)zh_setBackgroundColorPicker:(zhThemeColorPicker *)picker forBarMetrics:(UIBarMetrics)barMetrics;
 
-/// Currently only support NSForegroundColorAttributeName / NSFontAttributeName.
-- (void)zh_setTitleTextAttributes:(nullable NSDictionary<NSString *, id> *)titleTextAttributes;
-
 @end
-
-@interface UIApplication (zhTheme)
-
-/// app info.plist - when `View controller-based status bar appearance` item set to N0 is valid.
-- (void)zh_setStatusBarStyle:(nullable NSDictionary<NSString *, NSNumber *> *)dict;
-
-@end
-
-@interface UISegmentedControl (zhTheme)
-
-/// Currently only support NSForegroundColorAttributeName / NSFontAttributeName.
-- (void)zh_setTitleTextPickerAttributes:(nullable NSDictionary<NSString *,id> *)attributes forState:(UIControlState)state;
-
-@end
-
-/////////////////////////////// QuartzCore+zhTheme ///////////////////////////////
 
 @interface CALayer (zhTheme)
 

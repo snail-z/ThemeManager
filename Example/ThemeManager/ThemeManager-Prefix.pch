@@ -14,16 +14,9 @@
     @import UIKit;
     @import Foundation;
 
-// ========================= // 对应配置文件中的key
-#define ThemeDay    @"DAY"
-#define ThemeNight  @"NIGHT"
-#define Theme1 @"STYLE1"
-#define Theme2 @"STYLE2"
-#define Theme3 @"STYLE3"
-// =========================
-
     #import <ThemeManager/zhTheme.h>
 
+    #import "zhThemeOperator.h"
     #import "UIColor+Extend.h"
     #import "UIImage+Color.h"
     #import "UIView+Layout.h"

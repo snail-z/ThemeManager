@@ -21,8 +21,8 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        NSArray *arr1 = @[@"mf700-00014329", @"mf700-00014344", @"mf700-00021233", @"mf700-01036711", @"mf700-02883145"];
-        NSArray *arr2 = @[@"604-p00551", @"604-p01490", @"604-p01505", @"ph1449-p02096", @"ph1449-p02101"];
+        NSArray *arr1 = @[@"604-p00551", @"604-p01490", @"604-p01505", @"ph1449-p02096", @"ph1449-p02101"];
+        NSArray *arr2 = @[@"mf700-00014329", @"mf700-00014344", @"mf700-00021233", @"mf700-01036711", @"mf700-02883145"];
         _array1 = [NSMutableArray arrayWithArray:arr1];
         [_array1 addObjectsFromArray:arr1];
         _array2 = [NSMutableArray arrayWithArray:arr2];
@@ -43,16 +43,17 @@
     button.imageView.contentMode = UIViewContentModeScaleAspectFit;
     button.titleLabel.font = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:21];
     [button setTitle:@"Next" forState:UIControlStateNormal];
-    [button zh_setTitleColorPicker:ThemeColorPickerWithKey(@"color04") forState:UIControlStateNormal];
+    [button zh_setTitleColorPicker:ThemePickerColorKey(@"color04") forState:UIControlStateNormal];
     [button addTarget:self action:@selector(nextClicked) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [self.navigationController.navigationBar zh_themeUpdateCallback:^(UINavigationBar* target) {
+        NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+        textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25];
+        textAttrs[NSForegroundColorAttributeName] = ThemePickerColorKey(@"color04").color;
+        [target setTitleTextAttributes:textAttrs];
+    }];
     
-    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-    textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25];
-    textAttrs[NSForegroundColorAttributeName] = ThemeColorPickerWithKey(@"color04");
-    [self.navigationController.navigationBar zh_setTitleTextAttributes:textAttrs];
-    
-    self.navigationController.navigationBar.zh_overlayColorPicker = ThemeColorPickerWithKey(@"color01").animated(YES);
+    [self.navigationController.navigationBar zh_setBackgroundColorPicker:ThemePickerColorKey(@"color01") forBarMetrics:UIBarMetricsDefault];
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     NSMutableDictionary *backTextAttrs = [NSMutableDictionary dictionary];
@@ -76,7 +77,7 @@
     _tableView.rowHeight = 140;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
-    _tableView.zh_backgroundColorPicker = ThemeColorPickerWithKey(@"color01");
+    _tableView.zh_backgroundColorPicker = ThemePickerColorKey(@"color01");
     self.view = _tableView;
 }
 
@@ -99,25 +100,21 @@
     }
     
     UIImageView *imgView = (UIImageView *)[cell zh_getAssociatedValueForKey:_cmd];
-    NSDictionary *imgDict = @{ThemeDay : [UIImage imageNamed:_array1[indexPath.row]],
-                              ThemeNight : [UIImage imageNamed:_array2[indexPath.row]],
-                              Theme1 : [UIImage imageNamed:_array2[indexPath.row]],
-                              Theme2 : [UIImage imageNamed:_array2[indexPath.row]],
-                              Theme3 : [UIImage imageNamed:_array2[indexPath.row]]};
-    imgView.zh_imagePicker = ThemeImagePickerWithDictionary(imgDict);
+    NSDictionary *imgDict = @{AppThemeLight : [UIImage imageNamed:_array1[indexPath.row]],
+                              AppThemeNight : [UIImage imageNamed:_array2[indexPath.row]],
+                              AppThemeStyle1 : [UIImage imageNamed:_array2[indexPath.row]],
+                              AppThemeStyle2 : [UIImage imageNamed:_array2[indexPath.row]],
+                              AppThemeStyle3 : [UIImage imageNamed:_array2[indexPath.row]]};
+    imgView.zh_imagePicker = ThemePickerImageSets(imgDict);
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.zh_backgroundColorPicker = ThemeColorPickerWithKey(@"color01").animated(YES);
+    cell.zh_backgroundColorPicker = ThemePickerColorKey(@"color01");
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([ThemeManager isEqualCurrentStyle:ThemeNight]) {
-        [ThemeManager updateThemeStyle:ThemeDay];
-    } else {
-        [ThemeManager updateThemeStyle:ThemeNight];
-    }
+    [zhThemeOperator changeThemeDayOrNight];
 }
 
 @end
